@@ -30,11 +30,21 @@ public class LevelEditorWindow : EditorWindow
             DrawLevelGrid();
             if (GUILayout.Button("Save Level"))
             {
-                EditorUtility.SetDirty(currentLevel);
-                AssetDatabase.SaveAssets();
+                if (CheckColorMultiplesOfThree()) // Renk sayýmlarýný kontrol et
+                {
+                    EditorUtility.SetDirty(currentLevel);
+                    AssetDatabase.SaveAssets();
+                    Debug.Log("Level saved successfully!");
+                }
+                else
+                {
+                    EditorUtility.DisplayDialog("Save Error", "Each color must have a multiple of three passengers to save.", "OK");
+                    Debug.Log("Save failed: Each color must have multiples of three passengers.");
+                }
             }
         }
     }
+
 
     private void DrawBusAndWaitingArea()
     {
@@ -95,4 +105,33 @@ public class LevelEditorWindow : EditorWindow
             }
         }
     }
+
+    private bool CheckColorMultiplesOfThree()
+    {
+        Dictionary<Color, int> colorCount = new Dictionary<Color, int>();
+
+       
+        foreach (var cell in currentLevel.gridCells)
+        {
+            if (cell.isOccupied)
+            {
+                if (colorCount.ContainsKey(cell.passengerColor))
+                    colorCount[cell.passengerColor]++;
+                else
+                    colorCount[cell.passengerColor] = 1;
+            }
+        }
+
+       
+        foreach (var count in colorCount.Values)
+        {
+            if (count % 3 != 0) // Eðer üçün katý deðilse
+            {
+                return false; // Kaydetmeye izin verme
+            }
+        }
+
+        return true; 
+    }
+
 }

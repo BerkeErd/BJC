@@ -22,7 +22,8 @@ public class LevelEditorWindow : EditorWindow
 
         currentLevel = (LevelData)EditorGUILayout.ObjectField("Level Data", currentLevel, typeof(LevelData), false);
 
-        selectedColorIndex = EditorGUILayout.Popup("Passenger Color", selectedColorIndex, colorNames); 
+        selectedColorIndex = EditorGUILayout.Popup("Passenger Color", selectedColorIndex, colorNames);
+
 
         if (currentLevel != null)
         {
@@ -30,7 +31,7 @@ public class LevelEditorWindow : EditorWindow
             DrawLevelGrid();
             if (GUILayout.Button("Save Level"))
             {
-                if (CheckColorMultiplesOfThree()) // Renk sayýmlarýný kontrol et
+                if (CheckColorMultiplesOfThree())
                 {
                     EditorUtility.SetDirty(currentLevel);
                     AssetDatabase.SaveAssets();
@@ -42,6 +43,27 @@ public class LevelEditorWindow : EditorWindow
                     Debug.Log("Save failed: Each color must have multiples of three passengers.");
                 }
             }
+        }
+
+
+        if (GUILayout.Button("Random Fill"))
+        {
+            RandomFillGrid();
+        }
+
+        if (GUILayout.Button("Clear"))
+        {
+            ClearGrid(); 
+        }
+    }
+
+    private void ClearGrid()
+    {
+        foreach (var cell in currentLevel.gridCells)
+        {
+            cell.isOccupied = false;
+            cell.isBlocked = false;  
+            cell.passengerColor = Color.clear; 
         }
     }
 
@@ -133,5 +155,66 @@ public class LevelEditorWindow : EditorWindow
 
         return true; 
     }
+
+    private void RandomFillGrid()
+    {
+        Dictionary<Color, int> colorCount = new Dictionary<Color, int>();
+        List<int> emptyCellIndices = new List<int>();
+
+        // Mevcut renk sayýmlarýný hesapla ve boþ hücre indekslerini topla
+        for (int i = 0; i < currentLevel.gridCells.Length; i++)
+        {
+            if (!currentLevel.gridCells[i].isOccupied && !currentLevel.gridCells[i].isBlocked)
+            {
+                emptyCellIndices.Add(i);
+            }
+            else if (currentLevel.gridCells[i].isOccupied)
+            {
+                if (colorCount.ContainsKey(currentLevel.gridCells[i].passengerColor))
+                    colorCount[currentLevel.gridCells[i].passengerColor]++;
+                else
+                    colorCount[currentLevel.gridCells[i].passengerColor] = 1;
+            }
+        }
+
+        // Mevcut renklerin 3'ün katýna tamamlanmasý
+        foreach (var pair in new Dictionary<Color, int>(colorCount))
+        {
+            int remainder = pair.Value % 3;
+            if (remainder != 0)
+            {
+                int neededToAdd = 3 - remainder;
+                if (emptyCellIndices.Count < neededToAdd) return; // Yeterli boþ hücre yoksa iþlemi bitir
+
+                for (int i = 0; i < neededToAdd; i++)
+                {
+                    int randomIndex = emptyCellIndices[UnityEngine.Random.Range(0, emptyCellIndices.Count)];
+                    emptyCellIndices.Remove(randomIndex);
+                    currentLevel.gridCells[randomIndex].isOccupied = true;
+                    currentLevel.gridCells[randomIndex].passengerColor = pair.Key;
+                    colorCount[pair.Key]++;
+                }
+            }
+        }
+
+        // Kalan boþ hücreleri rastgele renklerle 3'ün katý þekilde doldurma
+        int numColors = availableColors.Length;
+        while (emptyCellIndices.Count >= 3)
+        {
+            Color randomColor = availableColors[UnityEngine.Random.Range(0, numColors)];
+            for (int i = 0; i < 3; i++) // Her renkten 3 adet ekleyerek doldur
+            {
+                if (emptyCellIndices.Count == 0) break;
+                int randomIndex = emptyCellIndices[UnityEngine.Random.Range(0, emptyCellIndices.Count)];
+                emptyCellIndices.Remove(randomIndex);
+                currentLevel.gridCells[randomIndex].isOccupied = true;
+                currentLevel.gridCells[randomIndex].passengerColor = randomColor;
+                if (!colorCount.ContainsKey(randomColor)) colorCount[randomColor] = 0;
+                colorCount[randomColor]++;
+            }
+        }
+    }
+
+
 
 }

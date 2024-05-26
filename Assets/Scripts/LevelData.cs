@@ -9,6 +9,8 @@ public class LevelData : ScriptableObject
     public int height;
     public LevelGridCell[] gridCells; // Grid hücrelerini tutacak dizi
 
+    public int waitingAreaSize = 5;
+
     [System.Serializable]
     public class LevelGridCell
     {
@@ -16,5 +18,23 @@ public class LevelData : ScriptableObject
         public Color passengerColor; // Yolcunun rengi
         public bool isBlocked; // Hücre engellenmiþ mi?
     }
+    
+    private void OnValidate()
+    {
+        ResizeGrid();
+    }
+
+    private void ResizeGrid()
+    {
+        if (gridCells == null || gridCells.Length != width * height)
+        {
+            gridCells = new LevelGridCell[width * height];
+            for (int i = 0; i < gridCells.Length; i++)
+            {
+                gridCells[i] = new LevelGridCell();
+            }
+        }
+    }
 }
+
 

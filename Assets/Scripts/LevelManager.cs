@@ -1,3 +1,4 @@
+using System.Collections.Generic;
 using UnityEngine;
 
 public class LevelManager : MonoBehaviour
@@ -24,12 +25,24 @@ public class LevelManager : MonoBehaviour
 
     void Start()
     {
+        ResetTemporaryData();
         BuildLevel();
         AdjustCameraToLevel();
         PlaceSideWalk();
         PlaceRoad();
     }
 
+    // Geçici bilgileri sýfýrla
+    void ResetTemporaryData()
+    {
+        for (int i = 0; i < levelData.height; i++)
+        {
+            for (int j = 0; j < levelData.width; j++)
+            {
+                levelData.tempOccupiedCells[i, j] = false;
+            }
+        }
+    }
 
     void AdjustCameraToLevel()
     {
@@ -102,42 +115,54 @@ public class LevelManager : MonoBehaviour
         float planeWidth = levelData.width * (1 + planeSpacing) - planeSpacing + planeExtraPadding;
         float planeDepth = levelData.height * (1 + planeSpacing) - planeSpacing + planeExtraPadding;
 
+
+        // Zemin plane oluþturma
         GameObject plane = GameObject.CreatePrimitive(PrimitiveType.Plane);
         plane.transform.localScale = new Vector3(planeWidth / 10, 1, planeDepth / 10);
         plane.transform.position = new Vector3((planeWidth - 1) / 2, -0.05f, (planeDepth - 1) / 2);
 
+        // Grid baþlangýç pozisyonlarýný hesaplama
         for (int i = 0; i < levelData.height; i++)
         {
             for (int j = 0; j < levelData.width; j++)
             {
-                Vector3 position = new Vector3(j * (1 + planeSpacing) + planeExtraPadding / 2, 0, i * (1 + planeSpacing) + planeExtraPadding / 2);
-                Instantiate(floorPrefab, position, Quaternion.identity);
+                // Burada, grid boyutlarýna göre düzeltilmiþ pozisyon hesaplama
+                float xPos = j + (j * planeSpacing) + (planeExtraPadding / 2);
+                float zPos = (levelData.height - 1 - i) + ((levelData.height - 1 - i) * planeSpacing) + (planeExtraPadding / 2);
+                Vector3 position = new Vector3(xPos, 0, zPos);
+
+                GameObject Floor = ObjectPooler.Instance.SpawnFromPool("Floor", position, Quaternion.identity);
 
                 LevelData.LevelGridCell cell = levelData.gridCells[i * levelData.width + j];
+                cell.Position = position;
                 if (cell.isOccupied)
                 {
-                    Instantiate(passengerPrefab, position, Quaternion.identity);
+                    GameObject Passenger = ObjectPooler.Instance.SpawnFromPool("Passenger", position, Quaternion.identity);
+                    Passenger.GetComponentInChildren<Passenger>().Initialize(levelData,i, j, cell.passengerColor);
+                    levelData.tempOccupiedCells[i, j] = true;
                 }
                 else if (cell.isBlocked)
                 {
-                    Instantiate(blockPrefab, position, Quaternion.identity);
+                    ObjectPooler.Instance.SpawnFromPool("Block", position, Quaternion.identity);
+                    levelData.tempOccupiedCells[i, j] = true;
                 }
 
                 if (cell.isTunnel)
                 {
-                    InstantiateTunnel(position, i, j);
+                    InstantiateTunnel(position, i, j, cell.tunnelSize, cell.tunnelPassengerColors);
+                    levelData.tempOccupiedCells[i, j] = true;
                 }
             }
         }
     }
 
-    void InstantiateTunnel(Vector3 position, int rowIndex, int colIndex)
-    {
-        GameObject tunnel = Instantiate(tunnelPrefab, position + Vector3.up * 0.1f, Quaternion.identity); // Tüneli biraz yükselterek yerleþtir
-        tunnel.name = $"Tunnel_{rowIndex}_{colIndex}";
-        
-        tunnel.GetComponent<Tunnel>().Initialize(rowIndex, colIndex, levelData); // Initialize fonksiyonu ile tünelin konumu ve diðer baþlangýç ayarlarýný yap.
 
+
+    void InstantiateTunnel(Vector3 position, int rowIndex, int colIndex, int tunnelSize, List<Color> tunnelPassengerColors)
+    {
+        GameObject tunnel = ObjectPooler.Instance.SpawnFromPool("Tunnel", position, Quaternion.identity);
+        tunnel.name = $"Tunnel_{rowIndex}_{colIndex}";
+        tunnel.GetComponent<Tunnel>().Initialize(levelData,rowIndex,colIndex, tunnelSize,tunnelPassengerColors ); // Initialize fonksiyonu ile tünelin konumu ve diðer baþlangýç ayarlarýný yap.
     }
 }
 

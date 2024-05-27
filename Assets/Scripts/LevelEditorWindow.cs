@@ -244,29 +244,42 @@ public class LevelEditorWindow : EditorWindow
     {
         Dictionary<Color, int> colorCount = new Dictionary<Color, int>();
 
-       
         foreach (var cell in currentLevel.gridCells)
         {
             if (cell.isOccupied)
             {
+                // Normal yolcularýn sayýmý
                 if (colorCount.ContainsKey(cell.passengerColor))
                     colorCount[cell.passengerColor]++;
                 else
                     colorCount[cell.passengerColor] = 1;
             }
-        }
 
-       
-        foreach (var count in colorCount.Values)
-        {
-            if (count % 3 != 0) // Eðer üçün katý deðilse
+            if (cell.isTunnel)
             {
-                return false; // Kaydetmeye izin verme
+                // Tünel içindeki yolcularýn sayýmý
+                foreach (var color in cell.tunnelPassengerColors)
+                {
+                    if (colorCount.ContainsKey(color))
+                        colorCount[color]++;
+                    else
+                        colorCount[color] = 1;
+                }
             }
         }
 
-        return true; 
+        // Tüm renklerin sayýlarýný kontrol et ve 3'ün katlarý olup olmadýðýný dene
+        foreach (var count in colorCount.Values)
+        {
+            if (count % 3 != 0)  // Eðer üçün katý deðilse
+            {
+                return false;  // Kaydetmeye izin verme
+            }
+        }
+
+        return true; // Tüm renklerin yolcu sayýlarý 3'ün katý ise
     }
+
 
     private void RandomFillGrid()
     {

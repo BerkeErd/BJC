@@ -14,9 +14,19 @@ public class LevelData : ScriptableObject
 
     public int waitingAreaSize = 5;
 
+    //[HideInInspector]
+    public bool[,] tempOccupiedCells;
+
+    void OnEnable()
+    {
+        // Diziyi baþlat
+        tempOccupiedCells = new bool[height, width];
+    }
+
     [System.Serializable]
     public class LevelGridCell
     {
+        public Vector3 Position;
         public bool isOccupied;
         public Color passengerColor;
         public bool isBlocked;
@@ -40,6 +50,28 @@ public class LevelData : ScriptableObject
                 gridCells[i] = new LevelGridCell();
             }
         }
+    }
+
+    // Toplam yolcu ve tünel sayýsýný hesaplayan metot
+    public (int totalPassengers, int totalTunnels) CalculatePassengerAndTunnelCounts()
+    {
+        int totalPassengers = 0;
+        int totalTunnels = 0;
+
+        foreach (var cell in gridCells)
+        {
+            if (cell.isOccupied)
+            {
+                totalPassengers++;  // Her iþgal edilmiþ hücre için yolcu sayýsýný arttýr
+            }
+            if (cell.isTunnel)
+            {
+                totalTunnels++;  // Her tünel için tünel sayýsýný arttýr
+                totalPassengers += cell.tunnelSize;  // Tünel boyutu kadar yolcu sayýsýný arttýr
+            }
+        }
+
+        return (totalPassengers, totalTunnels);
     }
 }
 

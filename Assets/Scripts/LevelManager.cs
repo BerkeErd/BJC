@@ -8,6 +8,8 @@ public class LevelManager : MonoBehaviour
     [SerializeField] private GameObject passengerPrefab; 
     [SerializeField] private GameObject blockPrefab;
     [SerializeField] private GameObject floorPrefab;
+    [SerializeField] private GameObject tunnelPrefab; 
+
 
     [SerializeField] private float planeSpacing = 0.1f;
     [SerializeField] private float planeExtraPadding = 1.0f;  // Her bir kenara eklenecek ekstra geniþlik
@@ -100,9 +102,8 @@ public class LevelManager : MonoBehaviour
         float planeWidth = levelData.width * (1 + planeSpacing) - planeSpacing + planeExtraPadding;
         float planeDepth = levelData.height * (1 + planeSpacing) - planeSpacing + planeExtraPadding;
 
-        // Plane oluþtur ve konumlandýr
         GameObject plane = GameObject.CreatePrimitive(PrimitiveType.Plane);
-        plane.transform.localScale = new Vector3(planeWidth / 10, 1, planeDepth / 10);  
+        plane.transform.localScale = new Vector3(planeWidth / 10, 1, planeDepth / 10);
         plane.transform.position = new Vector3((planeWidth - 1) / 2, -0.05f, (planeDepth - 1) / 2);
 
         for (int i = 0; i < levelData.height; i++)
@@ -115,15 +116,28 @@ public class LevelManager : MonoBehaviour
                 LevelData.LevelGridCell cell = levelData.gridCells[i * levelData.width + j];
                 if (cell.isOccupied)
                 {
-                    var passenger = Instantiate(passengerPrefab, position, Quaternion.identity);
-                    passenger.GetComponentInChildren<Renderer>().material.color = cell.passengerColor;
+                    Instantiate(passengerPrefab, position, Quaternion.identity);
                 }
                 else if (cell.isBlocked)
                 {
                     Instantiate(blockPrefab, position, Quaternion.identity);
                 }
+
+                if (cell.isTunnel)
+                {
+                    InstantiateTunnel(position, i, j);
+                }
             }
         }
+    }
+
+    void InstantiateTunnel(Vector3 position, int rowIndex, int colIndex)
+    {
+        GameObject tunnel = Instantiate(tunnelPrefab, position + Vector3.up * 0.1f, Quaternion.identity); // Tüneli biraz yükselterek yerleþtir
+        tunnel.name = $"Tunnel_{rowIndex}_{colIndex}";
+        
+        tunnel.GetComponent<Tunnel>().Initialize(rowIndex, colIndex, levelData); // Initialize fonksiyonu ile tünelin konumu ve diðer baþlangýç ayarlarýný yap.
+
     }
 }
 

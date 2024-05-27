@@ -12,250 +12,44 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e4785a499d8a33741a161da9c5aec352, type: 3}
   m_Name: Test Level
   m_EditorClassIdentifier: 
-  width: 9
-  height: 9
+  width: 2
+  height: 2
   gridCells:
-  - isOccupied: 0
-    passengerColor: {r: 0, g: 0, b: 0, a: 0}
-    isBlocked: 0
-  - isOccupied: 0
-    passengerColor: {r: 0, g: 0, b: 0, a: 0}
-    isBlocked: 0
-  - isOccupied: 0
-    passengerColor: {r: 0, g: 0, b: 0, a: 0}
-    isBlocked: 0
-  - isOccupied: 0
-    passengerColor: {r: 0, g: 0, b: 0, a: 0}
-    isBlocked: 0
-  - isOccupied: 0
-    passengerColor: {r: 0, g: 0, b: 0, a: 0}
-    isBlocked: 0
-  - isOccupied: 0
-    passengerColor: {r: 0, g: 0, b: 0, a: 0}
-    isBlocked: 0
-  - isOccupied: 0
-    passengerColor: {r: 0, g: 0, b: 0, a: 0}
-    isBlocked: 0
-  - isOccupied: 0
-    passengerColor: {r: 0, g: 0, b: 0, a: 0}
-    isBlocked: 0
-  - isOccupied: 0
-    passengerColor: {r: 0, g: 0, b: 0, a: 0}
-    isBlocked: 0
-  - isOccupied: 0
-    passengerColor: {r: 0, g: 0, b: 0, a: 0}
-    isBlocked: 0
-  - isOccupied: 0
-    passengerColor: {r: 0, g: 0, b: 0, a: 0}
-    isBlocked: 0
-  - isOccupied: 0
-    passengerColor: {r: 0, g: 0, b: 0, a: 0}
-    isBlocked: 0
-  - isOccupied: 0
-    passengerColor: {r: 0, g: 0, b: 0, a: 0}
-    isBlocked: 0
-  - isOccupied: 0
-    passengerColor: {r: 0, g: 0, b: 0, a: 0}
-    isBlocked: 0
-  - isOccupied: 0
-    passengerColor: {r: 0, g: 0, b: 0, a: 0}
-    isBlocked: 0
-  - isOccupied: 0
-    passengerColor: {r: 0, g: 0, b: 0, a: 0}
-    isBlocked: 0
-  - isOccupied: 0
-    passengerColor: {r: 0, g: 0, b: 0, a: 0}
-    isBlocked: 0
-  - isOccupied: 0
-    passengerColor: {r: 0, g: 0, b: 0, a: 0}
-    isBlocked: 0
-  - isOccupied: 0
-    passengerColor: {r: 0, g: 0, b: 0, a: 0}
-    isBlocked: 0
-  - isOccupied: 0
-    passengerColor: {r: 0, g: 0, b: 0, a: 0}
-    isBlocked: 0
-  - isOccupied: 0
-    passengerColor: {r: 0, g: 0, b: 0, a: 0}
-    isBlocked: 0
-  - isOccupied: 0
-    passengerColor: {r: 0, g: 0, b: 0, a: 0}
-    isBlocked: 0
-  - isOccupied: 0
-    passengerColor: {r: 0, g: 0, b: 0, a: 0}
-    isBlocked: 0
-  - isOccupied: 0
-    passengerColor: {r: 0, g: 0, b: 0, a: 0}
-    isBlocked: 0
-  - isOccupied: 0
-    passengerColor: {r: 0, g: 0, b: 0, a: 0}
-    isBlocked: 0
-  - isOccupied: 0
-    passengerColor: {r: 0, g: 0, b: 0, a: 0}
-    isBlocked: 0
-  - isOccupied: 0
-    passengerColor: {r: 0, g: 0, b: 0, a: 0}
-    isBlocked: 0
-  - isOccupied: 0
-    passengerColor: {r: 0, g: 0, b: 0, a: 0}
-    isBlocked: 0
-  - isOccupied: 0
-    passengerColor: {r: 0, g: 0, b: 0, a: 0}
-    isBlocked: 0
-  - isOccupied: 0
-    passengerColor: {r: 0, g: 0, b: 0, a: 0}
-    isBlocked: 0
-  - isOccupied: 0
-    passengerColor: {r: 0, g: 0, b: 0, a: 0}
-    isBlocked: 0
-  - isOccupied: 0
-    passengerColor: {r: 0, g: 0, b: 0, a: 0}
-    isBlocked: 0
-  - isOccupied: 0
-    passengerColor: {r: 0, g: 0, b: 0, a: 0}
-    isBlocked: 0
-  - isOccupied: 0
-    passengerColor: {r: 0, g: 0, b: 0, a: 0}
-    isBlocked: 0
-  - isOccupied: 0
-    passengerColor: {r: 0, g: 0, b: 0, a: 0}
-    isBlocked: 0
-  - isOccupied: 0
-    passengerColor: {r: 0, g: 0, b: 0, a: 0}
-    isBlocked: 0
-  - isOccupied: 0
-    passengerColor: {r: 0, g: 0, b: 0, a: 0}
-    isBlocked: 0
-  - isOccupied: 0
-    passengerColor: {r: 0, g: 0, b: 0, a: 0}
-    isBlocked: 0
-  - isOccupied: 0
-    passengerColor: {r: 0, g: 0, b: 0, a: 0}
-    isBlocked: 0
-  - isOccupied: 0
-    passengerColor: {r: 0, g: 0, b: 0, a: 0}
-    isBlocked: 0
-  - isOccupied: 0
-    passengerColor: {r: 0, g: 0, b: 0, a: 0}
-    isBlocked: 0
-  - isOccupied: 0
-    passengerColor: {r: 0, g: 0, b: 0, a: 0}
-    isBlocked: 0
-  - isOccupied: 0
-    passengerColor: {r: 0, g: 0, b: 0, a: 0}
-    isBlocked: 0
-  - isOccupied: 0
-    passengerColor: {r: 0, g: 0, b: 0, a: 0}
-    isBlocked: 0
-  - isOccupied: 0
-    passengerColor: {r: 0, g: 0, b: 0, a: 0}
-    isBlocked: 0
-  - isOccupied: 0
-    passengerColor: {r: 0, g: 0, b: 0, a: 0}
-    isBlocked: 0
-  - isOccupied: 0
-    passengerColor: {r: 0, g: 0, b: 0, a: 0}
-    isBlocked: 0
-  - isOccupied: 0
-    passengerColor: {r: 0, g: 0, b: 0, a: 0}
-    isBlocked: 0
-  - isOccupied: 0
-    passengerColor: {r: 0, g: 0, b: 0, a: 0}
-    isBlocked: 0
-  - isOccupied: 0
-    passengerColor: {r: 0, g: 0, b: 0, a: 0}
-    isBlocked: 0
-  - isOccupied: 0
-    passengerColor: {r: 0, g: 0, b: 0, a: 0}
-    isBlocked: 0
-  - isOccupied: 0
-    passengerColor: {r: 0, g: 0, b: 0, a: 0}
-    isBlocked: 0
-  - isOccupied: 0
-    passengerColor: {r: 0, g: 0, b: 0, a: 0}
-    isBlocked: 0
-  - isOccupied: 0
-    passengerColor: {r: 0, g: 0, b: 0, a: 0}
-    isBlocked: 0
-  - isOccupied: 0
-    passengerColor: {r: 0, g: 0, b: 0, a: 0}
-    isBlocked: 0
-  - isOccupied: 0
-    passengerColor: {r: 0, g: 0, b: 0, a: 0}
-    isBlocked: 0
-  - isOccupied: 0
-    passengerColor: {r: 0, g: 0, b: 0, a: 0}
-    isBlocked: 0
-  - isOccupied: 0
-    passengerColor: {r: 0, g: 0, b: 0, a: 0}
-    isBlocked: 0
-  - isOccupied: 0
-    passengerColor: {r: 0, g: 0, b: 0, a: 0}
-    isBlocked: 0
-  - isOccupied: 0
-    passengerColor: {r: 0, g: 0, b: 0, a: 0}
-    isBlocked: 0
-  - isOccupied: 0
-    passengerColor: {r: 0, g: 0, b: 0, a: 0}
-    isBlocked: 0
-  - isOccupied: 0
-    passengerColor: {r: 0, g: 0, b: 0, a: 0}
-    isBlocked: 0
-  - isOccupied: 0
-    passengerColor: {r: 0, g: 0, b: 0, a: 0}
-    isBlocked: 0
-  - isOccupied: 0
-    passengerColor: {r: 0, g: 0, b: 0, a: 0}
-    isBlocked: 0
-  - isOccupied: 0
-    passengerColor: {r: 0, g: 0, b: 0, a: 0}
-    isBlocked: 0
-  - isOccupied: 0
-    passengerColor: {r: 0, g: 0, b: 0, a: 0}
-    isBlocked: 0
-  - isOccupied: 0
-    passengerColor: {r: 0, g: 0, b: 0, a: 0}
-    isBlocked: 0
-  - isOccupied: 0
-    passengerColor: {r: 0, g: 0, b: 0, a: 0}
-    isBlocked: 0
-  - isOccupied: 0
-    passengerColor: {r: 0, g: 0, b: 0, a: 0}
-    isBlocked: 0
-  - isOccupied: 0
-    passengerColor: {r: 0, g: 0, b: 0, a: 0}
-    isBlocked: 0
-  - isOccupied: 0
-    passengerColor: {r: 0, g: 0, b: 0, a: 0}
-    isBlocked: 0
-  - isOccupied: 0
-    passengerColor: {r: 0, g: 0, b: 0, a: 0}
-    isBlocked: 0
-  - isOccupied: 0
-    passengerColor: {r: 0, g: 0, b: 0, a: 0}
-    isBlocked: 0
-  - isOccupied: 0
-    passengerColor: {r: 0, g: 0, b: 0, a: 0}
-    isBlocked: 0
-  - isOccupied: 0
-    passengerColor: {r: 0, g: 0, b: 0, a: 0}
-    isBlocked: 0
-  - isOccupied: 0
-    passengerColor: {r: 0, g: 0, b: 0, a: 0}
-    isBlocked: 0
-  - isOccupied: 0
-    passengerColor: {r: 0, g: 0, b: 0, a: 0}
-    isBlocked: 0
-  - isOccupied: 0
-    passengerColor: {r: 0, g: 0, b: 0, a: 0}
-    isBlocked: 0
-  - isOccupied: 0
-    passengerColor: {r: 0, g: 0, b: 0, a: 0}
-    isBlocked: 0
-  - isOccupied: 0
-    passengerColor: {r: 0, g: 0, b: 0, a: 0}
-    isBlocked: 0
-  - isOccupied: 0
-    passengerColor: {r: 0, g: 0, b: 0, a: 0}
-    isBlocked: 0
+  - isOccupied: 1
+    passengerColor: {r: 1, g: 0, b: 0, a: 1}
+    isBlocked: 0
+    isTunnel: 0
+    tunnelSize: 3
+    tunnelPassengerColors:
+    - {r: 1, g: 0, b: 0, a: 1}
+    - {r: 1, g: 0, b: 0, a: 1}
+    - {r: 0, g: 1, b: 0, a: 1}
+  - isOccupied: 1
+    passengerColor: {r: 1, g: 0, b: 1, a: 1}
+    isBlocked: 0
+    isTunnel: 0
+    tunnelSize: 0
+    tunnelPassengerColors: []
+  - isOccupied: 1
+    passengerColor: {r: 0, g: 1, b: 0, a: 1}
+    isBlocked: 0
+    isTunnel: 0
+    tunnelSize: 1
+    tunnelPassengerColors:
+    - {r: 0, g: 1, b: 0, a: 1}
+  - isOccupied: 0
+    passengerColor: {r: 0, g: 0, b: 0, a: 0}
+    isBlocked: 0
+    isTunnel: 1
+    tunnelSize: 9
+    tunnelPassengerColors:
+    - {r: 0, g: 1, b: 0, a: 1}
+    - {r: 0, g: 1, b: 0, a: 1}
+    - {r: 1, g: 0, b: 1, a: 1}
+    - {r: 1, g: 0, b: 1, a: 1}
+    - {r: 1, g: 0, b: 0, a: 1}
+    - {r: 1, g: 0, b: 0, a: 1}
+    - {r: 1, g: 0, b: 0, a: 1}
+    - {r: 1, g: 0, b: 0, a: 1}
+    - {r: 1, g: 0, b: 0, a: 1}
   waitingAreaSize: 5

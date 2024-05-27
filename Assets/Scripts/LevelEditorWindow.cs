@@ -8,7 +8,10 @@ public class LevelEditorWindow : EditorWindow
     private LevelData currentLevel;
     private Color[] availableColors = new Color[] { Color.red, Color.blue, Color.green, Color.yellow, Color.magenta };
     private string[] colorNames = new string[] { "Red", "Blue", "Green", "Yellow", "Magenta" };
-    private int selectedColorIndex = 0; 
+    private int selectedColorIndex = 0;
+    private bool AddTunnelMode = false; // Tünel ekleme modu deðiþkeni
+    private LevelData.LevelGridCell selectedTunnelCell = null; // Seçilen tünel hücresini sakla
+
 
     [MenuItem("Window/Level Editor")]
     public static void ShowWindow()
@@ -23,6 +26,51 @@ public class LevelEditorWindow : EditorWindow
         currentLevel = (LevelData)EditorGUILayout.ObjectField("Level Data", currentLevel, typeof(LevelData), false);
 
         selectedColorIndex = EditorGUILayout.Popup("Passenger Color", selectedColorIndex, colorNames);
+
+
+        if (GUILayout.Button(AddTunnelMode ? "Disable Tunnel Mode" : "Enable Tunnel Mode"))
+        {
+            AddTunnelMode = !AddTunnelMode;
+            Repaint(); // Editor penceresini yeniden çizdir
+            if (AddTunnelMode)
+                Debug.Log("Tunnel mode activated. Click on a grid cell to place a tunnel.");
+            else
+                Debug.Log("Tunnel mode deactivated.");
+        }
+
+        if (selectedTunnelCell != null && selectedTunnelCell.isTunnel)
+        {
+            EditorGUILayout.LabelField("Selected Tunnel Properties", EditorStyles.boldLabel);
+
+            // Tunnel size'ý otomatik olarak passenger listesinin uzunluðuna ayarla
+            selectedTunnelCell.tunnelSize = selectedTunnelCell.tunnelPassengerColors.Count;
+            EditorGUILayout.LabelField("Tunnel Size", selectedTunnelCell.tunnelSize.ToString());
+
+            if (GUILayout.Button($"Add {colorNames[selectedColorIndex]} Passenger"))
+            {
+                selectedTunnelCell.tunnelPassengerColors.Add(availableColors[selectedColorIndex]);
+                selectedTunnelCell.tunnelSize = selectedTunnelCell.tunnelPassengerColors.Count; // Passenger ekledikten sonra boyutu güncelle
+            }
+
+            for (int i = 0; i < selectedTunnelCell.tunnelPassengerColors.Count; i++)
+            {
+                EditorGUILayout.BeginHorizontal();
+                string colorName = GetColorName(selectedTunnelCell.tunnelPassengerColors[i]);
+                EditorGUILayout.LabelField($"Passenger {i + 1} Color", colorName);
+                if (GUILayout.Button("Remove"))
+                {
+                    selectedTunnelCell.tunnelPassengerColors.RemoveAt(i);
+                    selectedTunnelCell.tunnelSize = selectedTunnelCell.tunnelPassengerColors.Count; // Passenger çýkardýktan sonra boyutu güncelle
+                }
+                EditorGUILayout.EndHorizontal();
+            }
+
+            if (GUILayout.Button("Clear All Passengers"))
+            {
+                selectedTunnelCell.tunnelPassengerColors.Clear();
+                selectedTunnelCell.tunnelSize = 0; // Tüm passenger'larý temizledikten sonra boyutu sýfýrla
+            }
+        }
 
 
         if (currentLevel != null)
@@ -55,14 +103,31 @@ public class LevelEditorWindow : EditorWindow
         {
             ClearGrid(); 
         }
+
+
+
+        
+
     }
+
+    private string GetColorName(Color color)
+    {
+        for (int i = 0; i < availableColors.Length; i++)
+        {
+            if (availableColors[i] == color)
+                return colorNames[i];
+        }
+        return "Unknown"; // Eþleþme bulunamazsa
+    }
+
 
     private void ClearGrid()
     {
         foreach (var cell in currentLevel.gridCells)
         {
             cell.isOccupied = false;
-            cell.isBlocked = false;  
+            cell.isBlocked = false;
+            cell.isTunnel = false;
             cell.passengerColor = Color.clear; 
         }
     }
@@ -83,50 +148,97 @@ public class LevelEditorWindow : EditorWindow
         }
         EditorGUILayout.EndHorizontal();
     }
-    
-    private void DrawLevelGrid()
+
+
+    void DrawLevelGrid()
+{
+    for (int i = 0; i < currentLevel.height; i++)
     {
-        for (int i = 0; i < currentLevel.height; i++)
+        EditorGUILayout.BeginHorizontal();
+        for (int j = 0; j < currentLevel.width; j++)
         {
-            EditorGUILayout.BeginHorizontal();
-            for (int j = 0; j < currentLevel.width; j++)
+            int index = i * currentLevel.width + j;
+            LevelData.LevelGridCell cell = currentLevel.gridCells[index];
+            string label = cell.isBlocked ? "B" : (cell.isTunnel ? $"{cell.tunnelSize}" : (cell.isOccupied ? "X" : "O"));
+            Color cellColor = cell.isOccupied ? cell.passengerColor : (cell.isBlocked ? Color.gray : (cell.isTunnel ? Color.cyan : Color.white));
+            GUI.backgroundColor = cellColor;
+
+            if (GUILayout.Button(label, GUILayout.Width(570 / Mathf.Max(currentLevel.height,currentLevel.width)), GUILayout.Height(570 / Mathf.Max(currentLevel.height, currentLevel.width))))
             {
-                int index = i * currentLevel.width + j;
-                LevelData.LevelGridCell cell = currentLevel.gridCells[index];
-                string label = cell.isBlocked ? "Blocked" : (cell.isOccupied ? "X" : "O");
-                Color originalColor = GUI.backgroundColor;
-                GUI.backgroundColor = cell.isOccupied ? cell.passengerColor : (cell.isBlocked ? Color.black : Color.white);
+                    if (cell.isTunnel)
+                    {
+                        selectedTunnelCell = cell; 
+                    }
+                    else
+                    {
+                        selectedTunnelCell = null; 
+                    }
 
-                if (GUILayout.Button(label, GUILayout.Width(50), GUILayout.Height(50)))
-                {
-                    HandleCellInteraction(ref cell);
-                }
-
-                GUI.backgroundColor = originalColor;
+                    HandleCellInteraction(ref cell, i); 
             }
-            EditorGUILayout.EndHorizontal();
+            GUI.backgroundColor = Color.white;
         }
+        EditorGUILayout.EndHorizontal();
+    }
+}
+
+
+
+
+    private void SetCellAsTunnel(ref LevelData.LevelGridCell cell)
+    {
+        cell.isTunnel = true;
+        cell.isBlocked = false;
+        cell.isOccupied = false;
+        Debug.Log("Tunnel placed at cell.");
     }
 
-    private void HandleCellInteraction(ref LevelData.LevelGridCell cell)
+    void HandleCellInteraction(ref LevelData.LevelGridCell cell, int rowIndex)
     {
-        if (Event.current.button == 0 && !cell.isBlocked) 
+        if (Event.current.button == 0) 
         {
-            cell.isOccupied = !cell.isOccupied;
-            if (cell.isOccupied)
+            
+            if (AddTunnelMode && !cell.isBlocked && !cell.isTunnel)
             {
-                cell.passengerColor = availableColors[selectedColorIndex];
+                // Eðer ilk satýrdaysa tünel eklemeyi engelle
+                if (rowIndex != 0)
+                {
+                    cell.isTunnel = true;
+                    cell.isOccupied = false;  
+                    cell.isBlocked = false;
+                    Debug.Log("Tunnel placed at cell.");
+                }
+            }
+            else if (!cell.isBlocked && !cell.isTunnel)
+            {
+                // Normal modda, tünel veya engel yoksa, hücreyi doldur et veya boþalt
+                cell.isOccupied = !cell.isOccupied;
+                if (cell.isOccupied)
+                {
+                    cell.passengerColor = availableColors[selectedColorIndex];  // Seçili renk ile yolcu rengini ayarla
+                }
+                else
+                {
+                    cell.passengerColor = Color.clear;  // Yolcu hücresini boþaltýrken rengi temizle
+                }
             }
         }
-        else if (Event.current.button == 1)
+        else if (Event.current.button == 1) // Sað týk kontrolü
         {
+            // Engelleme veya engel kaldýrma iþlemleri
             cell.isBlocked = !cell.isBlocked;
             if (cell.isBlocked)
             {
-                cell.isOccupied = false; 
+                cell.isOccupied = false;
+                cell.isTunnel = false;
+                cell.passengerColor = Color.clear; 
             }
         }
     }
+
+
+
+
 
     private bool CheckColorMultiplesOfThree()
     {
@@ -164,16 +276,27 @@ public class LevelEditorWindow : EditorWindow
         // Mevcut renk sayýmlarýný hesapla ve boþ hücre indekslerini topla
         for (int i = 0; i < currentLevel.gridCells.Length; i++)
         {
-            if (!currentLevel.gridCells[i].isOccupied && !currentLevel.gridCells[i].isBlocked)
+            var cell = currentLevel.gridCells[i];
+            if (!cell.isOccupied && !cell.isBlocked && !cell.isTunnel)
             {
                 emptyCellIndices.Add(i);
             }
-            else if (currentLevel.gridCells[i].isOccupied)
+            if (cell.isOccupied)
             {
-                if (colorCount.ContainsKey(currentLevel.gridCells[i].passengerColor))
-                    colorCount[currentLevel.gridCells[i].passengerColor]++;
+                if (colorCount.ContainsKey(cell.passengerColor))
+                    colorCount[cell.passengerColor]++;
                 else
-                    colorCount[currentLevel.gridCells[i].passengerColor] = 1;
+                    colorCount[cell.passengerColor] = 1;
+            }
+            if (cell.isTunnel && cell.tunnelPassengerColors.Count > 0)
+            {
+                foreach (Color color in cell.tunnelPassengerColors)
+                {
+                    if (colorCount.ContainsKey(color))
+                        colorCount[color]++;
+                    else
+                        colorCount[color] = 1;
+                }
             }
         }
 
@@ -214,6 +337,7 @@ public class LevelEditorWindow : EditorWindow
             }
         }
     }
+
 
 
 

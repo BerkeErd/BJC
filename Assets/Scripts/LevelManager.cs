@@ -23,6 +23,7 @@ public class LevelManager : MonoBehaviour
     [SerializeField] private Material roadMat;
     [SerializeField] private Material sidewalkMat;
 
+
     void Start()
     {
         ResetTemporaryData();

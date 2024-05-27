@@ -10,6 +10,84 @@ public class Passenger : MonoBehaviour
     public int colIndex;
     [SerializeField] private float moveSpeed = 3f;
 
+    private PassengerManager manager;
+
+    void Start()
+    {
+        manager = FindObjectOfType<PassengerManager>();
+        manager.RegisterPassenger(this);
+    }
+
+
+    void OnEnable()
+    {
+        manager = FindObjectOfType<PassengerManager>();
+        if (manager != null)
+        {
+            manager.ActivatePassenger(this);
+        }
+    }
+
+    void OnDisable()
+    {
+        if (manager != null)
+        {
+            manager.DeactivatePassenger(this);
+        }
+    }
+
+    void OnDestroy()
+    {
+        if (manager != null)
+        {
+            manager.UnregisterPassenger(this);
+        }
+    }
+
+    public bool CanMoveToFirstRow()
+    {
+        Queue<Vector2Int> queue = new Queue<Vector2Int>();
+        HashSet<Vector2Int> visited = new HashSet<Vector2Int>();
+
+        // Baþlangýç noktasýný kuyruða ekle
+        Vector2Int start = new Vector2Int(colIndex, rowIndex);
+        queue.Enqueue(start);
+        visited.Add(start);
+
+        while (queue.Count > 0)
+        {
+            Vector2Int current = queue.Dequeue();
+
+            // Ýlk satýra ulaþýldý mý kontrol et
+            if (current.y == 0)
+            {
+                return true;
+            }
+
+            // Dört yönde hareket et
+            List<Vector2Int> possibleMoves = new List<Vector2Int>()
+        {
+            new Vector2Int(current.x, current.y - 1), // Yukarý
+            new Vector2Int(current.x, current.y + 1), // Aþaðý
+            new Vector2Int(current.x - 1, current.y), // Sol
+            new Vector2Int(current.x + 1, current.y)  // Sað
+        };
+
+            foreach (var move in possibleMoves)
+            {
+                // Hareketin grid sýnýrlarý içinde, ziyaret edilmediði ve meþgul olmadýðý kontrol edilir
+                if (IsInsideGrid(move) && !visited.Contains(move) && !IsCellOccupied(move.y, move.x))
+                {
+                    queue.Enqueue(move);
+                    visited.Add(move); // Hücreyi ziyaret edildi olarak iþaretle
+                }
+            }
+        }
+
+        return false; // Uygun bir yol bulunamadý
+    }
+
+
 
     public Color PassengerColor
     {

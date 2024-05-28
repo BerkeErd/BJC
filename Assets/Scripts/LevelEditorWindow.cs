@@ -79,17 +79,7 @@ public class LevelEditorWindow : EditorWindow
             DrawLevelGrid();
             if (GUILayout.Button("Save Level"))
             {
-                if (CheckColorMultiplesOfThree())
-                {
-                    EditorUtility.SetDirty(currentLevel);
-                    AssetDatabase.SaveAssets();
-                    Debug.Log("Level saved successfully!");
-                }
-                else
-                {
-                    EditorUtility.DisplayDialog("Save Error", "Each color must have a multiple of three passengers to save.", "OK");
-                    Debug.Log("Save failed: Each color must have multiples of three passengers.");
-                }
+                SaveLevel();
             }
         }
 
@@ -351,7 +341,32 @@ public class LevelEditorWindow : EditorWindow
         }
     }
 
+    void OnDestroy()
+    {
+        if (CheckColorMultiplesOfThree())
+        {
+            SaveLevel();
+            Debug.Log("Level saved successfully!");
+        }
+        else
+        {
+            ClearGrid();
+            Debug.LogError("Save failed: Each color must have multiples of three passengers. Changes not saved.");
+        }
+    }
 
-
-
+    void SaveLevel()
+    {
+        if (CheckColorMultiplesOfThree())
+        {
+            EditorUtility.SetDirty(currentLevel);
+            AssetDatabase.SaveAssets();
+            Debug.Log("Level saved successfully!");
+        }
+        else
+        {
+            EditorUtility.DisplayDialog("Save Error", "Each color must have a multiple of three passengers to save.", "OK");
+            Debug.Log("Save failed: Each color must have multiples of three passengers.");
+        }
+    }
 }

@@ -11,7 +11,13 @@ public class Tunnel : MonoBehaviour
     public int tunnelSize;
     private int spawnedCount = 0;
     public float spawnInterval = 1.0f;
+    private PassengerManager passengerManager;  
 
+    private void Start()
+    {
+        passengerManager = FindObjectOfType<PassengerManager>();
+        InitializePassengers(); // Tüm passenger'larý önceden oluþtur ve kaydet
+    }
 
     public void Initialize(LevelData data, int row, int col, int size, List<Color> passangers)
     {
@@ -23,12 +29,29 @@ public class Tunnel : MonoBehaviour
         StartCoroutine(CheckAndSpawnPassenger());
     }
 
+    private void InitializePassengers()
+    {
+        for (int i = 0; i < tunnelSize; i++)
+        {
+            Color passengerColor = passengerColors[i % passengerColors.Count];
+
+            // Passenger GameObject oluþtur
+            GameObject passengerGO = new GameObject("PassengerPlaceholder");
+            Passenger passengerComponent = passengerGO.AddComponent<Passenger>();
+            
+            passengerComponent.Initialize(levelData, rowIndex, colIndex, passengerColor);
+            passengerManager.RegisterPassenger(passengerComponent);
+            
+            passengerGO.SetActive(false);
+        }
+    }
+
 
     IEnumerator CheckAndSpawnPassenger()
     {
         while (tunnelSize > 0)
         {
-            yield return new WaitForSeconds(spawnInterval);
+            yield return new WaitForSeconds(spawnInterval); // DEÐÝÞECEK
             TrySpawnPassenger();
         }
     }

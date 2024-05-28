@@ -103,20 +103,43 @@ public class Passenger : MonoBehaviour
         }
     }
 
+    private void GoToWaitingCells()
+    {
+        if (CheckAvailableWaitingGrids(gameObject))
+        {
+            ClearOccupiedCell();
+        }
+        else
+        {
+            Debug.Log("You lose");
+        }
+    }
+
     public void OnMouseUpAsButton()
     {
         Debug.Log("Passenger týklandý!");
         List<Vector3> path = FindPathToExit();
         if (path.Count > 0)
         {
-            ClearOccupiedCell();
-            StartCoroutine(FollowPath(path));
+            if (GameObject.FindObjectOfType<BusManager>().currentBus.busColor != PassengerColor)
+            {
+                GoToWaitingCells();
+            }
+            else
+            {
+                StartCoroutine(FollowPath(path));
+                ClearOccupiedCell();
+            }
+            
+
         }
         else
         {
             Debug.Log("Çýkýþa giden yol bulunamadý.");
         }
     }
+
+    
 
 
     public void Initialize(LevelData data, int row, int col, Color color)
@@ -197,7 +220,9 @@ public class Passenger : MonoBehaviour
             }
         }
 
-        ObjectPooler.Instance.RemoveFromPool("Passenger", gameObject);  // Pooling ile yok etme iþlemi
+        // DEÐÝÞECEK
+        GetInsideofBus(GameObject.FindObjectOfType<BusManager>().currentBus);
+
     }
 
     List<Vector2Int> GetNeighbors(Vector2Int current)
@@ -240,6 +265,36 @@ public class Passenger : MonoBehaviour
         return true; // Grid dýþýndaysa veya hücre doluysa, meþgul kabul et
     }
 
-  
+    public void GetInsideofBus(Bus bus)
+    {
+        if(bus.activeBus && bus.busColor == PassengerColor)
+        {
+            bus.GetPassengerIn(this);
+            ObjectPooler.Instance.RemoveFromPool("Passenger", gameObject);
+        }
+        else
+        {
+            GoToWaitingCells();
+        }
+        
+    }
+
+
+    bool CheckAvailableWaitingGrids(GameObject passangerObject)
+    {
+        foreach (var grid in GameObject.FindObjectsOfType<WaitingGrid>())
+        {
+           if(grid.isEmpty)
+            {
+                grid.passengerOnGrid = this;
+                passangerObject.transform.position = grid.transform.position;
+                grid.isEmpty = false;
+                return true;
+            }
+        }
+
+        return false;
+        
+    }
 
 }

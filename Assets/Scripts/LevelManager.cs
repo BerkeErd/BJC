@@ -23,6 +23,11 @@ public class LevelManager : MonoBehaviour
     [SerializeField] private Material roadMat;
     [SerializeField] private Material sidewalkMat;
 
+    [SerializeField] private BusManager busmanager;
+    
+
+
+
 
     void Start()
     {
@@ -52,10 +57,10 @@ public class LevelManager : MonoBehaviour
         float planeDepth = levelData.height + sidewalkLength + roadLength;  
 
         // Kamera yüksekliðini ve pozisyonunu ayarla
-        float cameraHeight = Mathf.Max(planeWidth, planeDepth); 
+        float cameraHeight = Mathf.Max(planeWidth , planeDepth ); 
         float backOffset = planeDepth / 2 + 10.0f;  
 
-        Vector3 cameraPosition = new Vector3(planeWidth / 2, cameraHeight, planeDepth / 2 - backOffset);
+        Vector3 cameraPosition = new Vector3(planeWidth / 2, cameraHeight * 2, planeDepth / 2 - backOffset);
         mainCamera.transform.position = cameraPosition;
 
         // Kameranýn yolun baþlangýç noktasýna bakmasýný saðla
@@ -83,11 +88,14 @@ public class LevelManager : MonoBehaviour
         float gridSpacing = 1 + planeSpacing; // Her grid arasý mesafe
         float zPosition = levelData.height + (sidewalkLength / 2.0f); // Sidewalk'ýn ortasýna yerleþtir
 
+        busmanager.waitingSpot = new Vector3(centerGridX, 0.1f, zPosition + roadLength/2);
+
         // 5 grid ekle, merkezi hesapla ve oradan itibaren saða sola ekle
         for (int i = -2; i <= 2; i++) // -2'den 2'ye kadar (5 grid)
         {
             Vector3 gridPosition = new Vector3(centerGridX + i * gridSpacing, 0.1f, zPosition); // Y ekseni biraz yükseltilmiþ
             GameObject grid = Instantiate(floorPrefab, gridPosition, Quaternion.identity);
+            grid.AddComponent<WaitingGrid>();
         }
     }
 
@@ -98,7 +106,7 @@ public class LevelManager : MonoBehaviour
         // Sidewalk boyutlarý ve pozisyonundan yola baþlangýç pozisyonunu hesapla
         float sidewalkEndZ = levelData.height + sidewalkLength;
         Vector3 roadStartPosition = new Vector3(levelData.width / 2.0f, -0.01f, sidewalkEndZ + roadLength / 2.0f);
-
+        busmanager.busSpawnPoint = new Vector3(levelData.width * -3, -0.01f, sidewalkEndZ + roadLength / 2.0f);
         // Yol plane'ini oluþtur ve konumlandýr
         GameObject roadPlane = GameObject.CreatePrimitive(PrimitiveType.Plane);
         roadPlane.transform.position = roadStartPosition;

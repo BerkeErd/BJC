@@ -12,7 +12,42 @@ public class PassengerManager : MonoBehaviour
     [SerializeField] private Material passengerDefaultMat;
 
 
-    private void Start()
+    // Toplam yolcu sayýsýný döndürür
+    public int GetTotalPassengerCount()
+    {
+        Debug.Log(allPassengers.Count);
+        return allPassengers.Count;
+    }
+
+    public List<Color> getPassengersWithPathColors()
+    {
+        List<Color> Colors = new List<Color>();
+
+        foreach (var passenger in passengersWithPaths)
+        {
+            Colors.Add(passenger.PassengerColor);
+        }
+
+        return Colors;
+    }
+
+
+    void OnEnable()
+    {
+        GameController.OnGameStart += HandleGameStart;
+    }
+
+    void OnDisable()
+    {
+        GameController.OnGameStart -= HandleGameStart;
+    }
+
+    private void HandleGameStart()
+    {
+        StartPassengerManager();
+    }
+
+    private void StartPassengerManager()
     {
         StartCoroutine(CheckPathsRegularly());
     }
@@ -41,7 +76,6 @@ public class PassengerManager : MonoBehaviour
 
     public void UnregisterPassenger(Passenger passenger)
     {
-        allPassengers.Remove(passenger);
         activePassengers.Remove(passenger);
         passengersWithPaths.Remove(passenger);
     }
@@ -50,9 +84,8 @@ public class PassengerManager : MonoBehaviour
     {
         while (true)
         {
-            Debug.Log("Deneme");
             UpdatePassengersWithPaths();
-            yield return new WaitForSeconds(1f);  // DEÐÝÞECEK
+            yield return new WaitForSeconds(1f);  // DEÐÝÞECEK 
         }
     }
 
@@ -77,5 +110,23 @@ public class PassengerManager : MonoBehaviour
             }
         }
     }
+
+    public Dictionary<Color, int> CountPassengerColors()
+    {
+        Dictionary<Color, int> colorCounts = new Dictionary<Color, int>();
+        foreach (var passenger in allPassengers)
+        {
+            if (colorCounts.ContainsKey(passenger.PassengerColor))
+            {
+                colorCounts[passenger.PassengerColor]++;
+            }
+            else
+            {
+                colorCounts.Add(passenger.PassengerColor, 1);
+            }
+        }
+        return colorCounts;
+    }
+
 
 }

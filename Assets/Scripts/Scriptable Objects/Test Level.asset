@@ -12,520 +12,73 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e4785a499d8a33741a161da9c5aec352, type: 3}
   m_Name: Test Level
   m_EditorClassIdentifier: 
-  width: 16
-  height: 14
+  width: 5
+  height: 5
   gridCells:
-  - Position: {x: 0.5, y: 0, z: 14.8}
+  - Position: {x: 0.5, y: 0, z: 4.9}
     isOccupied: 1
     passengerColor: {r: 1, g: 0, b: 1, a: 1}
     isBlocked: 0
     isTunnel: 0
     tunnelSize: 1
     tunnelPassengerColors: []
-  - Position: {x: 1.6, y: 0, z: 14.8}
-    isOccupied: 1
-    passengerColor: {r: 1, g: 0, b: 1, a: 1}
-    isBlocked: 0
-    isTunnel: 0
-    tunnelSize: 1
-    tunnelPassengerColors: []
-  - Position: {x: 2.7, y: 0, z: 14.8}
-    isOccupied: 1
-    passengerColor: {r: 1, g: 0, b: 0, a: 1}
-    isBlocked: 0
-    isTunnel: 0
-    tunnelSize: 1
-    tunnelPassengerColors: []
-  - Position: {x: 3.8, y: 0, z: 14.8}
-    isOccupied: 1
-    passengerColor: {r: 1, g: 0, b: 1, a: 1}
-    isBlocked: 0
-    isTunnel: 0
-    tunnelSize: 1
-    tunnelPassengerColors: []
-  - Position: {x: 4.9, y: 0, z: 14.8}
+  - Position: {x: 1.6, y: 0, z: 4.9}
     isOccupied: 1
     passengerColor: {r: 0, g: 1, b: 0, a: 1}
     isBlocked: 0
     isTunnel: 0
     tunnelSize: 1
     tunnelPassengerColors: []
-  - Position: {x: 6, y: 0, z: 14.8}
-    isOccupied: 1
-    passengerColor: {r: 0, g: 0, b: 1, a: 1}
-    isBlocked: 0
-    isTunnel: 0
-    tunnelSize: 1
-    tunnelPassengerColors: []
-  - Position: {x: 7.1, y: 0, z: 14.8}
-    isOccupied: 1
-    passengerColor: {r: 0, g: 0, b: 1, a: 1}
-    isBlocked: 0
-    isTunnel: 0
-    tunnelSize: 1
-    tunnelPassengerColors: []
-  - Position: {x: 8.2, y: 0, z: 14.8}
-    isOccupied: 1
-    passengerColor: {r: 1, g: 0.92156863, b: 0.015686275, a: 1}
-    isBlocked: 0
-    isTunnel: 0
-    tunnelSize: 1
-    tunnelPassengerColors: []
-  - Position: {x: 9.3, y: 0, z: 14.8}
-    isOccupied: 1
-    passengerColor: {r: 1, g: 0, b: 1, a: 1}
-    isBlocked: 0
-    isTunnel: 0
-    tunnelSize: 1
-    tunnelPassengerColors: []
-  - Position: {x: 10.4, y: 0, z: 14.8}
-    isOccupied: 1
-    passengerColor: {r: 1, g: 0.92156863, b: 0.015686275, a: 1}
-    isBlocked: 0
-    isTunnel: 0
-    tunnelSize: 1
-    tunnelPassengerColors: []
-  - Position: {x: 11.5, y: 0, z: 14.8}
+  - Position: {x: 2.7, y: 0, z: 4.9}
     isOccupied: 1
     passengerColor: {r: 1, g: 0, b: 0, a: 1}
     isBlocked: 0
     isTunnel: 0
     tunnelSize: 1
     tunnelPassengerColors: []
-  - Position: {x: 12.6, y: 0, z: 14.8}
-    isOccupied: 1
-    passengerColor: {r: 1, g: 0, b: 1, a: 1}
-    isBlocked: 0
-    isTunnel: 0
-    tunnelSize: 1
-    tunnelPassengerColors: []
-  - Position: {x: 13.7, y: 0, z: 14.8}
+  - Position: {x: 3.8, y: 0, z: 4.9}
     isOccupied: 1
     passengerColor: {r: 1, g: 0, b: 0, a: 1}
     isBlocked: 0
     isTunnel: 0
     tunnelSize: 1
     tunnelPassengerColors: []
-  - Position: {x: 14.8, y: 0, z: 14.8}
-    isOccupied: 1
-    passengerColor: {r: 1, g: 0, b: 0, a: 1}
-    isBlocked: 0
-    isTunnel: 0
-    tunnelSize: 1
-    tunnelPassengerColors: []
-  - Position: {x: 15.9, y: 0, z: 14.8}
-    isOccupied: 1
-    passengerColor: {r: 1, g: 0, b: 0, a: 1}
-    isBlocked: 0
-    isTunnel: 0
-    tunnelSize: 1
-    tunnelPassengerColors: []
-  - Position: {x: 17, y: 0, z: 14.8}
-    isOccupied: 1
-    passengerColor: {r: 0, g: 0, b: 1, a: 1}
-    isBlocked: 0
-    isTunnel: 0
-    tunnelSize: 1
-    tunnelPassengerColors: []
-  - Position: {x: 0.5, y: 0, z: 13.7}
-    isOccupied: 1
-    passengerColor: {r: 0, g: 0, b: 1, a: 1}
-    isBlocked: 0
-    isTunnel: 0
-    tunnelSize: 1
-    tunnelPassengerColors: []
-  - Position: {x: 1.6, y: 0, z: 13.7}
-    isOccupied: 1
-    passengerColor: {r: 1, g: 0, b: 1, a: 1}
-    isBlocked: 0
-    isTunnel: 0
-    tunnelSize: 1
-    tunnelPassengerColors: []
-  - Position: {x: 2.7, y: 0, z: 13.7}
+  - Position: {x: 4.9, y: 0, z: 4.9}
     isOccupied: 1
     passengerColor: {r: 0, g: 1, b: 0, a: 1}
     isBlocked: 0
     isTunnel: 0
     tunnelSize: 1
     tunnelPassengerColors: []
-  - Position: {x: 3.8, y: 0, z: 13.7}
-    isOccupied: 1
-    passengerColor: {r: 1, g: 0, b: 0, a: 1}
-    isBlocked: 0
-    isTunnel: 0
-    tunnelSize: 1
-    tunnelPassengerColors: []
-  - Position: {x: 4.9, y: 0, z: 13.7}
-    isOccupied: 1
-    passengerColor: {r: 1, g: 0.92156863, b: 0.015686275, a: 1}
-    isBlocked: 0
-    isTunnel: 0
-    tunnelSize: 1
-    tunnelPassengerColors: []
-  - Position: {x: 6, y: 0, z: 13.7}
+  - Position: {x: 0.5, y: 0, z: 3.8}
     isOccupied: 1
     passengerColor: {r: 0, g: 1, b: 0, a: 1}
     isBlocked: 0
     isTunnel: 0
     tunnelSize: 1
     tunnelPassengerColors: []
-  - Position: {x: 7.1, y: 0, z: 13.7}
+  - Position: {x: 1.6, y: 0, z: 3.8}
+    isOccupied: 1
+    passengerColor: {r: 0, g: 1, b: 0, a: 1}
+    isBlocked: 0
+    isTunnel: 0
+    tunnelSize: 1
+    tunnelPassengerColors: []
+  - Position: {x: 2.7, y: 0, z: 3.8}
     isOccupied: 1
     passengerColor: {r: 1, g: 0, b: 0, a: 1}
     isBlocked: 0
     isTunnel: 0
     tunnelSize: 1
     tunnelPassengerColors: []
-  - Position: {x: 8.2, y: 0, z: 13.7}
+  - Position: {x: 3.8, y: 0, z: 3.8}
     isOccupied: 1
     passengerColor: {r: 0, g: 0, b: 1, a: 1}
     isBlocked: 0
     isTunnel: 0
     tunnelSize: 1
     tunnelPassengerColors: []
-  - Position: {x: 9.3, y: 0, z: 13.7}
-    isOccupied: 1
-    passengerColor: {r: 0, g: 0, b: 1, a: 1}
-    isBlocked: 0
-    isTunnel: 0
-    tunnelSize: 1
-    tunnelPassengerColors: []
-  - Position: {x: 10.4, y: 0, z: 13.7}
-    isOccupied: 1
-    passengerColor: {r: 1, g: 0, b: 0, a: 1}
-    isBlocked: 0
-    isTunnel: 0
-    tunnelSize: 1
-    tunnelPassengerColors: []
-  - Position: {x: 11.5, y: 0, z: 13.7}
-    isOccupied: 1
-    passengerColor: {r: 1, g: 0, b: 0, a: 1}
-    isBlocked: 0
-    isTunnel: 0
-    tunnelSize: 0
-    tunnelPassengerColors: []
-  - Position: {x: 12.6, y: 0, z: 13.7}
-    isOccupied: 1
-    passengerColor: {r: 1, g: 0, b: 1, a: 1}
-    isBlocked: 0
-    isTunnel: 0
-    tunnelSize: 1
-    tunnelPassengerColors: []
-  - Position: {x: 13.7, y: 0, z: 13.7}
-    isOccupied: 1
-    passengerColor: {r: 0, g: 1, b: 0, a: 1}
-    isBlocked: 0
-    isTunnel: 0
-    tunnelSize: 1
-    tunnelPassengerColors: []
-  - Position: {x: 14.8, y: 0, z: 13.7}
-    isOccupied: 1
-    passengerColor: {r: 0, g: 1, b: 0, a: 1}
-    isBlocked: 0
-    isTunnel: 0
-    tunnelSize: 1
-    tunnelPassengerColors: []
-  - Position: {x: 15.9, y: 0, z: 13.7}
-    isOccupied: 1
-    passengerColor: {r: 0, g: 1, b: 0, a: 1}
-    isBlocked: 0
-    isTunnel: 0
-    tunnelSize: 1
-    tunnelPassengerColors: []
-  - Position: {x: 17, y: 0, z: 13.7}
-    isOccupied: 1
-    passengerColor: {r: 1, g: 0, b: 0, a: 1}
-    isBlocked: 0
-    isTunnel: 0
-    tunnelSize: 1
-    tunnelPassengerColors: []
-  - Position: {x: 0.5, y: 0, z: 12.6}
-    isOccupied: 1
-    passengerColor: {r: 1, g: 0.92156863, b: 0.015686275, a: 1}
-    isBlocked: 0
-    isTunnel: 0
-    tunnelSize: 1
-    tunnelPassengerColors: []
-  - Position: {x: 1.6, y: 0, z: 12.6}
-    isOccupied: 1
-    passengerColor: {r: 1, g: 0, b: 1, a: 1}
-    isBlocked: 0
-    isTunnel: 0
-    tunnelSize: 1
-    tunnelPassengerColors: []
-  - Position: {x: 2.7, y: 0, z: 12.6}
-    isOccupied: 1
-    passengerColor: {r: 1, g: 0, b: 1, a: 1}
-    isBlocked: 0
-    isTunnel: 0
-    tunnelSize: 1
-    tunnelPassengerColors: []
-  - Position: {x: 3.8, y: 0, z: 12.6}
-    isOccupied: 1
-    passengerColor: {r: 1, g: 0, b: 0, a: 1}
-    isBlocked: 0
-    isTunnel: 0
-    tunnelSize: 1
-    tunnelPassengerColors: []
-  - Position: {x: 4.9, y: 0, z: 12.6}
-    isOccupied: 1
-    passengerColor: {r: 1, g: 0, b: 0, a: 1}
-    isBlocked: 0
-    isTunnel: 0
-    tunnelSize: 1
-    tunnelPassengerColors: []
-  - Position: {x: 6, y: 0, z: 12.6}
-    isOccupied: 1
-    passengerColor: {r: 0, g: 1, b: 0, a: 1}
-    isBlocked: 0
-    isTunnel: 0
-    tunnelSize: 1
-    tunnelPassengerColors: []
-  - Position: {x: 7.1, y: 0, z: 12.6}
-    isOccupied: 1
-    passengerColor: {r: 1, g: 0, b: 0, a: 1}
-    isBlocked: 0
-    isTunnel: 0
-    tunnelSize: 1
-    tunnelPassengerColors: []
-  - Position: {x: 8.2, y: 0, z: 12.6}
-    isOccupied: 1
-    passengerColor: {r: 0, g: 1, b: 0, a: 1}
-    isBlocked: 0
-    isTunnel: 0
-    tunnelSize: 1
-    tunnelPassengerColors: []
-  - Position: {x: 9.3, y: 0, z: 12.6}
-    isOccupied: 1
-    passengerColor: {r: 1, g: 0.92156863, b: 0.015686275, a: 1}
-    isBlocked: 0
-    isTunnel: 0
-    tunnelSize: 1
-    tunnelPassengerColors: []
-  - Position: {x: 10.4, y: 0, z: 12.6}
-    isOccupied: 1
-    passengerColor: {r: 0, g: 0, b: 1, a: 1}
-    isBlocked: 0
-    isTunnel: 0
-    tunnelSize: 1
-    tunnelPassengerColors: []
-  - Position: {x: 11.5, y: 0, z: 12.6}
-    isOccupied: 1
-    passengerColor: {r: 0, g: 1, b: 0, a: 1}
-    isBlocked: 0
-    isTunnel: 0
-    tunnelSize: 1
-    tunnelPassengerColors: []
-  - Position: {x: 12.6, y: 0, z: 12.6}
-    isOccupied: 1
-    passengerColor: {r: 1, g: 0, b: 1, a: 1}
-    isBlocked: 0
-    isTunnel: 0
-    tunnelSize: 1
-    tunnelPassengerColors: []
-  - Position: {x: 13.7, y: 0, z: 12.6}
-    isOccupied: 1
-    passengerColor: {r: 0, g: 1, b: 0, a: 1}
-    isBlocked: 0
-    isTunnel: 0
-    tunnelSize: 1
-    tunnelPassengerColors: []
-  - Position: {x: 14.8, y: 0, z: 12.6}
-    isOccupied: 1
-    passengerColor: {r: 0, g: 0, b: 1, a: 1}
-    isBlocked: 0
-    isTunnel: 0
-    tunnelSize: 1
-    tunnelPassengerColors: []
-  - Position: {x: 15.9, y: 0, z: 12.6}
-    isOccupied: 1
-    passengerColor: {r: 1, g: 0, b: 0, a: 1}
-    isBlocked: 0
-    isTunnel: 0
-    tunnelSize: 1
-    tunnelPassengerColors: []
-  - Position: {x: 17, y: 0, z: 12.6}
-    isOccupied: 1
-    passengerColor: {r: 1, g: 0, b: 0, a: 1}
-    isBlocked: 0
-    isTunnel: 0
-    tunnelSize: 1
-    tunnelPassengerColors: []
-  - Position: {x: 0.5, y: 0, z: 11.5}
-    isOccupied: 1
-    passengerColor: {r: 1, g: 0, b: 0, a: 1}
-    isBlocked: 0
-    isTunnel: 0
-    tunnelSize: 1
-    tunnelPassengerColors: []
-  - Position: {x: 1.6, y: 0, z: 11.5}
-    isOccupied: 1
-    passengerColor: {r: 0, g: 0, b: 1, a: 1}
-    isBlocked: 0
-    isTunnel: 0
-    tunnelSize: 1
-    tunnelPassengerColors: []
-  - Position: {x: 2.7, y: 0, z: 11.5}
-    isOccupied: 1
-    passengerColor: {r: 0, g: 0, b: 1, a: 1}
-    isBlocked: 0
-    isTunnel: 0
-    tunnelSize: 1
-    tunnelPassengerColors: []
-  - Position: {x: 3.8, y: 0, z: 11.5}
-    isOccupied: 1
-    passengerColor: {r: 1, g: 0, b: 1, a: 1}
-    isBlocked: 0
-    isTunnel: 0
-    tunnelSize: 1
-    tunnelPassengerColors: []
-  - Position: {x: 4.9, y: 0, z: 11.5}
-    isOccupied: 1
-    passengerColor: {r: 1, g: 0.92156863, b: 0.015686275, a: 1}
-    isBlocked: 0
-    isTunnel: 0
-    tunnelSize: 1
-    tunnelPassengerColors: []
-  - Position: {x: 6, y: 0, z: 11.5}
-    isOccupied: 1
-    passengerColor: {r: 1, g: 0.92156863, b: 0.015686275, a: 1}
-    isBlocked: 0
-    isTunnel: 0
-    tunnelSize: 1
-    tunnelPassengerColors: []
-  - Position: {x: 7.1, y: 0, z: 11.5}
-    isOccupied: 1
-    passengerColor: {r: 0, g: 1, b: 0, a: 1}
-    isBlocked: 0
-    isTunnel: 0
-    tunnelSize: 1
-    tunnelPassengerColors: []
-  - Position: {x: 8.2, y: 0, z: 11.5}
-    isOccupied: 1
-    passengerColor: {r: 1, g: 0.92156863, b: 0.015686275, a: 1}
-    isBlocked: 0
-    isTunnel: 0
-    tunnelSize: 1
-    tunnelPassengerColors: []
-  - Position: {x: 9.3, y: 0, z: 11.5}
-    isOccupied: 1
-    passengerColor: {r: 1, g: 0, b: 1, a: 1}
-    isBlocked: 0
-    isTunnel: 0
-    tunnelSize: 6
-    tunnelPassengerColors:
-    - {r: 1, g: 0.92156863, b: 0.015686275, a: 1}
-    - {r: 1, g: 0.92156863, b: 0.015686275, a: 1}
-    - {r: 1, g: 0, b: 1, a: 1}
-    - {r: 1, g: 0, b: 1, a: 1}
-    - {r: 1, g: 0, b: 1, a: 1}
-    - {r: 1, g: 0.92156863, b: 0.015686275, a: 1}
-  - Position: {x: 10.4, y: 0, z: 11.5}
-    isOccupied: 1
-    passengerColor: {r: 0, g: 1, b: 0, a: 1}
-    isBlocked: 0
-    isTunnel: 0
-    tunnelSize: 1
-    tunnelPassengerColors: []
-  - Position: {x: 11.5, y: 0, z: 11.5}
-    isOccupied: 1
-    passengerColor: {r: 1, g: 0, b: 1, a: 1}
-    isBlocked: 0
-    isTunnel: 0
-    tunnelSize: 1
-    tunnelPassengerColors: []
-  - Position: {x: 12.6, y: 0, z: 11.5}
-    isOccupied: 1
-    passengerColor: {r: 1, g: 0, b: 1, a: 1}
-    isBlocked: 0
-    isTunnel: 0
-    tunnelSize: 1
-    tunnelPassengerColors: []
-  - Position: {x: 13.7, y: 0, z: 11.5}
-    isOccupied: 1
-    passengerColor: {r: 1, g: 0, b: 1, a: 1}
-    isBlocked: 0
-    isTunnel: 0
-    tunnelSize: 1
-    tunnelPassengerColors: []
-  - Position: {x: 14.8, y: 0, z: 11.5}
-    isOccupied: 1
-    passengerColor: {r: 1, g: 0.92156863, b: 0.015686275, a: 1}
-    isBlocked: 0
-    isTunnel: 0
-    tunnelSize: 1
-    tunnelPassengerColors: []
-  - Position: {x: 15.9, y: 0, z: 11.5}
-    isOccupied: 1
-    passengerColor: {r: 0, g: 1, b: 0, a: 1}
-    isBlocked: 0
-    isTunnel: 0
-    tunnelSize: 1
-    tunnelPassengerColors: []
-  - Position: {x: 17, y: 0, z: 11.5}
-    isOccupied: 1
-    passengerColor: {r: 0, g: 0, b: 1, a: 1}
-    isBlocked: 0
-    isTunnel: 0
-    tunnelSize: 1
-    tunnelPassengerColors: []
-  - Position: {x: 0.5, y: 0, z: 10.4}
-    isOccupied: 1
-    passengerColor: {r: 1, g: 0.92156863, b: 0.015686275, a: 1}
-    isBlocked: 0
-    isTunnel: 0
-    tunnelSize: 1
-    tunnelPassengerColors: []
-  - Position: {x: 1.6, y: 0, z: 10.4}
-    isOccupied: 1
-    passengerColor: {r: 1, g: 0, b: 1, a: 1}
-    isBlocked: 0
-    isTunnel: 0
-    tunnelSize: 1
-    tunnelPassengerColors: []
-  - Position: {x: 2.7, y: 0, z: 10.4}
-    isOccupied: 1
-    passengerColor: {r: 0, g: 0, b: 1, a: 1}
-    isBlocked: 0
-    isTunnel: 0
-    tunnelSize: 1
-    tunnelPassengerColors: []
-  - Position: {x: 3.8, y: 0, z: 10.4}
-    isOccupied: 1
-    passengerColor: {r: 1, g: 0.92156863, b: 0.015686275, a: 1}
-    isBlocked: 0
-    isTunnel: 0
-    tunnelSize: 1
-    tunnelPassengerColors: []
-  - Position: {x: 4.9, y: 0, z: 10.4}
-    isOccupied: 1
-    passengerColor: {r: 0, g: 0, b: 1, a: 1}
-    isBlocked: 0
-    isTunnel: 0
-    tunnelSize: 1
-    tunnelPassengerColors: []
-  - Position: {x: 6, y: 0, z: 10.4}
-    isOccupied: 1
-    passengerColor: {r: 1, g: 0.92156863, b: 0.015686275, a: 1}
-    isBlocked: 0
-    isTunnel: 0
-    tunnelSize: 1
-    tunnelPassengerColors: []
-  - Position: {x: 7.1, y: 0, z: 10.4}
-    isOccupied: 1
-    passengerColor: {r: 1, g: 0.92156863, b: 0.015686275, a: 1}
-    isBlocked: 0
-    isTunnel: 0
-    tunnelSize: 1
-    tunnelPassengerColors: []
-  - Position: {x: 8.2, y: 0, z: 10.4}
-    isOccupied: 1
-    passengerColor: {r: 1, g: 0, b: 1, a: 1}
-    isBlocked: 0
-    isTunnel: 0
-    tunnelSize: 1
-    tunnelPassengerColors: []
-  - Position: {x: 9.3, y: 0, z: 10.4}
+  - Position: {x: 4.9, y: 0, z: 3.8}
     isOccupied: 0
     passengerColor: {r: 0, g: 0, b: 0, a: 0}
     isBlocked: 0
@@ -534,842 +87,53 @@ MonoBehaviour:
     tunnelPassengerColors:
     - {r: 1, g: 0, b: 0, a: 1}
     - {r: 1, g: 0, b: 0, a: 1}
-    - {r: 1, g: 0, b: 0, a: 1}
-    - {r: 1, g: 0.92156863, b: 0.015686275, a: 1}
-    - {r: 1, g: 0.92156863, b: 0.015686275, a: 1}
+    - {r: 0, g: 1, b: 0, a: 1}
+    - {r: 0, g: 1, b: 0, a: 1}
     - {r: 0, g: 0, b: 1, a: 1}
     - {r: 0, g: 0, b: 1, a: 1}
+    - {r: 1, g: 0, b: 0, a: 1}
+    - {r: 0, g: 1, b: 0, a: 1}
     - {r: 0, g: 0, b: 1, a: 1}
-    - {r: 1, g: 0.92156863, b: 0.015686275, a: 1}
-  - Position: {x: 10.4, y: 0, z: 10.4}
-    isOccupied: 1
-    passengerColor: {r: 1, g: 0.92156863, b: 0.015686275, a: 1}
-    isBlocked: 0
-    isTunnel: 0
-    tunnelSize: 1
-    tunnelPassengerColors: []
-  - Position: {x: 11.5, y: 0, z: 10.4}
-    isOccupied: 1
-    passengerColor: {r: 0, g: 1, b: 0, a: 1}
-    isBlocked: 0
-    isTunnel: 0
-    tunnelSize: 1
-    tunnelPassengerColors: []
-  - Position: {x: 12.6, y: 0, z: 10.4}
-    isOccupied: 1
-    passengerColor: {r: 0, g: 1, b: 0, a: 1}
-    isBlocked: 0
-    isTunnel: 0
-    tunnelSize: 1
-    tunnelPassengerColors: []
-  - Position: {x: 13.7, y: 0, z: 10.4}
-    isOccupied: 1
-    passengerColor: {r: 0, g: 0, b: 1, a: 1}
-    isBlocked: 0
-    isTunnel: 0
-    tunnelSize: 1
-    tunnelPassengerColors: []
-  - Position: {x: 14.8, y: 0, z: 10.4}
-    isOccupied: 1
-    passengerColor: {r: 1, g: 0.92156863, b: 0.015686275, a: 1}
-    isBlocked: 0
-    isTunnel: 0
-    tunnelSize: 1
-    tunnelPassengerColors: []
-  - Position: {x: 15.9, y: 0, z: 10.4}
-    isOccupied: 1
-    passengerColor: {r: 1, g: 0, b: 0, a: 1}
-    isBlocked: 0
-    isTunnel: 0
-    tunnelSize: 1
-    tunnelPassengerColors: []
-  - Position: {x: 17, y: 0, z: 10.4}
-    isOccupied: 1
-    passengerColor: {r: 1, g: 0.92156863, b: 0.015686275, a: 1}
-    isBlocked: 0
-    isTunnel: 0
-    tunnelSize: 1
-    tunnelPassengerColors: []
-  - Position: {x: 0.5, y: 0, z: 9.3}
-    isOccupied: 1
-    passengerColor: {r: 0, g: 0, b: 1, a: 1}
-    isBlocked: 0
-    isTunnel: 0
-    tunnelSize: 1
-    tunnelPassengerColors: []
-  - Position: {x: 1.6, y: 0, z: 9.3}
-    isOccupied: 1
-    passengerColor: {r: 1, g: 0.92156863, b: 0.015686275, a: 1}
-    isBlocked: 0
-    isTunnel: 0
-    tunnelSize: 1
-    tunnelPassengerColors: []
-  - Position: {x: 2.7, y: 0, z: 9.3}
-    isOccupied: 1
-    passengerColor: {r: 1, g: 0, b: 1, a: 1}
-    isBlocked: 0
-    isTunnel: 0
-    tunnelSize: 1
-    tunnelPassengerColors: []
-  - Position: {x: 3.8, y: 0, z: 9.3}
-    isOccupied: 1
-    passengerColor: {r: 0, g: 0, b: 1, a: 1}
-    isBlocked: 0
-    isTunnel: 0
-    tunnelSize: 1
-    tunnelPassengerColors: []
-  - Position: {x: 4.9, y: 0, z: 9.3}
-    isOccupied: 1
-    passengerColor: {r: 1, g: 0, b: 1, a: 1}
-    isBlocked: 0
-    isTunnel: 0
-    tunnelSize: 1
-    tunnelPassengerColors: []
-  - Position: {x: 6, y: 0, z: 9.3}
-    isOccupied: 1
-    passengerColor: {r: 1, g: 0.92156863, b: 0.015686275, a: 1}
-    isBlocked: 0
-    isTunnel: 0
-    tunnelSize: 1
-    tunnelPassengerColors: []
-  - Position: {x: 7.1, y: 0, z: 9.3}
-    isOccupied: 1
-    passengerColor: {r: 0, g: 0, b: 1, a: 1}
-    isBlocked: 0
-    isTunnel: 0
-    tunnelSize: 1
-    tunnelPassengerColors: []
-  - Position: {x: 8.2, y: 0, z: 9.3}
-    isOccupied: 1
-    passengerColor: {r: 1, g: 0, b: 0, a: 1}
-    isBlocked: 0
-    isTunnel: 0
-    tunnelSize: 1
-    tunnelPassengerColors: []
-  - Position: {x: 9.3, y: 0, z: 9.3}
-    isOccupied: 1
-    passengerColor: {r: 0, g: 0, b: 1, a: 1}
-    isBlocked: 0
-    isTunnel: 0
-    tunnelSize: 1
-    tunnelPassengerColors: []
-  - Position: {x: 10.4, y: 0, z: 9.3}
-    isOccupied: 1
-    passengerColor: {r: 1, g: 0.92156863, b: 0.015686275, a: 1}
-    isBlocked: 0
-    isTunnel: 0
-    tunnelSize: 1
-    tunnelPassengerColors: []
-  - Position: {x: 11.5, y: 0, z: 9.3}
-    isOccupied: 1
-    passengerColor: {r: 1, g: 0, b: 0, a: 1}
-    isBlocked: 0
-    isTunnel: 0
-    tunnelSize: 1
-    tunnelPassengerColors: []
-  - Position: {x: 12.6, y: 0, z: 9.3}
-    isOccupied: 1
-    passengerColor: {r: 1, g: 0.92156863, b: 0.015686275, a: 1}
-    isBlocked: 0
-    isTunnel: 0
-    tunnelSize: 1
-    tunnelPassengerColors: []
-  - Position: {x: 13.7, y: 0, z: 9.3}
-    isOccupied: 1
-    passengerColor: {r: 1, g: 0, b: 1, a: 1}
-    isBlocked: 0
-    isTunnel: 0
-    tunnelSize: 1
-    tunnelPassengerColors: []
-  - Position: {x: 14.8, y: 0, z: 9.3}
-    isOccupied: 1
-    passengerColor: {r: 1, g: 0, b: 0, a: 1}
-    isBlocked: 0
-    isTunnel: 0
-    tunnelSize: 1
-    tunnelPassengerColors: []
-  - Position: {x: 15.9, y: 0, z: 9.3}
-    isOccupied: 1
-    passengerColor: {r: 1, g: 0.92156863, b: 0.015686275, a: 1}
-    isBlocked: 0
-    isTunnel: 0
-    tunnelSize: 1
-    tunnelPassengerColors: []
-  - Position: {x: 17, y: 0, z: 9.3}
-    isOccupied: 1
-    passengerColor: {r: 1, g: 0.92156863, b: 0.015686275, a: 1}
-    isBlocked: 0
-    isTunnel: 0
-    tunnelSize: 1
-    tunnelPassengerColors: []
-  - Position: {x: 0.5, y: 0, z: 8.2}
-    isOccupied: 1
-    passengerColor: {r: 1, g: 0.92156863, b: 0.015686275, a: 1}
-    isBlocked: 0
-    isTunnel: 0
-    tunnelSize: 1
-    tunnelPassengerColors: []
-  - Position: {x: 1.6, y: 0, z: 8.2}
-    isOccupied: 1
-    passengerColor: {r: 1, g: 0.92156863, b: 0.015686275, a: 1}
-    isBlocked: 0
-    isTunnel: 0
-    tunnelSize: 1
-    tunnelPassengerColors: []
-  - Position: {x: 2.7, y: 0, z: 8.2}
-    isOccupied: 1
-    passengerColor: {r: 1, g: 0, b: 1, a: 1}
-    isBlocked: 0
-    isTunnel: 0
-    tunnelSize: 1
-    tunnelPassengerColors: []
-  - Position: {x: 3.8, y: 0, z: 8.2}
-    isOccupied: 1
-    passengerColor: {r: 1, g: 0.92156863, b: 0.015686275, a: 1}
-    isBlocked: 0
-    isTunnel: 0
-    tunnelSize: 1
-    tunnelPassengerColors: []
-  - Position: {x: 4.9, y: 0, z: 8.2}
-    isOccupied: 1
-    passengerColor: {r: 1, g: 0, b: 1, a: 1}
-    isBlocked: 0
-    isTunnel: 0
-    tunnelSize: 1
-    tunnelPassengerColors: []
-  - Position: {x: 6, y: 0, z: 8.2}
-    isOccupied: 1
-    passengerColor: {r: 1, g: 0, b: 0, a: 1}
-    isBlocked: 0
-    isTunnel: 0
-    tunnelSize: 1
-    tunnelPassengerColors: []
-  - Position: {x: 7.1, y: 0, z: 8.2}
-    isOccupied: 1
-    passengerColor: {r: 1, g: 0, b: 1, a: 1}
-    isBlocked: 0
-    isTunnel: 0
-    tunnelSize: 1
-    tunnelPassengerColors: []
-  - Position: {x: 8.2, y: 0, z: 8.2}
-    isOccupied: 1
-    passengerColor: {r: 1, g: 0, b: 1, a: 1}
-    isBlocked: 0
-    isTunnel: 0
-    tunnelSize: 1
-    tunnelPassengerColors: []
-  - Position: {x: 9.3, y: 0, z: 8.2}
-    isOccupied: 1
-    passengerColor: {r: 1, g: 0, b: 1, a: 1}
-    isBlocked: 0
-    isTunnel: 0
-    tunnelSize: 1
-    tunnelPassengerColors: []
-  - Position: {x: 10.4, y: 0, z: 8.2}
-    isOccupied: 1
-    passengerColor: {r: 1, g: 0.92156863, b: 0.015686275, a: 1}
-    isBlocked: 0
-    isTunnel: 0
-    tunnelSize: 1
-    tunnelPassengerColors: []
-  - Position: {x: 11.5, y: 0, z: 8.2}
-    isOccupied: 1
-    passengerColor: {r: 1, g: 0.92156863, b: 0.015686275, a: 1}
-    isBlocked: 0
-    isTunnel: 0
-    tunnelSize: 1
-    tunnelPassengerColors: []
-  - Position: {x: 12.6, y: 0, z: 8.2}
-    isOccupied: 1
-    passengerColor: {r: 1, g: 0.92156863, b: 0.015686275, a: 1}
-    isBlocked: 0
-    isTunnel: 0
-    tunnelSize: 1
-    tunnelPassengerColors: []
-  - Position: {x: 13.7, y: 0, z: 8.2}
-    isOccupied: 1
-    passengerColor: {r: 0, g: 0, b: 1, a: 1}
-    isBlocked: 0
-    isTunnel: 0
-    tunnelSize: 1
-    tunnelPassengerColors: []
-  - Position: {x: 14.8, y: 0, z: 8.2}
-    isOccupied: 1
-    passengerColor: {r: 1, g: 0, b: 1, a: 1}
-    isBlocked: 0
-    isTunnel: 0
-    tunnelSize: 1
-    tunnelPassengerColors: []
-  - Position: {x: 15.9, y: 0, z: 8.2}
-    isOccupied: 1
-    passengerColor: {r: 0, g: 1, b: 0, a: 1}
-    isBlocked: 0
-    isTunnel: 0
-    tunnelSize: 1
-    tunnelPassengerColors: []
-  - Position: {x: 17, y: 0, z: 8.2}
-    isOccupied: 1
-    passengerColor: {r: 0, g: 0, b: 1, a: 1}
-    isBlocked: 0
-    isTunnel: 0
-    tunnelSize: 1
-    tunnelPassengerColors: []
-  - Position: {x: 0.5, y: 0, z: 7.1}
-    isOccupied: 1
-    passengerColor: {r: 0, g: 0, b: 1, a: 1}
-    isBlocked: 0
-    isTunnel: 0
-    tunnelSize: 1
-    tunnelPassengerColors: []
-  - Position: {x: 1.6, y: 0, z: 7.1}
-    isOccupied: 1
-    passengerColor: {r: 1, g: 0, b: 0, a: 1}
-    isBlocked: 0
-    isTunnel: 0
-    tunnelSize: 1
-    tunnelPassengerColors: []
-  - Position: {x: 2.7, y: 0, z: 7.1}
-    isOccupied: 1
-    passengerColor: {r: 1, g: 0, b: 0, a: 1}
-    isBlocked: 0
-    isTunnel: 0
-    tunnelSize: 1
-    tunnelPassengerColors: []
-  - Position: {x: 3.8, y: 0, z: 7.1}
-    isOccupied: 1
-    passengerColor: {r: 0, g: 0, b: 1, a: 1}
-    isBlocked: 0
-    isTunnel: 0
-    tunnelSize: 1
-    tunnelPassengerColors: []
-  - Position: {x: 4.9, y: 0, z: 7.1}
-    isOccupied: 1
-    passengerColor: {r: 1, g: 0, b: 0, a: 1}
-    isBlocked: 0
-    isTunnel: 0
-    tunnelSize: 1
-    tunnelPassengerColors: []
-  - Position: {x: 6, y: 0, z: 7.1}
-    isOccupied: 1
-    passengerColor: {r: 1, g: 0, b: 1, a: 1}
-    isBlocked: 0
-    isTunnel: 0
-    tunnelSize: 1
-    tunnelPassengerColors: []
-  - Position: {x: 7.1, y: 0, z: 7.1}
-    isOccupied: 1
-    passengerColor: {r: 0, g: 0, b: 1, a: 1}
-    isBlocked: 0
-    isTunnel: 0
-    tunnelSize: 1
-    tunnelPassengerColors: []
-  - Position: {x: 8.2, y: 0, z: 7.1}
-    isOccupied: 1
-    passengerColor: {r: 1, g: 0.92156863, b: 0.015686275, a: 1}
-    isBlocked: 0
-    isTunnel: 0
-    tunnelSize: 1
-    tunnelPassengerColors: []
-  - Position: {x: 9.3, y: 0, z: 7.1}
-    isOccupied: 1
-    passengerColor: {r: 1, g: 0, b: 0, a: 1}
-    isBlocked: 0
-    isTunnel: 0
-    tunnelSize: 1
-    tunnelPassengerColors: []
-  - Position: {x: 10.4, y: 0, z: 7.1}
-    isOccupied: 1
-    passengerColor: {r: 1, g: 0, b: 1, a: 1}
-    isBlocked: 0
-    isTunnel: 0
-    tunnelSize: 1
-    tunnelPassengerColors: []
-  - Position: {x: 11.5, y: 0, z: 7.1}
-    isOccupied: 1
-    passengerColor: {r: 0, g: 0, b: 1, a: 1}
-    isBlocked: 0
-    isTunnel: 0
-    tunnelSize: 1
-    tunnelPassengerColors: []
-  - Position: {x: 12.6, y: 0, z: 7.1}
-    isOccupied: 1
-    passengerColor: {r: 0, g: 0, b: 1, a: 1}
-    isBlocked: 0
-    isTunnel: 0
-    tunnelSize: 1
-    tunnelPassengerColors: []
-  - Position: {x: 13.7, y: 0, z: 7.1}
-    isOccupied: 1
-    passengerColor: {r: 1, g: 0.92156863, b: 0.015686275, a: 1}
-    isBlocked: 0
-    isTunnel: 0
-    tunnelSize: 1
-    tunnelPassengerColors: []
-  - Position: {x: 14.8, y: 0, z: 7.1}
-    isOccupied: 1
-    passengerColor: {r: 1, g: 0, b: 1, a: 1}
-    isBlocked: 0
-    isTunnel: 0
-    tunnelSize: 1
-    tunnelPassengerColors: []
-  - Position: {x: 15.9, y: 0, z: 7.1}
-    isOccupied: 1
-    passengerColor: {r: 0, g: 0, b: 1, a: 1}
-    isBlocked: 0
-    isTunnel: 0
-    tunnelSize: 1
-    tunnelPassengerColors: []
-  - Position: {x: 17, y: 0, z: 7.1}
-    isOccupied: 1
-    passengerColor: {r: 1, g: 0, b: 1, a: 1}
-    isBlocked: 0
-    isTunnel: 0
-    tunnelSize: 1
-    tunnelPassengerColors: []
-  - Position: {x: 0.5, y: 0, z: 6}
-    isOccupied: 1
-    passengerColor: {r: 0, g: 0, b: 1, a: 1}
-    isBlocked: 0
-    isTunnel: 0
-    tunnelSize: 1
-    tunnelPassengerColors: []
-  - Position: {x: 1.6, y: 0, z: 6}
-    isOccupied: 1
-    passengerColor: {r: 1, g: 0.92156863, b: 0.015686275, a: 1}
-    isBlocked: 0
-    isTunnel: 0
-    tunnelSize: 1
-    tunnelPassengerColors: []
-  - Position: {x: 2.7, y: 0, z: 6}
-    isOccupied: 1
-    passengerColor: {r: 1, g: 0, b: 0, a: 1}
-    isBlocked: 0
-    isTunnel: 0
-    tunnelSize: 1
-    tunnelPassengerColors: []
-  - Position: {x: 3.8, y: 0, z: 6}
-    isOccupied: 1
-    passengerColor: {r: 1, g: 0.92156863, b: 0.015686275, a: 1}
-    isBlocked: 0
-    isTunnel: 0
-    tunnelSize: 1
-    tunnelPassengerColors: []
-  - Position: {x: 4.9, y: 0, z: 6}
-    isOccupied: 1
-    passengerColor: {r: 1, g: 0, b: 0, a: 1}
-    isBlocked: 0
-    isTunnel: 0
-    tunnelSize: 1
-    tunnelPassengerColors: []
-  - Position: {x: 6, y: 0, z: 6}
-    isOccupied: 1
-    passengerColor: {r: 0, g: 1, b: 0, a: 1}
-    isBlocked: 0
-    isTunnel: 0
-    tunnelSize: 1
-    tunnelPassengerColors: []
-  - Position: {x: 7.1, y: 0, z: 6}
-    isOccupied: 1
-    passengerColor: {r: 1, g: 0, b: 0, a: 1}
-    isBlocked: 0
-    isTunnel: 0
-    tunnelSize: 1
-    tunnelPassengerColors: []
-  - Position: {x: 8.2, y: 0, z: 6}
-    isOccupied: 1
-    passengerColor: {r: 1, g: 0, b: 1, a: 1}
-    isBlocked: 0
-    isTunnel: 0
-    tunnelSize: 1
-    tunnelPassengerColors: []
-  - Position: {x: 9.3, y: 0, z: 6}
-    isOccupied: 1
-    passengerColor: {r: 1, g: 0, b: 0, a: 1}
-    isBlocked: 0
-    isTunnel: 0
-    tunnelSize: 1
-    tunnelPassengerColors: []
-  - Position: {x: 10.4, y: 0, z: 6}
-    isOccupied: 1
-    passengerColor: {r: 1, g: 0, b: 0, a: 1}
-    isBlocked: 0
-    isTunnel: 0
-    tunnelSize: 1
-    tunnelPassengerColors: []
-  - Position: {x: 11.5, y: 0, z: 6}
-    isOccupied: 1
-    passengerColor: {r: 0, g: 0, b: 1, a: 1}
-    isBlocked: 0
-    isTunnel: 0
-    tunnelSize: 1
-    tunnelPassengerColors: []
-  - Position: {x: 12.6, y: 0, z: 6}
-    isOccupied: 1
-    passengerColor: {r: 0, g: 0, b: 1, a: 1}
-    isBlocked: 0
-    isTunnel: 0
-    tunnelSize: 1
-    tunnelPassengerColors: []
-  - Position: {x: 13.7, y: 0, z: 6}
-    isOccupied: 1
-    passengerColor: {r: 0, g: 1, b: 0, a: 1}
-    isBlocked: 0
-    isTunnel: 0
-    tunnelSize: 1
-    tunnelPassengerColors: []
-  - Position: {x: 14.8, y: 0, z: 6}
-    isOccupied: 1
-    passengerColor: {r: 1, g: 0.92156863, b: 0.015686275, a: 1}
-    isBlocked: 0
-    isTunnel: 0
-    tunnelSize: 1
-    tunnelPassengerColors: []
-  - Position: {x: 15.9, y: 0, z: 6}
-    isOccupied: 1
-    passengerColor: {r: 0, g: 0, b: 1, a: 1}
-    isBlocked: 0
-    isTunnel: 0
-    tunnelSize: 1
-    tunnelPassengerColors: []
-  - Position: {x: 17, y: 0, z: 6}
-    isOccupied: 1
-    passengerColor: {r: 1, g: 0, b: 0, a: 1}
-    isBlocked: 0
-    isTunnel: 0
-    tunnelSize: 1
-    tunnelPassengerColors: []
-  - Position: {x: 0.5, y: 0, z: 4.9}
-    isOccupied: 1
-    passengerColor: {r: 1, g: 0.92156863, b: 0.015686275, a: 1}
-    isBlocked: 0
-    isTunnel: 0
-    tunnelSize: 1
-    tunnelPassengerColors: []
-  - Position: {x: 1.6, y: 0, z: 4.9}
-    isOccupied: 1
-    passengerColor: {r: 0, g: 0, b: 1, a: 1}
-    isBlocked: 0
-    isTunnel: 0
-    tunnelSize: 1
-    tunnelPassengerColors: []
-  - Position: {x: 2.7, y: 0, z: 4.9}
-    isOccupied: 1
-    passengerColor: {r: 1, g: 0.92156863, b: 0.015686275, a: 1}
-    isBlocked: 0
-    isTunnel: 0
-    tunnelSize: 1
-    tunnelPassengerColors: []
-  - Position: {x: 3.8, y: 0, z: 4.9}
-    isOccupied: 1
-    passengerColor: {r: 1, g: 0.92156863, b: 0.015686275, a: 1}
-    isBlocked: 0
-    isTunnel: 0
-    tunnelSize: 1
-    tunnelPassengerColors: []
-  - Position: {x: 4.9, y: 0, z: 4.9}
-    isOccupied: 1
-    passengerColor: {r: 1, g: 0, b: 1, a: 1}
-    isBlocked: 0
-    isTunnel: 0
-    tunnelSize: 1
-    tunnelPassengerColors: []
-  - Position: {x: 6, y: 0, z: 4.9}
-    isOccupied: 1
-    passengerColor: {r: 0, g: 0, b: 1, a: 1}
-    isBlocked: 0
-    isTunnel: 0
-    tunnelSize: 1
-    tunnelPassengerColors: []
-  - Position: {x: 7.1, y: 0, z: 4.9}
-    isOccupied: 1
-    passengerColor: {r: 1, g: 0, b: 1, a: 1}
-    isBlocked: 0
-    isTunnel: 0
-    tunnelSize: 1
-    tunnelPassengerColors: []
-  - Position: {x: 8.2, y: 0, z: 4.9}
-    isOccupied: 1
-    passengerColor: {r: 0, g: 0, b: 1, a: 1}
-    isBlocked: 0
-    isTunnel: 0
-    tunnelSize: 2
-    tunnelPassengerColors:
-    - {r: 1, g: 0, b: 0, a: 1}
-    - {r: 1, g: 0, b: 0, a: 1}
-  - Position: {x: 9.3, y: 0, z: 4.9}
-    isOccupied: 1
-    passengerColor: {r: 0, g: 1, b: 0, a: 1}
-    isBlocked: 0
-    isTunnel: 0
-    tunnelSize: 1
-    tunnelPassengerColors: []
-  - Position: {x: 10.4, y: 0, z: 4.9}
-    isOccupied: 1
-    passengerColor: {r: 1, g: 0, b: 1, a: 1}
-    isBlocked: 0
-    isTunnel: 0
-    tunnelSize: 1
-    tunnelPassengerColors: []
-  - Position: {x: 11.5, y: 0, z: 4.9}
-    isOccupied: 1
-    passengerColor: {r: 1, g: 0, b: 1, a: 1}
-    isBlocked: 0
-    isTunnel: 0
-    tunnelSize: 1
-    tunnelPassengerColors: []
-  - Position: {x: 12.6, y: 0, z: 4.9}
-    isOccupied: 1
-    passengerColor: {r: 0, g: 1, b: 0, a: 1}
-    isBlocked: 0
-    isTunnel: 0
-    tunnelSize: 1
-    tunnelPassengerColors: []
-  - Position: {x: 13.7, y: 0, z: 4.9}
-    isOccupied: 1
-    passengerColor: {r: 1, g: 0, b: 0, a: 1}
-    isBlocked: 0
-    isTunnel: 0
-    tunnelSize: 1
-    tunnelPassengerColors: []
-  - Position: {x: 14.8, y: 0, z: 4.9}
-    isOccupied: 1
-    passengerColor: {r: 1, g: 0.92156863, b: 0.015686275, a: 1}
-    isBlocked: 0
-    isTunnel: 0
-    tunnelSize: 1
-    tunnelPassengerColors: []
-  - Position: {x: 15.9, y: 0, z: 4.9}
-    isOccupied: 1
-    passengerColor: {r: 1, g: 0.92156863, b: 0.015686275, a: 1}
-    isBlocked: 0
-    isTunnel: 0
-    tunnelSize: 1
-    tunnelPassengerColors: []
-  - Position: {x: 17, y: 0, z: 4.9}
-    isOccupied: 1
-    passengerColor: {r: 1, g: 0, b: 0, a: 1}
-    isBlocked: 0
-    isTunnel: 0
-    tunnelSize: 1
-    tunnelPassengerColors: []
-  - Position: {x: 0.5, y: 0, z: 3.8}
-    isOccupied: 1
-    passengerColor: {r: 1, g: 0, b: 0, a: 1}
-    isBlocked: 0
-    isTunnel: 0
-    tunnelSize: 1
-    tunnelPassengerColors: []
-  - Position: {x: 1.6, y: 0, z: 3.8}
-    isOccupied: 1
-    passengerColor: {r: 1, g: 0, b: 1, a: 1}
-    isBlocked: 0
-    isTunnel: 0
-    tunnelSize: 1
-    tunnelPassengerColors: []
-  - Position: {x: 2.7, y: 0, z: 3.8}
-    isOccupied: 1
-    passengerColor: {r: 0, g: 1, b: 0, a: 1}
-    isBlocked: 0
-    isTunnel: 0
-    tunnelSize: 1
-    tunnelPassengerColors: []
-  - Position: {x: 3.8, y: 0, z: 3.8}
-    isOccupied: 1
-    passengerColor: {r: 1, g: 0, b: 0, a: 1}
-    isBlocked: 0
-    isTunnel: 0
-    tunnelSize: 1
-    tunnelPassengerColors: []
-  - Position: {x: 4.9, y: 0, z: 3.8}
-    isOccupied: 1
-    passengerColor: {r: 1, g: 0.92156863, b: 0.015686275, a: 1}
-    isBlocked: 0
-    isTunnel: 0
-    tunnelSize: 1
-    tunnelPassengerColors: []
-  - Position: {x: 6, y: 0, z: 3.8}
-    isOccupied: 1
-    passengerColor: {r: 1, g: 0, b: 0, a: 1}
-    isBlocked: 0
-    isTunnel: 0
-    tunnelSize: 1
-    tunnelPassengerColors: []
-  - Position: {x: 7.1, y: 0, z: 3.8}
-    isOccupied: 1
-    passengerColor: {r: 1, g: 0, b: 1, a: 1}
-    isBlocked: 0
-    isTunnel: 0
-    tunnelSize: 1
-    tunnelPassengerColors: []
-  - Position: {x: 8.2, y: 0, z: 3.8}
-    isOccupied: 1
-    passengerColor: {r: 0, g: 0, b: 1, a: 1}
-    isBlocked: 0
-    isTunnel: 0
-    tunnelSize: 1
-    tunnelPassengerColors: []
-  - Position: {x: 9.3, y: 0, z: 3.8}
-    isOccupied: 1
-    passengerColor: {r: 1, g: 0, b: 0, a: 1}
-    isBlocked: 0
-    isTunnel: 0
-    tunnelSize: 1
-    tunnelPassengerColors: []
-  - Position: {x: 10.4, y: 0, z: 3.8}
-    isOccupied: 1
-    passengerColor: {r: 1, g: 0.92156863, b: 0.015686275, a: 1}
-    isBlocked: 0
-    isTunnel: 0
-    tunnelSize: 1
-    tunnelPassengerColors: []
-  - Position: {x: 11.5, y: 0, z: 3.8}
-    isOccupied: 1
-    passengerColor: {r: 1, g: 0, b: 0, a: 1}
-    isBlocked: 0
-    isTunnel: 0
-    tunnelSize: 1
-    tunnelPassengerColors: []
-  - Position: {x: 12.6, y: 0, z: 3.8}
-    isOccupied: 1
-    passengerColor: {r: 1, g: 0, b: 1, a: 1}
-    isBlocked: 0
-    isTunnel: 0
-    tunnelSize: 1
-    tunnelPassengerColors: []
-  - Position: {x: 13.7, y: 0, z: 3.8}
-    isOccupied: 1
-    passengerColor: {r: 1, g: 0.92156863, b: 0.015686275, a: 1}
-    isBlocked: 0
-    isTunnel: 0
-    tunnelSize: 1
-    tunnelPassengerColors: []
-  - Position: {x: 14.8, y: 0, z: 3.8}
-    isOccupied: 1
-    passengerColor: {r: 1, g: 0, b: 0, a: 1}
-    isBlocked: 0
-    isTunnel: 0
-    tunnelSize: 1
-    tunnelPassengerColors: []
-  - Position: {x: 15.9, y: 0, z: 3.8}
-    isOccupied: 1
-    passengerColor: {r: 0, g: 0, b: 1, a: 1}
-    isBlocked: 0
-    isTunnel: 0
-    tunnelSize: 1
-    tunnelPassengerColors: []
-  - Position: {x: 17, y: 0, z: 3.8}
-    isOccupied: 1
-    passengerColor: {r: 1, g: 0.92156863, b: 0.015686275, a: 1}
-    isBlocked: 0
-    isTunnel: 0
-    tunnelSize: 1
-    tunnelPassengerColors: []
   - Position: {x: 0.5, y: 0, z: 2.7}
     isOccupied: 1
     passengerColor: {r: 0, g: 1, b: 0, a: 1}
     isBlocked: 0
     isTunnel: 0
-    tunnelSize: 1
-    tunnelPassengerColors: []
+    tunnelSize: 11
+    tunnelPassengerColors:
+    - {r: 1, g: 0, b: 0, a: 1}
+    - {r: 1, g: 0.92156863, b: 0.015686275, a: 1}
+    - {r: 1, g: 0, b: 1, a: 1}
+    - {r: 0, g: 1, b: 0, a: 1}
+    - {r: 0, g: 1, b: 0, a: 1}
+    - {r: 1, g: 0, b: 0, a: 1}
+    - {r: 1, g: 0, b: 0, a: 1}
+    - {r: 1, g: 0.92156863, b: 0.015686275, a: 1}
+    - {r: 1, g: 0.92156863, b: 0.015686275, a: 1}
+    - {r: 1, g: 0, b: 1, a: 1}
+    - {r: 1, g: 0, b: 1, a: 1}
   - Position: {x: 1.6, y: 0, z: 2.7}
     isOccupied: 1
-    passengerColor: {r: 1, g: 0.92156863, b: 0.015686275, a: 1}
+    passengerColor: {r: 0, g: 1, b: 0, a: 1}
     isBlocked: 0
     isTunnel: 0
     tunnelSize: 1
     tunnelPassengerColors: []
   - Position: {x: 2.7, y: 0, z: 2.7}
     isOccupied: 1
-    passengerColor: {r: 1, g: 0.92156863, b: 0.015686275, a: 1}
+    passengerColor: {r: 0, g: 1, b: 0, a: 1}
     isBlocked: 0
     isTunnel: 0
     tunnelSize: 1
     tunnelPassengerColors: []
   - Position: {x: 3.8, y: 0, z: 2.7}
     isOccupied: 1
-    passengerColor: {r: 1, g: 0, b: 0, a: 1}
+    passengerColor: {r: 0, g: 0, b: 1, a: 1}
     isBlocked: 0
     isTunnel: 0
     tunnelSize: 1
     tunnelPassengerColors: []
   - Position: {x: 4.9, y: 0, z: 2.7}
-    isOccupied: 1
-    passengerColor: {r: 1, g: 0, b: 1, a: 1}
-    isBlocked: 0
-    isTunnel: 0
-    tunnelSize: 1
-    tunnelPassengerColors: []
-  - Position: {x: 6, y: 0, z: 2.7}
-    isOccupied: 1
-    passengerColor: {r: 0, g: 1, b: 0, a: 1}
-    isBlocked: 0
-    isTunnel: 0
-    tunnelSize: 1
-    tunnelPassengerColors: []
-  - Position: {x: 7.1, y: 0, z: 2.7}
-    isOccupied: 1
-    passengerColor: {r: 1, g: 0.92156863, b: 0.015686275, a: 1}
-    isBlocked: 0
-    isTunnel: 0
-    tunnelSize: 1
-    tunnelPassengerColors: []
-  - Position: {x: 8.2, y: 0, z: 2.7}
-    isOccupied: 1
-    passengerColor: {r: 1, g: 0.92156863, b: 0.015686275, a: 1}
-    isBlocked: 0
-    isTunnel: 0
-    tunnelSize: 1
-    tunnelPassengerColors: []
-  - Position: {x: 9.3, y: 0, z: 2.7}
-    isOccupied: 0
-    passengerColor: {r: 0, g: 0, b: 0, a: 0}
-    isBlocked: 0
-    isTunnel: 0
-    tunnelSize: 1
-    tunnelPassengerColors: []
-  - Position: {x: 10.4, y: 0, z: 2.7}
-    isOccupied: 1
-    passengerColor: {r: 0, g: 0, b: 1, a: 1}
-    isBlocked: 0
-    isTunnel: 0
-    tunnelSize: 1
-    tunnelPassengerColors: []
-  - Position: {x: 11.5, y: 0, z: 2.7}
-    isOccupied: 1
-    passengerColor: {r: 0, g: 0, b: 1, a: 1}
-    isBlocked: 0
-    isTunnel: 0
-    tunnelSize: 1
-    tunnelPassengerColors: []
-  - Position: {x: 12.6, y: 0, z: 2.7}
-    isOccupied: 1
-    passengerColor: {r: 1, g: 0, b: 1, a: 1}
-    isBlocked: 0
-    isTunnel: 0
-    tunnelSize: 1
-    tunnelPassengerColors: []
-  - Position: {x: 13.7, y: 0, z: 2.7}
-    isOccupied: 1
-    passengerColor: {r: 0, g: 1, b: 0, a: 1}
-    isBlocked: 0
-    isTunnel: 0
-    tunnelSize: 1
-    tunnelPassengerColors: []
-  - Position: {x: 14.8, y: 0, z: 2.7}
-    isOccupied: 1
-    passengerColor: {r: 0, g: 1, b: 0, a: 1}
-    isBlocked: 0
-    isTunnel: 0
-    tunnelSize: 1
-    tunnelPassengerColors: []
-  - Position: {x: 15.9, y: 0, z: 2.7}
-    isOccupied: 1
-    passengerColor: {r: 0, g: 1, b: 0, a: 1}
-    isBlocked: 0
-    isTunnel: 0
-    tunnelSize: 1
-    tunnelPassengerColors: []
-  - Position: {x: 17, y: 0, z: 2.7}
     isOccupied: 1
     passengerColor: {r: 0, g: 1, b: 0, a: 1}
     isBlocked: 0
@@ -1378,21 +142,21 @@ MonoBehaviour:
     tunnelPassengerColors: []
   - Position: {x: 0.5, y: 0, z: 1.6}
     isOccupied: 1
-    passengerColor: {r: 0, g: 0, b: 1, a: 1}
+    passengerColor: {r: 0, g: 1, b: 0, a: 1}
     isBlocked: 0
     isTunnel: 0
     tunnelSize: 1
     tunnelPassengerColors: []
   - Position: {x: 1.6, y: 0, z: 1.6}
     isOccupied: 1
-    passengerColor: {r: 1, g: 0, b: 0, a: 1}
+    passengerColor: {r: 0, g: 1, b: 0, a: 1}
     isBlocked: 0
     isTunnel: 0
     tunnelSize: 1
     tunnelPassengerColors: []
   - Position: {x: 2.7, y: 0, z: 1.6}
     isOccupied: 1
-    passengerColor: {r: 1, g: 0, b: 0, a: 1}
+    passengerColor: {r: 0, g: 1, b: 0, a: 1}
     isBlocked: 0
     isTunnel: 0
     tunnelSize: 1
@@ -1406,98 +170,21 @@ MonoBehaviour:
     tunnelPassengerColors: []
   - Position: {x: 4.9, y: 0, z: 1.6}
     isOccupied: 1
-    passengerColor: {r: 0, g: 1, b: 0, a: 1}
-    isBlocked: 0
-    isTunnel: 0
-    tunnelSize: 1
-    tunnelPassengerColors: []
-  - Position: {x: 6, y: 0, z: 1.6}
-    isOccupied: 1
-    passengerColor: {r: 1, g: 0.92156863, b: 0.015686275, a: 1}
-    isBlocked: 0
-    isTunnel: 0
-    tunnelSize: 1
-    tunnelPassengerColors: []
-  - Position: {x: 7.1, y: 0, z: 1.6}
-    isOccupied: 1
     passengerColor: {r: 1, g: 0, b: 1, a: 1}
-    isBlocked: 0
-    isTunnel: 0
-    tunnelSize: 1
-    tunnelPassengerColors: []
-  - Position: {x: 8.2, y: 0, z: 1.6}
-    isOccupied: 1
-    passengerColor: {r: 0, g: 1, b: 0, a: 1}
-    isBlocked: 0
-    isTunnel: 0
-    tunnelSize: 1
-    tunnelPassengerColors: []
-  - Position: {x: 9.3, y: 0, z: 1.6}
-    isOccupied: 1
-    passengerColor: {r: 1, g: 0, b: 1, a: 1}
-    isBlocked: 0
-    isTunnel: 0
-    tunnelSize: 1
-    tunnelPassengerColors: []
-  - Position: {x: 10.4, y: 0, z: 1.6}
-    isOccupied: 1
-    passengerColor: {r: 1, g: 0, b: 0, a: 1}
-    isBlocked: 0
-    isTunnel: 0
-    tunnelSize: 1
-    tunnelPassengerColors: []
-  - Position: {x: 11.5, y: 0, z: 1.6}
-    isOccupied: 1
-    passengerColor: {r: 1, g: 0, b: 1, a: 1}
-    isBlocked: 0
-    isTunnel: 0
-    tunnelSize: 1
-    tunnelPassengerColors: []
-  - Position: {x: 12.6, y: 0, z: 1.6}
-    isOccupied: 1
-    passengerColor: {r: 0, g: 1, b: 0, a: 1}
-    isBlocked: 0
-    isTunnel: 0
-    tunnelSize: 1
-    tunnelPassengerColors: []
-  - Position: {x: 13.7, y: 0, z: 1.6}
-    isOccupied: 1
-    passengerColor: {r: 0, g: 1, b: 0, a: 1}
-    isBlocked: 0
-    isTunnel: 0
-    tunnelSize: 1
-    tunnelPassengerColors: []
-  - Position: {x: 14.8, y: 0, z: 1.6}
-    isOccupied: 1
-    passengerColor: {r: 1, g: 0, b: 1, a: 1}
-    isBlocked: 0
-    isTunnel: 0
-    tunnelSize: 1
-    tunnelPassengerColors: []
-  - Position: {x: 15.9, y: 0, z: 1.6}
-    isOccupied: 1
-    passengerColor: {r: 0, g: 1, b: 0, a: 1}
-    isBlocked: 0
-    isTunnel: 0
-    tunnelSize: 1
-    tunnelPassengerColors: []
-  - Position: {x: 17, y: 0, z: 1.6}
-    isOccupied: 1
-    passengerColor: {r: 0, g: 0, b: 1, a: 1}
     isBlocked: 0
     isTunnel: 0
     tunnelSize: 1
     tunnelPassengerColors: []
   - Position: {x: 0.5, y: 0, z: 0.5}
     isOccupied: 1
-    passengerColor: {r: 0, g: 0, b: 1, a: 1}
+    passengerColor: {r: 0, g: 1, b: 0, a: 1}
     isBlocked: 0
     isTunnel: 0
     tunnelSize: 1
     tunnelPassengerColors: []
   - Position: {x: 1.6, y: 0, z: 0.5}
     isOccupied: 1
-    passengerColor: {r: 1, g: 0, b: 1, a: 1}
+    passengerColor: {r: 0, g: 1, b: 0, a: 1}
     isBlocked: 0
     isTunnel: 0
     tunnelSize: 1
@@ -1518,84 +205,7 @@ MonoBehaviour:
     tunnelPassengerColors: []
   - Position: {x: 4.9, y: 0, z: 0.5}
     isOccupied: 1
-    passengerColor: {r: 1, g: 0.92156863, b: 0.015686275, a: 1}
-    isBlocked: 0
-    isTunnel: 0
-    tunnelSize: 1
-    tunnelPassengerColors: []
-  - Position: {x: 6, y: 0, z: 0.5}
-    isOccupied: 1
-    passengerColor: {r: 1, g: 0, b: 1, a: 1}
-    isBlocked: 0
-    isTunnel: 0
-    tunnelSize: 1
-    tunnelPassengerColors: []
-  - Position: {x: 7.1, y: 0, z: 0.5}
-    isOccupied: 1
-    passengerColor: {r: 1, g: 0, b: 0, a: 1}
-    isBlocked: 0
-    isTunnel: 0
-    tunnelSize: 1
-    tunnelPassengerColors: []
-  - Position: {x: 8.2, y: 0, z: 0.5}
-    isOccupied: 1
-    passengerColor: {r: 0, g: 1, b: 0, a: 1}
-    isBlocked: 0
-    isTunnel: 0
-    tunnelSize: 1
-    tunnelPassengerColors: []
-  - Position: {x: 9.3, y: 0, z: 0.5}
-    isOccupied: 1
-    passengerColor: {r: 1, g: 0, b: 0, a: 1}
-    isBlocked: 0
-    isTunnel: 0
-    tunnelSize: 1
-    tunnelPassengerColors: []
-  - Position: {x: 10.4, y: 0, z: 0.5}
-    isOccupied: 1
     passengerColor: {r: 0, g: 0, b: 1, a: 1}
-    isBlocked: 0
-    isTunnel: 0
-    tunnelSize: 1
-    tunnelPassengerColors: []
-  - Position: {x: 11.5, y: 0, z: 0.5}
-    isOccupied: 1
-    passengerColor: {r: 1, g: 0, b: 1, a: 1}
-    isBlocked: 0
-    isTunnel: 0
-    tunnelSize: 1
-    tunnelPassengerColors: []
-  - Position: {x: 12.6, y: 0, z: 0.5}
-    isOccupied: 1
-    passengerColor: {r: 1, g: 0, b: 0, a: 1}
-    isBlocked: 0
-    isTunnel: 0
-    tunnelSize: 1
-    tunnelPassengerColors: []
-  - Position: {x: 13.7, y: 0, z: 0.5}
-    isOccupied: 1
-    passengerColor: {r: 1, g: 0, b: 0, a: 1}
-    isBlocked: 0
-    isTunnel: 0
-    tunnelSize: 1
-    tunnelPassengerColors: []
-  - Position: {x: 14.8, y: 0, z: 0.5}
-    isOccupied: 1
-    passengerColor: {r: 0, g: 0, b: 1, a: 1}
-    isBlocked: 0
-    isTunnel: 0
-    tunnelSize: 1
-    tunnelPassengerColors: []
-  - Position: {x: 15.9, y: 0, z: 0.5}
-    isOccupied: 1
-    passengerColor: {r: 1, g: 0, b: 0, a: 1}
-    isBlocked: 0
-    isTunnel: 0
-    tunnelSize: 1
-    tunnelPassengerColors: []
-  - Position: {x: 17, y: 0, z: 0.5}
-    isOccupied: 1
-    passengerColor: {r: 0, g: 1, b: 0, a: 1}
     isBlocked: 0
     isTunnel: 0
     tunnelSize: 1

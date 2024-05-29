@@ -384,6 +384,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: cc0c8fbf917db0f489e2576f798e6f6c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  isGameStarted: 0
 --- !u!4 &1161498594
 Transform:
   m_ObjectHideFlags: 0
@@ -431,6 +432,7 @@ MonoBehaviour:
   passengerManager: {fileID: 606189846}
   busSpawnPoint: {x: 0, y: 0, z: 0}
   waitingSpot: {x: 0, y: 0, z: 0}
+  currentBus: {fileID: 0}
 --- !u!4 &1274898455
 Transform:
   m_ObjectHideFlags: 0

@@ -38,26 +38,30 @@ public class Tunnel : MonoBehaviour
         tunnelSize = size;
         passengerColors = passangers;
         spawnDirection = tunnelDirection;
-        StartCoroutine(CheckAndSpawnPassenger());
         SetTunnelExit(); 
     }
 
     private void SetTunnelExit()
     {
         Vector2Int newExitCell = new Vector2Int(colIndex, rowIndex);
+        Quaternion rotation = Quaternion.identity;
         switch (spawnDirection)
         {
             case TunnelDirection.Up:
                 newExitCell += Vector2Int.down;
+                rotation = Quaternion.Euler(0, 0, 0); // Yüzünü yukarý çevir
                 break;
             case TunnelDirection.Down:
                 newExitCell += Vector2Int.up;
+                rotation = Quaternion.Euler(0, 180, 0); // Yüzünü aþaðý çevir
                 break;
             case TunnelDirection.Left:
                 newExitCell += Vector2Int.left;
+                rotation = Quaternion.Euler(0, 270, 0); // Yüzünü sola çevir
                 break;
             case TunnelDirection.Right:
                 newExitCell += Vector2Int.right;
+                rotation = Quaternion.Euler(0, 90, 0); // Yüzünü saða çevir
                 break;
         }
         exitCell = newExitCell;
@@ -65,6 +69,7 @@ public class Tunnel : MonoBehaviour
         if (IsInsideGrid(exitCell))
         {
             BlockTheExitCell();
+            transform.rotation = rotation; 
         }
     }
     
@@ -77,6 +82,7 @@ public class Tunnel : MonoBehaviour
     private void UnblockTheExitCell()
     {
         levelData.occupiedByTunnelCells[exitCell.y, exitCell.x] = false;
+        Debug.Log(levelData.occupiedByTunnelCells[exitCell.y, exitCell.x]);
     }
 
     private bool IsInsideGrid(Vector2Int pos)
@@ -100,35 +106,27 @@ public class Tunnel : MonoBehaviour
         }
     }
 
-
-    IEnumerator CheckAndSpawnPassenger()
-    {
-        while (tunnelSize > 0)
-        {
-            yield return new WaitForSeconds(spawnInterval); // DEÐÝÞECEK
-            TrySpawnPassenger();
-        }
-    }
-
     private void TrySpawnPassenger()
     {
 
-        if (IsInsideGrid(exitCell) && !IsCellOccupied(exitCell.y, exitCell.x))
-        {
-            SpawnPassenger(exitCell.y, exitCell.x, passengerColors[spawnedCount % passengerColors.Count]);
-            spawnedCount++;
-            tunnelSize--;
-        }
+        Debug.Log(tunnelSize);
 
-        if(tunnelSize == 0)
+        if (tunnelSize <= 0)
         {
+            Debug.Log("Yap o iþi");
             UnblockTheExitCell();
-            StopCoroutine(CheckAndSpawnPassenger());
         }
         else
         {
+            if (IsInsideGrid(exitCell) && !IsCellOccupied(exitCell.y, exitCell.x))
+            {
+                SpawnPassenger(exitCell.y, exitCell.x, passengerColors[spawnedCount % passengerColors.Count]);
+                spawnedCount++;
+                tunnelSize--;
+            }
             BlockTheExitCell();
         }
+        passengerManager.UpdatePassengersWithPaths();
     }
 
     private bool IsCellOccupied(int row, int col)
@@ -155,19 +153,28 @@ public class Tunnel : MonoBehaviour
     private void OnEnable()
     {
         Passenger.OnPassengerMoved += HandlePassengerMoved;
+        GameController.OnGameStart += HandleGameStart;
     }
 
     private void OnDisable()
     {
         Passenger.OnPassengerMoved -= HandlePassengerMoved;
+        GameController.OnGameStart -= HandleGameStart;
     }
 
     private void HandlePassengerMoved(Passenger passenger)
     {
-        if(tunnelSize > 0)
+        Debug.Log("hareket sezdim");
+        if (tunnelSize >= 0)
         {
             TrySpawnPassenger();
         }
+    }
+
+    private void HandleGameStart()
+    {
+        Debug.Log("baþladýk");
+        TrySpawnPassenger();
     }
 }
 

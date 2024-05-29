@@ -31,7 +31,7 @@ public class BusManager : MonoBehaviour
 
     private Color GetAColorForBus()
     {
-        passengerManager.UpdatePassengersWithPaths();
+        
         List<Color> passengerColors = passengerManager.getPassengersWithPathColors();
 
         // Renkleri say ve en çok tekrar edenleri sýrala

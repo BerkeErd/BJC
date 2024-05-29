@@ -35,11 +35,13 @@ public class PassengerManager : MonoBehaviour
     void OnEnable()
     {
         GameController.OnGameStart += HandleGameStart;
+        Passenger.OnPassengerMoved += HandlePassengerMoved;
     }
 
     void OnDisable()
     {
         GameController.OnGameStart -= HandleGameStart;
+        Passenger.OnPassengerMoved -= HandlePassengerMoved;
     }
 
     private void HandleGameStart()
@@ -114,6 +116,11 @@ public class PassengerManager : MonoBehaviour
         }
         return colorCounts;
     }
+    
 
+    private void HandlePassengerMoved(Passenger passenger)
+    {
+        UpdatePassengersWithPaths();
+    }
 
 }

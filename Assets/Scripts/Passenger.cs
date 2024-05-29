@@ -1,9 +1,14 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
 public class Passenger : MonoBehaviour
 {
+
+    public static event Action<Passenger> OnPassengerMoved; // Yolcu hareket ettiðinde tetiklenecek event
+
+
     private Color _passengerColor;
     public LevelData levelData;
     public int rowIndex;
@@ -11,6 +16,9 @@ public class Passenger : MonoBehaviour
     [SerializeField] private float moveSpeed = 3f;
 
     private PassengerManager manager;
+
+    public bool hasTunnel;
+    public Tunnel tunnel;
 
     void Start()
     {
@@ -76,7 +84,7 @@ public class Passenger : MonoBehaviour
             foreach (var move in possibleMoves)
             {
                 // Hareketin grid sýnýrlarý içinde, ziyaret edilmediði ve meþgul olmadýðý kontrol edilir
-                if (IsInsideGrid(move) && !visited.Contains(move) && !IsCellOccupied(move.y, move.x))
+                if (IsInsideGrid(move) && !visited.Contains(move) && !IsCellOccupied(move.y, move.x) && !IsCellOccupiedByTunnel(move.y, move.x))
                 {
                     queue.Enqueue(move);
                     visited.Add(move); // Hücreyi ziyaret edildi olarak iþaretle
@@ -117,10 +125,14 @@ public class Passenger : MonoBehaviour
 
     public void OnMouseUpAsButton()
     {
-        Debug.Log("Passenger týklandý!");
+        
         List<Vector3> path = FindPathToExit();
         if (path.Count > 0)
         {
+            ClearOccupiedCell();
+            OnPassengerMoved?.Invoke(this);
+            manager.DeactivatePassenger(this);
+            
             if (GameObject.FindObjectOfType<BusManager>().currentBus.busColor != PassengerColor)
             {
                 GoToWaitingCells();
@@ -128,7 +140,6 @@ public class Passenger : MonoBehaviour
             else
             {
                 StartCoroutine(FollowPath(path));
-                ClearOccupiedCell();
             }
             
 
@@ -241,7 +252,7 @@ public class Passenger : MonoBehaviour
         foreach (Vector2Int dir in directions)
         {
             Vector2Int neighborPos = new Vector2Int(current.x + dir.x, current.y + dir.y);
-            if (IsInsideGrid(neighborPos) && !IsCellOccupied(neighborPos.y, neighborPos.x))
+            if (IsInsideGrid(neighborPos) && !IsCellOccupied(neighborPos.y, neighborPos.x) && !IsCellOccupiedByTunnel(neighborPos.y, neighborPos.x))
             {
                 neighbors.Add(neighborPos);
             }
@@ -261,6 +272,15 @@ public class Passenger : MonoBehaviour
         if (IsInsideGrid(new Vector2Int(col, row)))
         {
             return levelData.tempOccupiedCells[row, col];
+        }
+        return true; // Grid dýþýndaysa veya hücre doluysa, meþgul kabul et
+    }
+
+    bool IsCellOccupiedByTunnel(int row, int col)
+    {
+        if (IsInsideGrid(new Vector2Int(col, row)))
+        {
+            return levelData.occupiedByTunnelCells[row, col];
         }
         return true; // Grid dýþýndaysa veya hücre doluysa, meþgul kabul et
     }

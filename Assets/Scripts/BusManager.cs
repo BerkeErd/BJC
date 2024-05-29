@@ -31,25 +31,46 @@ public class BusManager : MonoBehaviour
 
     private Color GetAColorForBus()
     {
+        passengerManager.UpdatePassengersWithPaths();
         List<Color> passengerColors = passengerManager.getPassengersWithPathColors();
 
         // Renkleri say ve en çok tekrar edenleri sýrala
-        var mostCommonColors = passengerColors
+        var colorCounts = passengerColors
             .GroupBy(color => color)
-            .OrderByDescending(group => group.Count())
-            .Select(group => group.Key)
-            .Take(3)  // En çok tekrar eden üst 3 rengi al
+            .Select(group => new { Color = group.Key, Count = group.Count() })
+            .Where(colorInfo => colorInfo.Count > 0) 
+            .OrderByDescending(colorInfo => colorInfo.Count)
             .ToList();
 
-        Color selectedColor = Color.black;
-
-        while (!busColors.Contains(selectedColor))
-        {
-           selectedColor = mostCommonColors[Random.Range(0, mostCommonColors.Count)];
-        }
+        List<Color> mostCommonColors = colorCounts
+            .Take(3) // En çok tekrar eden üst 3 rengi al
+            .Select(colorInfo => colorInfo.Color)
+            .ToList();
         
+        Color selectedColor = Color.black; // Varsayýlan renk olarak siyah belirliyoruz.
+
+        // Deneme sayýsýný sýnýrlayarak sonsuz döngüden kaçýn
+        int attempts = 0;
+        while (!busColors.Contains(selectedColor) && attempts < 10)
+        {
+            if (mostCommonColors.Count > 0)
+            {
+                selectedColor = mostCommonColors[Random.Range(0,mostCommonColors.Count)];
+            }
+            attempts++;
+        }
+
+        // Eðer uygun renk bulunamazsa, bir varsayýlan renk kullan
+        if (!busColors.Contains(selectedColor))
+        {
+            Debug.Log("UYGUN RENK BULUNAMADI");
+            selectedColor = busColors.Any() ? busColors[Random.Range(0,busColors.Count)] : Color.black;
+        }
+
         return selectedColor;
     }
+
+
 
     private void HandleGameStart()
     {
@@ -73,7 +94,7 @@ public class BusManager : MonoBehaviour
         GameObject newBusObj = ObjectPooler.Instance.SpawnFromPool("Bus", busSpawnPoint, Quaternion.Euler(0, 90, 0));
         Bus newBus = newBusObj.GetComponent<Bus>();
         newBus.destination = waitingSpot;
-        SetBusColor(newBus);
+        
         newBus.InitializePosition(busSpawnPoint);
         busQueue.Enqueue(newBus);
         if (busQueue.Count == 1)
@@ -97,10 +118,12 @@ public class BusManager : MonoBehaviour
     // Bir otobüs depart ettiðinde çaðrýlan metod
     public void BusDeparted(Bus bus)
     {
-        if(busSpawned < totalBusToSpawn)
+        bus.ResetBus();
+
+        if (busSpawned < totalBusToSpawn)
         {
             bus.InitializePosition(busSpawnPoint);  // Otobüsü baþlangýç noktasýna geri gönder
-            SetBusColor(bus);
+            //SetBusColor(bus);
             busQueue.Enqueue(bus);
             busQueue.Dequeue();  // Kuyruktaki otobüsü çýkar
             ActivateFrontBus();  // Kuyruðun baþýndaki yeni otobüsü aktif yap
@@ -112,6 +135,8 @@ public class BusManager : MonoBehaviour
             ObjectPooler.Instance.RemoveFromPool("Bus", bus.gameObject);
             ActivateFrontBus();  // Kuyruðun baþýndaki yeni otobüsü aktif yap
         }
+
+        
         
     }
 
@@ -125,6 +150,7 @@ public class BusManager : MonoBehaviour
         if (busQueue.Count > 0)
         {
             busQueue.Peek().activeBus = true;  // Kuyruðun baþýndaki otobüsü aktif yap
+            SetBusColor(busQueue.Peek());
         }
     }
 

@@ -16,66 +16,78 @@ MonoBehaviour:
   height: 5
   gridCells:
   - Position: {x: 0.5, y: 0, z: 4.9}
-    isOccupied: 1
-    passengerColor: {r: 1, g: 0, b: 1, a: 1}
+    isOccupied: 0
+    passengerColor: {r: 0, g: 0, b: 0, a: 0}
     isBlocked: 0
     isTunnel: 0
+    tunnelDirection: 0
     tunnelSize: 1
     tunnelPassengerColors: []
   - Position: {x: 1.6, y: 0, z: 4.9}
-    isOccupied: 1
-    passengerColor: {r: 0, g: 1, b: 0, a: 1}
+    isOccupied: 0
+    passengerColor: {r: 0, g: 0, b: 0, a: 0}
     isBlocked: 0
     isTunnel: 0
+    tunnelDirection: 0
     tunnelSize: 1
     tunnelPassengerColors: []
   - Position: {x: 2.7, y: 0, z: 4.9}
-    isOccupied: 1
-    passengerColor: {r: 1, g: 0, b: 0, a: 1}
+    isOccupied: 0
+    passengerColor: {r: 0, g: 0, b: 0, a: 0}
     isBlocked: 0
     isTunnel: 0
+    tunnelDirection: 0
     tunnelSize: 1
     tunnelPassengerColors: []
   - Position: {x: 3.8, y: 0, z: 4.9}
-    isOccupied: 1
-    passengerColor: {r: 1, g: 0, b: 0, a: 1}
+    isOccupied: 0
+    passengerColor: {r: 0, g: 0, b: 0, a: 0}
     isBlocked: 0
     isTunnel: 0
+    tunnelDirection: 0
     tunnelSize: 1
     tunnelPassengerColors: []
   - Position: {x: 4.9, y: 0, z: 4.9}
-    isOccupied: 1
-    passengerColor: {r: 0, g: 1, b: 0, a: 1}
+    isOccupied: 0
+    passengerColor: {r: 0, g: 0, b: 0, a: 0}
     isBlocked: 0
     isTunnel: 0
+    tunnelDirection: 0
     tunnelSize: 1
     tunnelPassengerColors: []
   - Position: {x: 0.5, y: 0, z: 3.8}
-    isOccupied: 1
-    passengerColor: {r: 0, g: 1, b: 0, a: 1}
+    isOccupied: 0
+    passengerColor: {r: 0, g: 0, b: 0, a: 0}
     isBlocked: 0
     isTunnel: 0
+    tunnelDirection: 0
     tunnelSize: 1
     tunnelPassengerColors: []
   - Position: {x: 1.6, y: 0, z: 3.8}
-    isOccupied: 1
-    passengerColor: {r: 0, g: 1, b: 0, a: 1}
+    isOccupied: 0
+    passengerColor: {r: 0, g: 0, b: 0, a: 0}
     isBlocked: 0
     isTunnel: 0
+    tunnelDirection: 0
     tunnelSize: 1
     tunnelPassengerColors: []
   - Position: {x: 2.7, y: 0, z: 3.8}
-    isOccupied: 1
-    passengerColor: {r: 1, g: 0, b: 0, a: 1}
+    isOccupied: 0
+    passengerColor: {r: 0, g: 0, b: 0, a: 0}
     isBlocked: 0
-    isTunnel: 0
-    tunnelSize: 1
-    tunnelPassengerColors: []
+    isTunnel: 1
+    tunnelDirection: 3
+    tunnelSize: 3
+    tunnelPassengerColors:
+    - {r: 1, g: 0, b: 0, a: 1}
+    - {r: 1, g: 0, b: 0, a: 1}
+    - {r: 1, g: 0, b: 0, a: 1}
   - Position: {x: 3.8, y: 0, z: 3.8}
-    isOccupied: 1
-    passengerColor: {r: 0, g: 0, b: 1, a: 1}
+    isOccupied: 0
+    passengerColor: {r: 0, g: 0, b: 0, a: 0}
     isBlocked: 0
     isTunnel: 0
+    tunnelDirection: 0
     tunnelSize: 1
     tunnelPassengerColors: []
   - Position: {x: 4.9, y: 0, z: 3.8}
@@ -83,131 +95,160 @@ MonoBehaviour:
     passengerColor: {r: 0, g: 0, b: 0, a: 0}
     isBlocked: 0
     isTunnel: 1
-    tunnelSize: 9
+    tunnelDirection: 2
+    tunnelSize: 3
     tunnelPassengerColors:
     - {r: 1, g: 0, b: 0, a: 1}
     - {r: 1, g: 0, b: 0, a: 1}
-    - {r: 0, g: 1, b: 0, a: 1}
-    - {r: 0, g: 1, b: 0, a: 1}
-    - {r: 0, g: 0, b: 1, a: 1}
-    - {r: 0, g: 0, b: 1, a: 1}
     - {r: 1, g: 0, b: 0, a: 1}
-    - {r: 0, g: 1, b: 0, a: 1}
-    - {r: 0, g: 0, b: 1, a: 1}
   - Position: {x: 0.5, y: 0, z: 2.7}
-    isOccupied: 1
-    passengerColor: {r: 0, g: 1, b: 0, a: 1}
-    isBlocked: 0
+    isOccupied: 0
+    passengerColor: {r: 0, g: 0, b: 0, a: 0}
+    isBlocked: 1
     isTunnel: 0
-    tunnelSize: 11
+    tunnelDirection: 0
+    tunnelSize: 3
     tunnelPassengerColors:
     - {r: 1, g: 0, b: 0, a: 1}
-    - {r: 1, g: 0.92156863, b: 0.015686275, a: 1}
-    - {r: 1, g: 0, b: 1, a: 1}
-    - {r: 0, g: 1, b: 0, a: 1}
-    - {r: 0, g: 1, b: 0, a: 1}
     - {r: 1, g: 0, b: 0, a: 1}
     - {r: 1, g: 0, b: 0, a: 1}
-    - {r: 1, g: 0.92156863, b: 0.015686275, a: 1}
-    - {r: 1, g: 0.92156863, b: 0.015686275, a: 1}
-    - {r: 1, g: 0, b: 1, a: 1}
-    - {r: 1, g: 0, b: 1, a: 1}
   - Position: {x: 1.6, y: 0, z: 2.7}
-    isOccupied: 1
-    passengerColor: {r: 0, g: 1, b: 0, a: 1}
-    isBlocked: 0
+    isOccupied: 0
+    passengerColor: {r: 0, g: 0, b: 0, a: 0}
+    isBlocked: 1
     isTunnel: 0
+    tunnelDirection: 0
     tunnelSize: 1
     tunnelPassengerColors: []
   - Position: {x: 2.7, y: 0, z: 2.7}
-    isOccupied: 1
-    passengerColor: {r: 0, g: 1, b: 0, a: 1}
-    isBlocked: 0
+    isOccupied: 0
+    passengerColor: {r: 0, g: 0, b: 0, a: 0}
+    isBlocked: 1
     isTunnel: 0
-    tunnelSize: 1
-    tunnelPassengerColors: []
+    tunnelDirection: 3
+    tunnelSize: 3
+    tunnelPassengerColors:
+    - {r: 1, g: 0, b: 0, a: 1}
+    - {r: 1, g: 0, b: 0, a: 1}
+    - {r: 1, g: 0, b: 0, a: 1}
   - Position: {x: 3.8, y: 0, z: 2.7}
-    isOccupied: 1
-    passengerColor: {r: 0, g: 0, b: 1, a: 1}
+    isOccupied: 0
+    passengerColor: {r: 0, g: 0, b: 0, a: 0}
     isBlocked: 0
     isTunnel: 0
-    tunnelSize: 1
-    tunnelPassengerColors: []
+    tunnelDirection: 0
+    tunnelSize: 3
+    tunnelPassengerColors:
+    - {r: 1, g: 0, b: 0, a: 1}
+    - {r: 1, g: 0, b: 0, a: 1}
+    - {r: 1, g: 0, b: 0, a: 1}
   - Position: {x: 4.9, y: 0, z: 2.7}
-    isOccupied: 1
-    passengerColor: {r: 0, g: 1, b: 0, a: 1}
+    isOccupied: 0
+    passengerColor: {r: 0, g: 0, b: 0, a: 0}
     isBlocked: 0
-    isTunnel: 0
-    tunnelSize: 1
-    tunnelPassengerColors: []
+    isTunnel: 1
+    tunnelDirection: 2
+    tunnelSize: 3
+    tunnelPassengerColors:
+    - {r: 1, g: 0, b: 0, a: 1}
+    - {r: 1, g: 0, b: 0, a: 1}
+    - {r: 1, g: 0, b: 0, a: 1}
   - Position: {x: 0.5, y: 0, z: 1.6}
     isOccupied: 1
-    passengerColor: {r: 0, g: 1, b: 0, a: 1}
+    passengerColor: {r: 1, g: 0, b: 0, a: 1}
     isBlocked: 0
     isTunnel: 0
+    tunnelDirection: 0
     tunnelSize: 1
     tunnelPassengerColors: []
   - Position: {x: 1.6, y: 0, z: 1.6}
-    isOccupied: 1
-    passengerColor: {r: 0, g: 1, b: 0, a: 1}
+    isOccupied: 0
+    passengerColor: {r: 0, g: 0, b: 0, a: 0}
     isBlocked: 0
     isTunnel: 0
-    tunnelSize: 1
-    tunnelPassengerColors: []
+    tunnelDirection: 0
+    tunnelSize: 15
+    tunnelPassengerColors:
+    - {r: 1, g: 0.92156863, b: 0.015686275, a: 1}
+    - {r: 1, g: 0.92156863, b: 0.015686275, a: 1}
+    - {r: 1, g: 0.92156863, b: 0.015686275, a: 1}
+    - {r: 0, g: 1, b: 0, a: 1}
+    - {r: 0, g: 1, b: 0, a: 1}
+    - {r: 0, g: 1, b: 0, a: 1}
+    - {r: 1, g: 0, b: 1, a: 1}
+    - {r: 1, g: 0, b: 1, a: 1}
+    - {r: 1, g: 0, b: 1, a: 1}
+    - {r: 0, g: 0, b: 1, a: 1}
+    - {r: 0, g: 0, b: 1, a: 1}
+    - {r: 0, g: 0, b: 1, a: 1}
+    - {r: 1, g: 0, b: 0, a: 1}
+    - {r: 1, g: 0, b: 0, a: 1}
+    - {r: 1, g: 0, b: 0, a: 1}
   - Position: {x: 2.7, y: 0, z: 1.6}
-    isOccupied: 1
-    passengerColor: {r: 0, g: 1, b: 0, a: 1}
+    isOccupied: 0
+    passengerColor: {r: 0, g: 0, b: 0, a: 0}
     isBlocked: 0
     isTunnel: 0
+    tunnelDirection: 0
     tunnelSize: 1
     tunnelPassengerColors: []
   - Position: {x: 3.8, y: 0, z: 1.6}
-    isOccupied: 1
-    passengerColor: {r: 1, g: 0, b: 1, a: 1}
+    isOccupied: 0
+    passengerColor: {r: 0, g: 0, b: 0, a: 0}
     isBlocked: 0
     isTunnel: 0
+    tunnelDirection: 0
     tunnelSize: 1
     tunnelPassengerColors: []
   - Position: {x: 4.9, y: 0, z: 1.6}
-    isOccupied: 1
-    passengerColor: {r: 1, g: 0, b: 1, a: 1}
+    isOccupied: 0
+    passengerColor: {r: 0, g: 0, b: 0, a: 0}
     isBlocked: 0
     isTunnel: 0
+    tunnelDirection: 0
     tunnelSize: 1
     tunnelPassengerColors: []
   - Position: {x: 0.5, y: 0, z: 0.5}
     isOccupied: 1
-    passengerColor: {r: 0, g: 1, b: 0, a: 1}
+    passengerColor: {r: 1, g: 0, b: 0, a: 1}
     isBlocked: 0
     isTunnel: 0
+    tunnelDirection: 0
     tunnelSize: 1
     tunnelPassengerColors: []
   - Position: {x: 1.6, y: 0, z: 0.5}
     isOccupied: 1
-    passengerColor: {r: 0, g: 1, b: 0, a: 1}
+    passengerColor: {r: 1, g: 0, b: 0, a: 1}
     isBlocked: 0
     isTunnel: 0
-    tunnelSize: 1
-    tunnelPassengerColors: []
+    tunnelDirection: 0
+    tunnelSize: 3
+    tunnelPassengerColors:
+    - {r: 1, g: 0, b: 0, a: 1}
+    - {r: 1, g: 0, b: 0, a: 1}
+    - {r: 1, g: 0, b: 0, a: 1}
   - Position: {x: 2.7, y: 0, z: 0.5}
     isOccupied: 1
-    passengerColor: {r: 0, g: 1, b: 0, a: 1}
+    passengerColor: {r: 1, g: 0, b: 0, a: 1}
     isBlocked: 0
     isTunnel: 0
+    tunnelDirection: 0
     tunnelSize: 1
     tunnelPassengerColors: []
   - Position: {x: 3.8, y: 0, z: 0.5}
     isOccupied: 1
-    passengerColor: {r: 0, g: 1, b: 0, a: 1}
+    passengerColor: {r: 1, g: 0, b: 0, a: 1}
     isBlocked: 0
     isTunnel: 0
+    tunnelDirection: 0
     tunnelSize: 1
     tunnelPassengerColors: []
   - Position: {x: 4.9, y: 0, z: 0.5}
     isOccupied: 1
-    passengerColor: {r: 0, g: 0, b: 1, a: 1}
+    passengerColor: {r: 1, g: 0, b: 0, a: 1}
     isBlocked: 0
     isTunnel: 0
+    tunnelDirection: 0
     tunnelSize: 1
     tunnelPassengerColors: []
   waitingAreaSize: 5

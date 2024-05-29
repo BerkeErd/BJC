@@ -16,7 +16,6 @@ public class GameController : MonoBehaviour
 
     public void StartGame()
     {
-        Debug.Log("Game Started");
         OnGameStart?.Invoke(); // Event'i tetikle
     }
 

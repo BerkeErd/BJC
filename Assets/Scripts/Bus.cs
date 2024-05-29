@@ -15,7 +15,7 @@ public class Bus : MonoBehaviour
 
     private int passengersInside = 0;
 
-    public bool isFull = false;
+    private bool isCheckedForWaitingPassengers = false;
 
     private void Start()
     {
@@ -28,8 +28,7 @@ public class Bus : MonoBehaviour
         {
             manager.currentBus = this;
             transform.position = Vector3.MoveTowards(transform.position, destination, speed * Time.deltaTime);
-
-            // Otobüs hedefe ulaþtýðýnda gerekli iþlemleri yap
+            
             if (Vector3.Distance(transform.position, destination) < 0.1f)
             {
                 ArriveAtDestination();
@@ -39,10 +38,12 @@ public class Bus : MonoBehaviour
 
     private void ArriveAtDestination()
     {
-        // Otobüs hedefe ulaþtýðýnda yapýlacak iþlemler
-        Debug.Log("Bus has arrived at destination.");
+        if(!isCheckedForWaitingPassengers)
+        {
+           isCheckedForWaitingPassengers = true;
+           CheckWaitingPassengers();
+        }
         
-        CheckWaitingPassengers();
     }
 
     private void CheckWaitingPassengers()
@@ -51,7 +52,7 @@ public class Bus : MonoBehaviour
         {
             if (!grid.isEmpty)
             {
-                if(grid.passengerOnGrid.PassengerColor == busColor)
+                if(grid.passengerOnGrid.PassengerColor == busColor && passengersInside < 3) 
                 {
                     grid.passengerOnGrid.GetInsideofBus(this);
                     grid.isEmpty = true;
@@ -78,8 +79,14 @@ public class Bus : MonoBehaviour
         if(passengersInside >= 3)
         {
             manager.BusDeparted(this);
-            passengersInside = 0;
+            ResetBus();
         }
+    }
+
+    public void ResetBus()
+    {
+        isCheckedForWaitingPassengers = false;
+        passengersInside = 0;
     }
 
 }

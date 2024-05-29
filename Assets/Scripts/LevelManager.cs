@@ -46,6 +46,7 @@ public class LevelManager : MonoBehaviour
             for (int j = 0; j < levelData.width; j++)
             {
                 levelData.tempOccupiedCells[i, j] = false;
+                levelData.occupiedByTunnelCells[i, j] = false;
             }
         }
     }
@@ -158,7 +159,7 @@ public class LevelManager : MonoBehaviour
 
                 if (cell.isTunnel)
                 {
-                    InstantiateTunnel(position, i, j, cell.tunnelSize, cell.tunnelPassengerColors);
+                    InstantiateTunnel(position, i, j, cell.tunnelSize, cell.tunnelPassengerColors, cell.tunnelDirection);
                     levelData.tempOccupiedCells[i, j] = true;
                 }
             }
@@ -167,11 +168,12 @@ public class LevelManager : MonoBehaviour
 
 
 
-    void InstantiateTunnel(Vector3 position, int rowIndex, int colIndex, int tunnelSize, List<Color> tunnelPassengerColors)
+    void InstantiateTunnel(Vector3 position, int rowIndex, int colIndex, int tunnelSize, List<Color> tunnelPassengerColors, TunnelDirection tunnelDirection)
     {
         GameObject tunnel = ObjectPooler.Instance.SpawnFromPool("Tunnel", position, Quaternion.identity);
+        Tunnel tunnelComponent = tunnel.GetComponent<Tunnel>();
         tunnel.name = $"Tunnel_{rowIndex}_{colIndex}";
-        tunnel.GetComponent<Tunnel>().Initialize(levelData,rowIndex,colIndex, tunnelSize,tunnelPassengerColors ); // Initialize fonksiyonu ile tünelin konumu ve diðer baþlangýç ayarlarýný yap.
+        tunnelComponent.Initialize(levelData,rowIndex,colIndex, tunnelSize,tunnelPassengerColors, tunnelDirection); // Initialize fonksiyonu ile tünelin konumu ve diðer baþlangýç ayarlarýný yap.
     }
 }
 

@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
+
 [CreateAssetMenu(fileName = "New Level", menuName = "Level/Create New Level", order = 1)]
 public class LevelData : ScriptableObject
 {
@@ -16,11 +17,13 @@ public class LevelData : ScriptableObject
 
     //[HideInInspector]
     public bool[,] tempOccupiedCells;
+    public bool[,] occupiedByTunnelCells;
 
     void OnEnable()
     {
         // Diziyi baþlat
         tempOccupiedCells = new bool[height, width];
+        occupiedByTunnelCells = new bool[height, width];
     }
 
     [System.Serializable]
@@ -31,6 +34,7 @@ public class LevelData : ScriptableObject
         public Color passengerColor;
         public bool isBlocked;
         public bool isTunnel;
+        public TunnelDirection tunnelDirection;
         public int tunnelSize = 1; // Tünel boyutu
         public List<Color> tunnelPassengerColors = new List<Color>(); // Tünel içindeki yolcularýn renkleri
     }

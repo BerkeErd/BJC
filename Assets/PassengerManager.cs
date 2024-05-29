@@ -44,12 +44,7 @@ public class PassengerManager : MonoBehaviour
 
     private void HandleGameStart()
     {
-        StartPassengerManager();
-    }
-
-    private void StartPassengerManager()
-    {
-        StartCoroutine(CheckPathsRegularly());
+        UpdatePassengersWithPaths();
     }
 
     public void ActivatePassenger(Passenger passenger)
@@ -76,20 +71,12 @@ public class PassengerManager : MonoBehaviour
 
     public void UnregisterPassenger(Passenger passenger)
     {
+        allPassengers.Remove(passenger);
         activePassengers.Remove(passenger);
         passengersWithPaths.Remove(passenger);
     }
 
-    IEnumerator CheckPathsRegularly()
-    {
-        while (true)
-        {
-            UpdatePassengersWithPaths();
-            yield return new WaitForSeconds(1f);  // DEÐÝÞECEK 
-        }
-    }
-
-    void UpdatePassengersWithPaths()
+    public void UpdatePassengersWithPaths()
     {
         passengersWithPaths.Clear(); 
         foreach (var passenger in activePassengers)

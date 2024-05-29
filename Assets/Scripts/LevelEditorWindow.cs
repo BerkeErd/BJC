@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEditor;
@@ -11,6 +12,10 @@ public class LevelEditorWindow : EditorWindow
     private int selectedColorIndex = 0;
     private bool AddTunnelMode = false; // Tünel ekleme modu deðiþkeni
     private LevelData.LevelGridCell selectedTunnelCell = null; // Seçilen tünel hücresini sakla
+
+    private string[] directionNames = new string[] { "Up", "Down", "Left", "Right" };
+    private int selectedDirectionIndex = 0; // Seçilen yön indexi
+
 
 
     [MenuItem("Window/Level Editor")]
@@ -41,10 +46,14 @@ public class LevelEditorWindow : EditorWindow
         if (selectedTunnelCell != null && selectedTunnelCell.isTunnel)
         {
             EditorGUILayout.LabelField("Selected Tunnel Properties", EditorStyles.boldLabel);
-
-            // Tunnel size'ý otomatik olarak passenger listesinin uzunluðuna ayarla
-            selectedTunnelCell.tunnelSize = selectedTunnelCell.tunnelPassengerColors.Count;
-            EditorGUILayout.LabelField("Tunnel Size", selectedTunnelCell.tunnelSize.ToString());
+            string[] directionNames = Enum.GetNames(typeof(TunnelDirection)); // Yön isimlerini al
+            int currentDirectionIndex = (int)selectedTunnelCell.tunnelDirection; // Mevcut yön indeksini al
+            int newDirectionIndex = EditorGUILayout.Popup("Tunnel Direction", currentDirectionIndex, directionNames);
+            if (newDirectionIndex != currentDirectionIndex) // Yön deðiþtiyse
+            {
+                selectedTunnelCell.tunnelDirection = (TunnelDirection)newDirectionIndex;
+                EditorUtility.SetDirty(currentLevel); // Deðiþiklikleri kaydet
+            }
 
             if (GUILayout.Button($"Add {colorNames[selectedColorIndex]} Passenger"))
             {

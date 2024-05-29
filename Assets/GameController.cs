@@ -5,30 +5,53 @@ using UnityEngine;
 public class GameController : MonoBehaviour
 {
     public static event Action OnGameStart; // Oyunun baþlama event'i
+    public static GameController Instance { get; private set; }
 
-    private bool isGameStarted = false;
+    public bool isGameStarted = false;
+    private bool firstTouchHandled = false;
 
     private Bus currentBus;
     private BusManager busManager;
     private List<GameObject> waitingCells;
 
-
+    void Awake()
+    {
+        if (Instance != null && Instance != this)
+        {
+            Destroy(gameObject); 
+        }
+        else
+        {
+            Instance = this; 
+        }
+    }
 
     public void StartGame()
     {
-        OnGameStart?.Invoke(); // Event'i tetikle
+        isGameStarted = true;
+        OnGameStart?.Invoke(); 
     }
 
-    private void Update()
+    void Update()
     {
-        if(Input.GetKey(KeyCode.K))
+        if (Input.touchCount > 0 && Input.GetTouch(0).phase == TouchPhase.Began && !isGameStarted)
         {
-            if(!isGameStarted)
-            {
-                isGameStarted = true;
-                StartGame();
-            }
+            StartGame();
         }
+        else if (isGameStarted && Input.touchCount > 0 && Input.GetTouch(0).phase == TouchPhase.Began && !firstTouchHandled)
+        {
+            firstTouchHandled = true; 
+        }
+    }
+
+    public bool IsFirstTouchHandled()
+    {
+        return firstTouchHandled;
+    }
+
+    public void ResetFirstTouchHandled()
+    {
+        firstTouchHandled = false;
     }
 }
 

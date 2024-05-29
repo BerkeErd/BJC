@@ -125,32 +125,32 @@ public class Passenger : MonoBehaviour
 
     public void OnMouseUpAsButton()
     {
-        
-        List<Vector3> path = FindPathToExit();
-        if (path.Count > 0)
+        if (GameController.Instance.isGameStarted && GameController.Instance.IsFirstTouchHandled())
         {
-            ClearOccupiedCell();
-            OnPassengerMoved?.Invoke(this);
-            manager.DeactivatePassenger(this);
-            
-            if (GameObject.FindObjectOfType<BusManager>().currentBus.busColor != PassengerColor)
+            List<Vector3> path = FindPathToExit();
+            if (path.Count > 0)
             {
-                GoToWaitingCells();
+                ClearOccupiedCell();
+                OnPassengerMoved?.Invoke(this);
+                manager.DeactivatePassenger(this);
+
+                if (GameObject.FindObjectOfType<BusManager>().currentBus.busColor != PassengerColor)
+                {
+                    GoToWaitingCells();
+                }
+                else
+                {
+                    StartCoroutine(FollowPath(path));
+                }
             }
             else
             {
-                StartCoroutine(FollowPath(path));
+                Debug.Log("Çýkýþa giden yol bulunamadý.");
             }
-            
-
-        }
-        else
-        {
-            Debug.Log("Çýkýþa giden yol bulunamadý.");
         }
     }
 
-    
+
 
 
     public void Initialize(LevelData data, int row, int col, Color color)

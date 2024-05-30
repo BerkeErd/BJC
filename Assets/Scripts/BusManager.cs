@@ -147,7 +147,6 @@ public class BusManager : MonoBehaviour
         if (busSpawned < totalBusToSpawn)
         {
             bus.InitializePosition(busSpawnPoint);  // Otobüsü baþlangýç noktasýna geri gönder
-            //SetBusColor(bus);
             busQueue.Enqueue(bus);
             busQueue.Dequeue();  // Kuyruktaki otobüsü çýkar
             ActivateFrontBus();  // Kuyruðun baþýndaki yeni otobüsü aktif yap
@@ -159,6 +158,8 @@ public class BusManager : MonoBehaviour
             ObjectPooler.Instance.RemoveFromPool("Bus", bus.gameObject);
             ActivateFrontBus();  // Kuyruðun baþýndaki yeni otobüsü aktif yap
         }
+
+
     }
 
     // Kuyruðun baþýndaki otobüsü aktif eden metod
@@ -172,6 +173,10 @@ public class BusManager : MonoBehaviour
         {
             busQueue.Peek().activeBus = true;  // Kuyruðun baþýndaki otobüsü aktif yap
             SetBusColor(busQueue.Peek());
+        }
+        else
+        {
+            GameController.Instance.WinLevel();
         }
     }
 

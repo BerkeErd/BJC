@@ -6,7 +6,7 @@ using TMPro;
 public class GameController : MonoBehaviour
 {
     public static event Action OnGameStart; // Oyunun baþlama event'i
-    public static event Action OnGameLose; // Oyunun kaybedilme event'i
+    public static event Action OnGameWon; // Oyunun kazanýlma event'i
     public static GameController Instance { get; private set; }
 
 
@@ -14,6 +14,8 @@ public class GameController : MonoBehaviour
     [SerializeField] TextMeshProUGUI LevelText;
 
     [SerializeField] GameObject LoseScreen;
+    [SerializeField] GameObject WinScreen;
+    [SerializeField] TextMeshProUGUI TapToStartText;
 
     public bool isGameStarted = false;
     private bool isGameOver = false;
@@ -39,6 +41,7 @@ public class GameController : MonoBehaviour
         if (!isGameStarted)
         {
             isGameStarted = true;
+            TapToStartText.gameObject.SetActive(false);
             remainingTime = timerDuration; 
             OnGameStart?.Invoke();
         }
@@ -55,10 +58,25 @@ public class GameController : MonoBehaviour
     {
         isGameStarted = false;
         isGameOver = true;
-        LoseScreen.GetComponent<Animator>().Play("LoseScreenFallAnim");
+        LoseScreen.GetComponent<Animator>().Play("FallScreenFallAnim");
         TimerText.text = "Game Over";
         Debug.Log("Game Over");
-        OnGameLose?.Invoke();
+    }
+
+    public void WinLevel()
+    {
+        if(!isGameOver)
+        {
+            WinScreen.GetComponent<Animator>().Play("WinScreenFallAnim");
+            isGameStarted = false;
+            isGameOver = true;
+        }
+        
+    }
+
+    public void ToggleWinLevelEvent()
+    {
+        OnGameWon?.Invoke();
     }
 
     void Update()
@@ -78,7 +96,7 @@ public class GameController : MonoBehaviour
         if (isGameStarted && remainingTime > 0)
         {
             TimerText.text = remainingTime.ToString("F0") + " Seconds";
-            remainingTime -= Time.deltaTime; // Kalan zamaný azalt
+            remainingTime -= Time.deltaTime; 
             if (remainingTime <= 0)
             {
                 LoseGame();

@@ -3,6 +3,7 @@ using UnityEngine;
 
 public class LevelManager : MonoBehaviour
 {
+    [SerializeField] private List<LevelData> levels; // Tüm level verilerini tutan liste
     [SerializeField] private LevelData levelData;
     [SerializeField] private Camera mainCamera; 
     
@@ -24,19 +25,41 @@ public class LevelManager : MonoBehaviour
     [SerializeField] private Material sidewalkMat;
 
     [SerializeField] private BusManager busmanager;
-    
+
+    [SerializeField] SimpleSceneManager simplescenemanager;
 
 
+    private int currentLevelIndex;
 
+    void OnEnable()
+    {
+        GameController.OnGameWon += HandleGameWon;
+    }
+
+    void OnDisable()
+    {
+        GameController.OnGameWon -= HandleGameWon;
+    }
 
     void Start()
     {
-        ResetTemporaryData();
-        BuildLevel();
-        AdjustCameraToLevel();
-        PlaceSideWalk();
-        PlaceRoad();
-        SetLevelInfo();
+        currentLevelIndex = PlayerPrefs.GetInt("CurrentLevel", 0);
+        LoadLevel(currentLevelIndex);
+    }
+
+    public void LoadLevel(int levelIndex)
+    {
+        if (levelIndex >= 0 && levelIndex < levels.Count)
+        {
+            levelData = levels[levelIndex];
+            ResetTemporaryData();
+            BuildLevel();
+            AdjustCameraToLevel();
+            PlaceSideWalk();
+            PlaceRoad();
+            SetLevelInfo();
+        }
+        //ResetTemporaryData();
     }
 
     // Geçici bilgileri sýfýrla
@@ -182,5 +205,23 @@ public class LevelManager : MonoBehaviour
         tunnel.name = $"Tunnel_{rowIndex}_{colIndex}";
         tunnelComponent.Initialize(levelData,rowIndex,colIndex, tunnelSize,tunnelPassengerColors, tunnelDirection); // Initialize fonksiyonu ile tünelin konumu ve diðer baþlangýç ayarlarýný yap.
     }
+
+    private void HandleGameWon()
+    {
+        LoadNextLevel();
+    }
+
+    private void LoadNextLevel()
+    {
+        currentLevelIndex++;
+        if (currentLevelIndex >= levels.Count)
+        {
+            currentLevelIndex = 0; 
+        }
+        PlayerPrefs.SetInt("CurrentLevel", currentLevelIndex);
+        PlayerPrefs.Save();
+        simplescenemanager.RestartCurrentScene();
+    }
+
 }
 

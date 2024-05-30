@@ -34,6 +34,7 @@ public class Passenger : MonoBehaviour
         {
             manager.ActivatePassenger(this);
         }
+        StartCoroutine(PlayGrowthAnimation());
     }
 
     void OnDisable()
@@ -316,8 +317,8 @@ public class Passenger : MonoBehaviour
             bus.Passengers.Add(this);
         }
 
-        bus.GetPassengerIn(this);
-        ObjectPooler.Instance.RemoveFromPool("Passenger", gameObject);
+        
+        StartCoroutine(PlayShrinkAnimation(bus));
     }
 
     private IEnumerator MoveToBusAndGetIn(Bus bus)
@@ -369,6 +370,39 @@ public class Passenger : MonoBehaviour
 
         return false;
 
+    }
+
+    private IEnumerator PlayGrowthAnimation()
+    {
+        Vector3 originalScale = new Vector3(0.01f,0.01f,0.01f);
+        Vector3 targetScale = originalScale * 1f;
+        float currentTime = 0f;
+
+        while (currentTime < 1)
+        {
+            transform.localScale = Vector3.Lerp(Vector3.zero, originalScale, currentTime / 1);
+            currentTime += Time.deltaTime;
+            yield return null;
+        }
+
+        transform.localScale = targetScale;
+    }
+
+    private IEnumerator PlayShrinkAnimation(Bus bus)
+    {
+        Vector3 originalScale = transform.localScale;
+        Vector3 targetScale = originalScale * 0.1f;
+        float currentTime = 0f;
+
+        while (currentTime < 0.25f)
+        {
+            transform.localScale = Vector3.Lerp(originalScale, targetScale, currentTime / 1);
+            currentTime += Time.deltaTime;
+            yield return null;
+        }
+
+        bus.GetPassengerIn(this);
+        ObjectPooler.Instance.RemoveFromPool("Passenger", gameObject);
     }
 
 }

@@ -7,15 +7,15 @@ public class Bus : MonoBehaviour
     public bool activeBus;
     public Color busColor;
 
-    [SerializeField] private float speed;
+    public float speed;
 
     public Vector3 destination;
 
     private BusManager manager;
 
-    private int passengersInside = 0;
-
     private bool isCheckedForWaitingPassengers = false;
+
+    public List<Passenger> Passengers = new List<Passenger>();
 
     private void Start()
     {
@@ -52,7 +52,7 @@ public class Bus : MonoBehaviour
         {
             if (!grid.isEmpty)
             {
-                if(grid.passengerOnGrid.PassengerColor == busColor && passengersInside < 3) 
+                if(grid.passengerOnGrid.PassengerColor == busColor && !isFull()) 
                 {
                     grid.passengerOnGrid.GetInsideofBus(this);
                     grid.isEmpty = true;
@@ -73,10 +73,29 @@ public class Bus : MonoBehaviour
         transform.position = position;
     }
 
+    public void IncreasePassengerCount(Passenger p)
+    {
+        Passengers.Add(p);
+    }
+
+    public bool isFull()
+    {
+        return Passengers.Count >= 3;
+    }
+
+    public bool ReadyToMove()
+    {
+        foreach (var passenger in Passengers)
+        {
+            if (passenger.isMoving)
+                return false;
+        }
+        return true;
+    }
+
     public void GetPassengerIn(Passenger p)
     {
-        passengersInside += 1;
-        if(passengersInside >= 3)
+        if(isFull() && ReadyToMove())
         {
             manager.BusDeparted(this);
             ResetBus();
@@ -85,8 +104,8 @@ public class Bus : MonoBehaviour
 
     public void ResetBus()
     {
+        Passengers = new List<Passenger>();
         isCheckedForWaitingPassengers = false;
-        passengersInside = 0;
     }
 
 }

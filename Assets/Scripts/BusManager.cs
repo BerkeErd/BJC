@@ -10,6 +10,7 @@ public class BusManager : MonoBehaviour
     [SerializeField] private PassengerManager passengerManager; // PassengerManager referansý
 
     public Vector3 busSpawnPoint;
+    public Vector3 busDespawnPoint;
     public Vector3 waitingSpot;
 
     private Queue<Bus> busQueue = new Queue<Bus>();
@@ -18,6 +19,7 @@ public class BusManager : MonoBehaviour
 
 
     public Bus currentBus;
+    
 
     void OnEnable()
     {
@@ -63,14 +65,12 @@ public class BusManager : MonoBehaviour
         // Eðer uygun renk bulunamazsa, bir varsayýlan renk kullan
         if (!busColors.Contains(selectedColor))
         {
-            Debug.Log("UYGUN RENK BULUNAMADI");
             selectedColor = busColors.Any() ? busColors[Random.Range(0,busColors.Count)] : Color.black;
         }
 
         return selectedColor;
     }
-
-
+    
 
     private void HandleGameStart()
     {
@@ -82,7 +82,6 @@ public class BusManager : MonoBehaviour
     {
         int passengerCount = passengerManager.GetTotalPassengerCount();
         totalBusToSpawn = passengerCount / 3; // Toplam yolcu sayýsýný 3'e böl ve yukarý yuvarla
-        Debug.Log(totalBusToSpawn);
         for (int i = 0; i < Mathf.Min(totalBusToSpawn,3); i++)
         {
             SpawnInitialBuses();
@@ -114,9 +113,34 @@ public class BusManager : MonoBehaviour
         bus.SetColor(busColor);
         
     }
-
-    // Bir otobüs depart ettiðinde çaðrýlan metod
+    
     public void BusDeparted(Bus bus)
+    {
+        bus.activeBus = false;
+        StartCoroutine(MoveBusToDespawnPoint(bus));
+    }
+
+    private IEnumerator MoveBusToDespawnPoint(Bus bus)
+    {
+        Vector3 targetPosition = busDespawnPoint;
+        bool isMoving = true;
+
+        while (isMoving)
+        {
+            float step = bus.speed * Time.deltaTime; // Adým hýzý, isterseniz ayarlayabilirsiniz
+            bus.transform.position = Vector3.MoveTowards(bus.transform.position, targetPosition, step);
+
+            if (Vector3.Distance(bus.transform.position, targetPosition) < 0.1f)
+            {
+                isMoving = false;
+                ProcessBusDeparture(bus);
+            }
+
+            yield return null;
+        }
+    }
+
+    private void ProcessBusDeparture(Bus bus)
     {
         bus.ResetBus();
 
@@ -135,9 +159,6 @@ public class BusManager : MonoBehaviour
             ObjectPooler.Instance.RemoveFromPool("Bus", bus.gameObject);
             ActivateFrontBus();  // Kuyruðun baþýndaki yeni otobüsü aktif yap
         }
-
-        
-        
     }
 
     // Kuyruðun baþýndaki otobüsü aktif eden metod

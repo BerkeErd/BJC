@@ -17,8 +17,8 @@ public class Passenger : MonoBehaviour
 
     private PassengerManager manager;
 
-    public bool hasTunnel;
-    public Tunnel tunnel;
+    public bool isMoving = false;
+    private Vector3 targetPosition;
 
     void Start()
     {
@@ -133,15 +133,7 @@ public class Passenger : MonoBehaviour
                 ClearOccupiedCell();
                 OnPassengerMoved?.Invoke(this);
                 manager.DeactivatePassenger(this);
-
-                if (GameObject.FindObjectOfType<BusManager>().currentBus.busColor != PassengerColor)
-                {
-                    GoToWaitingCells();
-                }
-                else
-                {
-                    StartCoroutine(FollowPath(path));
-                }
+                StartCoroutine(FollowPath(path));
             }
             else
             {
@@ -231,9 +223,23 @@ public class Passenger : MonoBehaviour
             }
         }
 
-        // DEÐÝÞECEK
-        GetInsideofBus(GameObject.FindObjectOfType<BusManager>().currentBus);
 
+        CheckForBus();
+
+    }
+
+
+    void CheckForBus()
+    {
+        if (GameObject.FindObjectOfType<BusManager>().currentBus.busColor != PassengerColor)
+        {
+            GoToWaitingCells();
+        }
+        else
+        {
+            MoveToBusIfNooneisWaiting(GameObject.FindObjectOfType<BusManager>().currentBus);
+        }
+        
     }
 
     List<Vector2Int> GetNeighbors(Vector2Int current)
@@ -285,18 +291,49 @@ public class Passenger : MonoBehaviour
         return true; // Grid dýþýndaysa veya hücre doluysa, meþgul kabul et
     }
 
-    public void GetInsideofBus(Bus bus)
+    public void MoveToBusIfNooneisWaiting(Bus bus)
     {
-        if(bus.activeBus && bus.busColor == PassengerColor)
+        if(bus.activeBus && bus.busColor == PassengerColor && !CheckIfSameColorPassengerWaiting() && !bus.isFull())
         {
-            bus.GetPassengerIn(this);
-            ObjectPooler.Instance.RemoveFromPool("Passenger", gameObject);
+            bus.IncreasePassengerCount(this);
+            StartCoroutine(MoveToBusAndGetIn(bus));
         }
         else
         {
             GoToWaitingCells();
         }
         
+    }
+
+    public void GetInsideofBus(Bus bus)
+    {
+        if(!bus.Passengers.Contains(this) && !bus.isFull())
+        {
+            bus.Passengers.Add(this);
+        }
+
+        bus.GetPassengerIn(this);
+        ObjectPooler.Instance.RemoveFromPool("Passenger", gameObject);
+    }
+
+    private IEnumerator MoveToBusAndGetIn(Bus bus)
+    {
+        targetPosition = bus.transform.position;
+        isMoving = true;
+
+        while (isMoving)
+        {
+            float step = 5 * Time.deltaTime; // Adým hýzý, isterseniz ayarlayabilirsiniz
+            transform.position = Vector3.MoveTowards(transform.position, targetPosition, step);
+
+            if (Vector3.Distance(transform.position, targetPosition) < 0.1f)
+            {
+                isMoving = false;
+                GetInsideofBus(bus);
+            }
+
+            yield return null;
+        }
     }
 
 
@@ -314,7 +351,21 @@ public class Passenger : MonoBehaviour
         }
 
         return false;
-        
+    }
+
+    bool CheckIfSameColorPassengerWaiting()
+    {
+        foreach (var grid in GameObject.FindObjectsOfType<WaitingGrid>())
+        {
+            if (!grid.isEmpty)
+            {
+                if(grid.passengerOnGrid.PassengerColor == PassengerColor)
+                return true;
+            }
+        }
+
+        return false;
+
     }
 
 }

@@ -23,92 +23,94 @@ public class LevelEditorWindow : EditorWindow
     {
         GetWindow<LevelEditorWindow>("Level Editor");
     }
-
+    
     void OnGUI()
     {
         GUILayout.Label("Level Editor", EditorStyles.boldLabel);
 
         currentLevel = (LevelData)EditorGUILayout.ObjectField("Level Data", currentLevel, typeof(LevelData), false);
 
-        selectedColorIndex = EditorGUILayout.Popup("Passenger Color", selectedColorIndex, colorNames);
-
-
-        if (GUILayout.Button(AddTunnelMode ? "Disable Tunnel Mode" : "Enable Tunnel Mode"))
-        {
-            AddTunnelMode = !AddTunnelMode;
-            Repaint(); // Editor penceresini yeniden çizdir
-            if (AddTunnelMode)
-                Debug.Log("Tunnel mode activated. Click on a grid cell to place a tunnel.");
-            else
-                Debug.Log("Tunnel mode deactivated.");
-        }
-
-        if (selectedTunnelCell != null && selectedTunnelCell.isTunnel)
-        {
-            EditorGUILayout.LabelField("Selected Tunnel Properties", EditorStyles.boldLabel);
-            string[] directionNames = Enum.GetNames(typeof(TunnelDirection)); // Yön isimlerini al
-            int currentDirectionIndex = (int)selectedTunnelCell.tunnelDirection; // Mevcut yön indeksini al
-            int newDirectionIndex = EditorGUILayout.Popup("Tunnel Direction", currentDirectionIndex, directionNames);
-            if (newDirectionIndex != currentDirectionIndex) // Yön deðiþtiyse
-            {
-                selectedTunnelCell.tunnelDirection = (TunnelDirection)newDirectionIndex;
-                EditorUtility.SetDirty(currentLevel); // Deðiþiklikleri kaydet
-            }
-
-            if (GUILayout.Button($"Add {colorNames[selectedColorIndex]} Passenger"))
-            {
-                selectedTunnelCell.tunnelPassengerColors.Add(availableColors[selectedColorIndex]);
-                selectedTunnelCell.tunnelSize = selectedTunnelCell.tunnelPassengerColors.Count; // Passenger ekledikten sonra boyutu güncelle
-            }
-
-            for (int i = 0; i < selectedTunnelCell.tunnelPassengerColors.Count; i++)
-            {
-                EditorGUILayout.BeginHorizontal();
-                string colorName = GetColorName(selectedTunnelCell.tunnelPassengerColors[i]);
-                EditorGUILayout.LabelField($"Passenger {i + 1} Color", colorName);
-                if (GUILayout.Button("Remove"))
-                {
-                    selectedTunnelCell.tunnelPassengerColors.RemoveAt(i);
-                    selectedTunnelCell.tunnelSize = selectedTunnelCell.tunnelPassengerColors.Count; // Passenger çýkardýktan sonra boyutu güncelle
-                }
-                EditorGUILayout.EndHorizontal();
-            }
-
-            if (GUILayout.Button("Clear All Passengers"))
-            {
-                selectedTunnelCell.tunnelPassengerColors.Clear();
-                selectedTunnelCell.tunnelSize = 0; // Tüm passenger'larý temizledikten sonra boyutu sýfýrla
-            }
-        }
-
-
         if (currentLevel != null)
         {
+            // Level Genel Ayarlarý
+            EditorGUILayout.BeginVertical("box");
+            EditorGUILayout.LabelField("General Settings", EditorStyles.boldLabel);
+            currentLevel.timer = EditorGUILayout.IntField("Timer (seconds)", currentLevel.timer); 
+            EditorGUILayout.EndVertical();
+
+            selectedColorIndex = EditorGUILayout.Popup("Passenger Color", selectedColorIndex, colorNames);
+
+            if (GUILayout.Button(AddTunnelMode ? "Disable Tunnel Mode" : "Enable Tunnel Mode"))
+            {
+                AddTunnelMode = !AddTunnelMode;
+                if (AddTunnelMode)
+                    Debug.Log("Tunnel mode activated. Click on a grid cell to place a tunnel.");
+                else
+                    Debug.Log("Tunnel mode deactivated.");
+            }
+
+            if (selectedTunnelCell != null && selectedTunnelCell.isTunnel)
+            {
+                DrawTunnelSettings();
+            }
+
             DrawBusAndWaitingArea();
             DrawLevelGrid();
+
             if (GUILayout.Button("Save Level"))
             {
                 SaveLevel();
             }
+
+            if (GUILayout.Button("Random Fill"))
+            {
+                RandomFillGrid();
+            }
+
+            if (GUILayout.Button("Clear"))
+            {
+                ClearGrid();
+            }
         }
-
-
-        if (GUILayout.Button("Random Fill"))
-        {
-            RandomFillGrid();
-        }
-
-        if (GUILayout.Button("Clear"))
-        {
-            ClearGrid(); 
-        }
-
-
-
-        
-
     }
 
+    private void DrawTunnelSettings()
+    {
+        EditorGUILayout.LabelField("Selected Tunnel Properties", EditorStyles.boldLabel);
+        string[] directionNames = Enum.GetNames(typeof(TunnelDirection)); // Yön isimlerini al
+        int currentDirectionIndex = (int)selectedTunnelCell.tunnelDirection; // Mevcut yön indeksini al
+        int newDirectionIndex = EditorGUILayout.Popup("Tunnel Direction", currentDirectionIndex, directionNames);
+        if (newDirectionIndex != currentDirectionIndex) // Yön deðiþtiyse
+        {
+            selectedTunnelCell.tunnelDirection = (TunnelDirection)newDirectionIndex;
+            EditorUtility.SetDirty(currentLevel); // Deðiþiklikleri kaydet
+        }
+
+        if (GUILayout.Button($"Add {colorNames[selectedColorIndex]} Passenger"))
+        {
+            selectedTunnelCell.tunnelPassengerColors.Add(availableColors[selectedColorIndex]);
+            selectedTunnelCell.tunnelSize = selectedTunnelCell.tunnelPassengerColors.Count; // Passenger ekledikten sonra boyutu güncelle
+        }
+
+        for (int i = 0; i < selectedTunnelCell.tunnelPassengerColors.Count; i++)
+        {
+            EditorGUILayout.BeginHorizontal();
+            string colorName = GetColorName(selectedTunnelCell.tunnelPassengerColors[i]);
+            EditorGUILayout.LabelField($"Passenger {i + 1} Color", colorName);
+            if (GUILayout.Button("Remove"))
+            {
+                selectedTunnelCell.tunnelPassengerColors.RemoveAt(i);
+                selectedTunnelCell.tunnelSize = selectedTunnelCell.tunnelPassengerColors.Count; // Passenger çýkardýktan sonra boyutu güncelle
+            }
+            EditorGUILayout.EndHorizontal();
+        }
+
+        if (GUILayout.Button("Clear All Passengers"))
+        {
+            selectedTunnelCell.tunnelPassengerColors.Clear();
+            selectedTunnelCell.tunnelSize = 0; // Tüm passenger'larý temizledikten sonra boyutu sýfýrla
+        }
+    }
     private string GetColorName(Color color)
     {
         for (int i = 0; i < availableColors.Length; i++)
@@ -189,7 +191,6 @@ public class LevelEditorWindow : EditorWindow
         cell.isTunnel = true;
         cell.isBlocked = false;
         cell.isOccupied = false;
-        Debug.Log("Tunnel placed at cell.");
     }
 
     void HandleCellInteraction(ref LevelData.LevelGridCell cell, int rowIndex)
@@ -205,7 +206,6 @@ public class LevelEditorWindow : EditorWindow
                     cell.isTunnel = true;
                     cell.isOccupied = false;  
                     cell.isBlocked = false;
-                    Debug.Log("Tunnel placed at cell.");
                 }
             }
             else if (!cell.isBlocked && !cell.isTunnel)

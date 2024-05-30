@@ -11,12 +11,15 @@ public class LevelData : ScriptableObject
     public int width;
     [Range(2, 30)]
     public int height;
+    [Min(1)]
+    public int timer;
     public LevelGridCell[] gridCells; // Grid hücrelerini tutacak dizi
 
     public int waitingAreaSize = 5;
 
-    //[HideInInspector]
+    [HideInInspector]
     public bool[,] tempOccupiedCells;
+    [HideInInspector]
     public bool[,] occupiedByTunnelCells;
 
     void OnEnable()

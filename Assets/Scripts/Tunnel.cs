@@ -82,7 +82,6 @@ public class Tunnel : MonoBehaviour
     private void UnblockTheExitCell()
     {
         levelData.occupiedByTunnelCells[exitCell.y, exitCell.x] = false;
-        Debug.Log(levelData.occupiedByTunnelCells[exitCell.y, exitCell.x]);
     }
 
     private bool IsInsideGrid(Vector2Int pos)
@@ -108,12 +107,10 @@ public class Tunnel : MonoBehaviour
 
     private void TrySpawnPassenger()
     {
-
-        Debug.Log(tunnelSize);
+        
 
         if (tunnelSize <= 0)
         {
-            Debug.Log("Yap o iþi");
             UnblockTheExitCell();
         }
         else
@@ -143,8 +140,6 @@ public class Tunnel : MonoBehaviour
             Vector3 spawnPosition = levelData.gridCells[row * levelData.width + col].Position;
             GameObject newPassenger = ObjectPooler.Instance.SpawnFromPool("Passenger", spawnPosition, Quaternion.identity);
             Passenger passengerComponent = newPassenger.GetComponent<Passenger>();
-            passengerComponent.hasTunnel = true;
-            passengerComponent.tunnel = this;
             passengerComponent.Initialize(levelData, row, col, color);
             levelData.tempOccupiedCells[row, col] = true; // Geçici olarak iþgal et
         }
@@ -164,7 +159,6 @@ public class Tunnel : MonoBehaviour
 
     private void HandlePassengerMoved(Passenger passenger)
     {
-        Debug.Log("hareket sezdim");
         if (tunnelSize >= 0)
         {
             TrySpawnPassenger();
@@ -173,7 +167,6 @@ public class Tunnel : MonoBehaviour
 
     private void HandleGameStart()
     {
-        Debug.Log("baþladýk");
         TrySpawnPassenger();
     }
 }

@@ -36,6 +36,7 @@ public class LevelManager : MonoBehaviour
         AdjustCameraToLevel();
         PlaceSideWalk();
         PlaceRoad();
+        SetLevelTimer();
     }
 
     // Geçici bilgileri sýfýrla
@@ -108,6 +109,7 @@ public class LevelManager : MonoBehaviour
         float sidewalkEndZ = levelData.height + sidewalkLength;
         Vector3 roadStartPosition = new Vector3(levelData.width / 2.0f, -0.01f, sidewalkEndZ + roadLength / 2.0f);
         busmanager.busSpawnPoint = new Vector3(levelData.width * -3, -0.01f, sidewalkEndZ + roadLength / 2.0f);
+        busmanager.busDespawnPoint = new Vector3(levelData.width * 3, -0.01f, sidewalkEndZ + roadLength / 2.0f);
         // Yol plane'ini oluþtur ve konumlandýr
         GameObject roadPlane = GameObject.CreatePrimitive(PrimitiveType.Plane);
         roadPlane.transform.position = roadStartPosition;
@@ -164,6 +166,11 @@ public class LevelManager : MonoBehaviour
                 }
             }
         }
+    }
+
+    void SetLevelTimer()
+    {
+        GameController.Instance.SetTimer(levelData.timer);
     }
 
 

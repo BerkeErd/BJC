@@ -15,7 +15,6 @@ public class PassengerManager : MonoBehaviour
     // Toplam yolcu sayýsýný döndürür
     public int GetTotalPassengerCount()
     {
-        Debug.Log(allPassengers.Count);
         return allPassengers.Count;
     }
 

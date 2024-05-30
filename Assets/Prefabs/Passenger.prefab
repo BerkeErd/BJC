@@ -401,7 +401,8 @@ MonoBehaviour:
   levelData: {fileID: 0}
   rowIndex: 0
   colIndex: 0
-  moveSpeed: 3
+  moveSpeed: 6
+  isMoving: 0
 --- !u!65 &6887069197316655411
 BoxCollider:
   m_ObjectHideFlags: 0

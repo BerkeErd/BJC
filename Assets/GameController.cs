@@ -1,6 +1,7 @@
 using System;
 using System.Collections;
 using UnityEngine;
+using TMPro;
 
 public class GameController : MonoBehaviour
 {
@@ -8,7 +9,12 @@ public class GameController : MonoBehaviour
     public static event Action OnGameLose; // Oyunun kaybedilme event'i
     public static GameController Instance { get; private set; }
 
+
+    [SerializeField] TextMeshProUGUI TimerText;
+    [SerializeField] TextMeshProUGUI LevelText;
+
     public bool isGameStarted = false;
+    private bool isGameOver = false;
     private bool firstTouchHandled = false;
 
     private float timerDuration = 0f; 
@@ -36,15 +42,18 @@ public class GameController : MonoBehaviour
         }
     }
 
-    public void SetTimer(float seconds)
+    public void SetLevelInfos(float Timer, string LevelName)
     {
-        timerDuration = seconds;
-        remainingTime = seconds;
+        timerDuration = Timer;
+        remainingTime = Timer;
+        LevelText.text = LevelName;
     }
 
     public void LoseGame()
     {
         isGameStarted = false;
+        isGameOver = true;
+        TimerText.text = "Game Over";
         Debug.Log("Game Over");
         OnGameLose?.Invoke();
     }
@@ -53,7 +62,7 @@ public class GameController : MonoBehaviour
     {
         if (Input.touchCount > 0 && Input.GetTouch(0).phase == TouchPhase.Began)
         {
-            if (!isGameStarted)
+            if (!isGameStarted && !isGameOver)
             {
                 StartGame();
             }
@@ -65,6 +74,7 @@ public class GameController : MonoBehaviour
 
         if (isGameStarted && remainingTime > 0)
         {
+            TimerText.text = remainingTime.ToString("F0") + " Seconds";
             remainingTime -= Time.deltaTime; // Kalan zamaný azalt
             if (remainingTime <= 0)
             {

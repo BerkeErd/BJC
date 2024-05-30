@@ -125,7 +125,7 @@ public class Passenger : MonoBehaviour
 
     public void OnMouseUpAsButton()
     {
-        if (GameController.Instance.isGameStarted && GameController.Instance.IsFirstTouchHandled())
+        if (GameController.Instance.isGameStarted && GameController.Instance.IsFirstTouchHandled() && !isMoving)
         {
             List<Vector3> path = FindPathToExit();
             if (path.Count > 0)
@@ -323,7 +323,7 @@ public class Passenger : MonoBehaviour
 
         while (isMoving)
         {
-            float step = 5 * Time.deltaTime; // Adým hýzý, isterseniz ayarlayabilirsiniz
+            float step = moveSpeed * Time.deltaTime; 
             transform.position = Vector3.MoveTowards(transform.position, targetPosition, step);
 
             if (Vector3.Distance(transform.position, targetPosition) < 0.1f)

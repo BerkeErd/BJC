@@ -36,7 +36,7 @@ public class LevelManager : MonoBehaviour
         AdjustCameraToLevel();
         PlaceSideWalk();
         PlaceRoad();
-        SetLevelTimer();
+        SetLevelInfo();
     }
 
     // Geçici bilgileri sýfýrla
@@ -168,9 +168,9 @@ public class LevelManager : MonoBehaviour
         }
     }
 
-    void SetLevelTimer()
+    void SetLevelInfo()
     {
-        GameController.Instance.SetTimer(levelData.timer);
+        GameController.Instance.SetLevelInfos(levelData.timer, levelData.name);
     }
 
 

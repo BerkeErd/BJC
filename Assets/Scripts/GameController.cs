@@ -13,6 +13,8 @@ public class GameController : MonoBehaviour
     [SerializeField] TextMeshProUGUI TimerText;
     [SerializeField] TextMeshProUGUI LevelText;
 
+    [SerializeField] GameObject LoseScreen;
+
     public bool isGameStarted = false;
     private bool isGameOver = false;
     private bool firstTouchHandled = false;
@@ -53,6 +55,7 @@ public class GameController : MonoBehaviour
     {
         isGameStarted = false;
         isGameOver = true;
+        LoseScreen.GetComponent<Animator>().Play("LoseScreenFallAnim");
         TimerText.text = "Game Over";
         Debug.Log("Game Over");
         OnGameLose?.Invoke();

@@ -119,7 +119,7 @@ public class Passenger : MonoBehaviour
         }
         else
         {
-            Debug.Log("You lose");
+            GameController.Instance.LoseGame();
         }
     }
 
@@ -210,6 +210,8 @@ public class Passenger : MonoBehaviour
 
     IEnumerator FollowPath(List<Vector3> path)
     {
+        isMoving = true;
+
         foreach (Vector3 targetPosition in path)
         {
             transform.LookAt(new Vector3(targetPosition.x, transform.position.y, targetPosition.z));
@@ -307,7 +309,9 @@ public class Passenger : MonoBehaviour
 
     public void GetInsideofBus(Bus bus)
     {
-        if(!bus.Passengers.Contains(this) && !bus.isFull())
+        isMoving = false; 
+
+        if (!bus.Passengers.Contains(this) && !bus.isFull())
         {
             bus.Passengers.Add(this);
         }
@@ -328,7 +332,6 @@ public class Passenger : MonoBehaviour
 
             if (Vector3.Distance(transform.position, targetPosition) < 0.1f)
             {
-                isMoving = false;
                 GetInsideofBus(bus);
             }
 

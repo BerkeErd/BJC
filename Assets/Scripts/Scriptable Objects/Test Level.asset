@@ -137,24 +137,27 @@ MonoBehaviour:
     tunnelSize: 1
     tunnelPassengerColors: []
   - Position: {x: 6, y: 0, z: 9.3}
-    isOccupied: 1
-    passengerColor: {r: 0, g: 1, b: 0, a: 1}
+    isOccupied: 0
+    passengerColor: {r: 0, g: 0, b: 0, a: 0}
     isBlocked: 0
     isTunnel: 0
     tunnelDirection: 0
     tunnelSize: 1
     tunnelPassengerColors: []
   - Position: {x: 7.1, y: 0, z: 9.3}
-    isOccupied: 1
-    passengerColor: {r: 0, g: 1, b: 0, a: 1}
+    isOccupied: 0
+    passengerColor: {r: 0, g: 0, b: 0, a: 0}
     isBlocked: 0
-    isTunnel: 0
+    isTunnel: 1
     tunnelDirection: 0
-    tunnelSize: 1
-    tunnelPassengerColors: []
+    tunnelSize: 3
+    tunnelPassengerColors:
+    - {r: 1, g: 0, b: 0, a: 1}
+    - {r: 1, g: 0, b: 0, a: 1}
+    - {r: 1, g: 0, b: 0, a: 1}
   - Position: {x: 8.2, y: 0, z: 9.3}
-    isOccupied: 1
-    passengerColor: {r: 0, g: 1, b: 0, a: 1}
+    isOccupied: 0
+    passengerColor: {r: 0, g: 0, b: 0, a: 0}
     isBlocked: 0
     isTunnel: 0
     tunnelDirection: 0

@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using TMPro;
 using UnityEngine;
 
 public enum TunnelDirection
@@ -22,6 +23,7 @@ public class Tunnel : MonoBehaviour
     private PassengerManager passengerManager;
     public TunnelDirection spawnDirection;
     private List<GameObject> placeholderPassengers = new List<GameObject>();
+    [SerializeField] private TextMeshPro countText;
     Vector2Int exitCell;
 
     private void Start()
@@ -38,6 +40,7 @@ public class Tunnel : MonoBehaviour
         tunnelSize = size;
         passengerColors = passangers;
         spawnDirection = tunnelDirection;
+        countText.text = tunnelSize.ToString();
         SetTunnelExit(); 
     }
 
@@ -107,8 +110,6 @@ public class Tunnel : MonoBehaviour
 
     private void TrySpawnPassenger()
     {
-        
-
         if (tunnelSize <= 0)
         {
             UnblockTheExitCell();
@@ -117,9 +118,7 @@ public class Tunnel : MonoBehaviour
         {
             if (IsInsideGrid(exitCell) && !IsCellOccupied(exitCell.y, exitCell.x))
             {
-                SpawnPassenger(exitCell.y, exitCell.x, passengerColors[spawnedCount % passengerColors.Count]);
-                spawnedCount++;
-                tunnelSize--;
+                SpawnPassenger(exitCell.y, exitCell.x, passengerColors[spawnedCount]);
             }
             BlockTheExitCell();
         }
@@ -136,12 +135,15 @@ public class Tunnel : MonoBehaviour
     {
         if (!IsCellOccupied(row, col)) // Meþgul deðilse yolcu yarat
         {
+            tunnelSize--;
+            countText.text = tunnelSize.ToString();
             passengerManager.UnregisterPassenger(placeholderPassengers[spawnedCount].GetComponent<Passenger>());
             Vector3 spawnPosition = levelData.gridCells[row * levelData.width + col].Position;
             GameObject newPassenger = ObjectPooler.Instance.SpawnFromPool("Passenger", spawnPosition, Quaternion.identity);
             Passenger passengerComponent = newPassenger.GetComponent<Passenger>();
             passengerComponent.Initialize(levelData, row, col, color);
             levelData.tempOccupiedCells[row, col] = true; // Geçici olarak iþgal et
+            spawnedCount++;
         }
     }
 

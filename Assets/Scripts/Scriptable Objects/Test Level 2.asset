@@ -16,7 +16,7 @@ MonoBehaviour:
   height: 2
   timer: 55
   gridCells:
-  - Position: {x: 0, y: 0, z: 0}
+  - Position: {x: 0.5, y: 0, z: 1.6}
     isOccupied: 0
     passengerColor: {r: 0, g: 0, b: 0, a: 0}
     isBlocked: 0
@@ -24,7 +24,7 @@ MonoBehaviour:
     tunnelDirection: 0
     tunnelSize: 1
     tunnelPassengerColors: []
-  - Position: {x: 0, y: 0, z: 0}
+  - Position: {x: 1.6, y: 0, z: 1.6}
     isOccupied: 0
     passengerColor: {r: 0, g: 0, b: 0, a: 0}
     isBlocked: 0
@@ -32,15 +32,18 @@ MonoBehaviour:
     tunnelDirection: 0
     tunnelSize: 1
     tunnelPassengerColors: []
-  - Position: {x: 0, y: 0, z: 0}
+  - Position: {x: 0.5, y: 0, z: 0.5}
     isOccupied: 0
     passengerColor: {r: 0, g: 0, b: 0, a: 0}
     isBlocked: 0
-    isTunnel: 0
-    tunnelDirection: 0
-    tunnelSize: 1
-    tunnelPassengerColors: []
-  - Position: {x: 0, y: 0, z: 0}
+    isTunnel: 1
+    tunnelDirection: 3
+    tunnelSize: 3
+    tunnelPassengerColors:
+    - {r: 1, g: 0, b: 0, a: 1}
+    - {r: 1, g: 0, b: 0, a: 1}
+    - {r: 1, g: 0, b: 0, a: 1}
+  - Position: {x: 1.6, y: 0, z: 0.5}
     isOccupied: 0
     passengerColor: {r: 0, g: 0, b: 0, a: 0}
     isBlocked: 0

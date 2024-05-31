@@ -14,6 +14,7 @@ public class ObjectPooler : MonoBehaviour
 
     public List<Pool> pools;
     public Dictionary<string, Queue<GameObject>> poolDictionary;
+    public Dictionary<string, Transform> poolParents;
 
     #region Singleton
     public static ObjectPooler Instance;
@@ -26,15 +27,22 @@ public class ObjectPooler : MonoBehaviour
     void Start()
     {
         poolDictionary = new Dictionary<string, Queue<GameObject>>();
+        poolParents = new Dictionary<string, Transform>();
 
         foreach (var pool in pools)
         {
             Queue<GameObject> objectPool = new Queue<GameObject>();
 
+            // Parent objeyi oluþtur ve hiyerarþide düzenli tut
+            GameObject poolParent = new GameObject(pool.tag + " Pool");
+            poolParent.transform.SetParent(transform);
+            poolParents[pool.tag] = poolParent.transform;
+
             for (int i = 0; i < pool.size; i++)
             {
                 GameObject obj = Instantiate(pool.prefab);
                 obj.SetActive(false);
+                obj.transform.SetParent(poolParent.transform);  // Parent olarak belirli bir Transform ayarlýyoruz
                 objectPool.Enqueue(obj);
             }
 
@@ -66,17 +74,30 @@ public class ObjectPooler : MonoBehaviour
         return objectToSpawn;
     }
 
-    public void RemoveFromPool(string tag, GameObject objectToRemove)
+    //public void RemoveFromPool(string tag, GameObject objectToRemove)
+    //{
+    //    if (poolDictionary.ContainsKey(tag) && poolDictionary[tag].Contains(objectToRemove))
+    //    {
+    //        poolDictionary[tag].Dequeue();
+    //        Destroy(objectToRemove);
+    //    }
+    //    else
+    //    {
+    //        Debug.LogWarning("Object to remove not found in pool or wrong tag.");
+    //    }
+    //}
+
+    public void ReturnToPool(string tag, GameObject objectToReturn)
     {
-        if (poolDictionary.ContainsKey(tag) && poolDictionary[tag].Contains(objectToRemove))
+        if (!poolDictionary.ContainsKey(tag))
         {
-            poolDictionary[tag].Dequeue();
-            Destroy(objectToRemove);
+            Debug.LogWarning("Pool with tag " + tag + " doesn't exist.");
+            return;
         }
-        else
-        {
-            Debug.LogWarning("Object to remove not found in pool or wrong tag.");
-        }
+
+        objectToReturn.SetActive(false);
+        objectToReturn.transform.SetParent(poolParents[tag]);  // Obje tekrar parent altýna yerleþtir
+        poolDictionary[tag].Enqueue(objectToReturn);
     }
 
     private void ExtendPool(string tag)
@@ -86,6 +107,7 @@ public class ObjectPooler : MonoBehaviour
         {
             GameObject obj = Instantiate(pool.prefab);
             obj.SetActive(false);
+            obj.transform.SetParent(poolParents[tag]);  // Yeni objeyi de doðru parent altýna yerleþtir
             poolDictionary[tag].Enqueue(obj);
         }
         else

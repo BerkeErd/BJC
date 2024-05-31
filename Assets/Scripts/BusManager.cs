@@ -45,7 +45,7 @@ public class BusManager : MonoBehaviour
             .ToList();
 
         List<Color> mostCommonColors = colorCounts
-            .Take(3) // En çok tekrar eden üst 3 rengi al
+            .Take(2) // En çok tekrar eden üst 2 rengi al
             .Select(colorInfo => colorInfo.Color)
             .ToList();
         
@@ -86,6 +86,7 @@ public class BusManager : MonoBehaviour
         {
             SpawnInitialBuses();
         }
+        ActivateFrontBus();
     }
 
     private void SpawnInitialBuses()
@@ -96,10 +97,7 @@ public class BusManager : MonoBehaviour
         
         newBus.InitializePosition(busSpawnPoint);
         busQueue.Enqueue(newBus);
-        if (busQueue.Count == 1)
-        {
-            ActivateFrontBus();  // Ýlk otobüsü aktif yap
-        }
+        
 
         busSpawned++;
     }
@@ -107,15 +105,18 @@ public class BusManager : MonoBehaviour
     // Otobüs rengini ayarlayan metod
     private void SetBusColor(Bus bus)
     {
-
-        Color busColor = GetAColorForBus();
-        busColors.Remove(busColor);
-        bus.SetColor(busColor);
-        
+        if(!bus.isColorSet)
+        {
+            Color busColor = GetAColorForBus();
+            busColors.Remove(busColor);
+            bus.SetColor(busColor);
+            bus.isColorSet = true;
+        }
     }
     
     public void BusDeparted(Bus bus)
     {
+        currentBus = null;
         bus.activeBus = false;
         StartCoroutine(MoveBusToDespawnPoint(bus));
     }
@@ -155,24 +156,32 @@ public class BusManager : MonoBehaviour
         else
         {
             busQueue.Dequeue();
-            ObjectPooler.Instance.RemoveFromPool("Bus", bus.gameObject);
+            ObjectPooler.Instance.ReturnToPool("Bus", bus.gameObject);
             ActivateFrontBus();  // Kuyruðun baþýndaki yeni otobüsü aktif yap
         }
 
 
     }
 
-    // Kuyruðun baþýndaki otobüsü aktif eden metod
     private void ActivateFrontBus()
     {
         foreach (Bus bus in busQueue)
         {
             bus.activeBus = false;  // Tüm otobüsleri önce pasif yap
         }
+
         if (busQueue.Count > 0)
         {
-            busQueue.Peek().activeBus = true;  // Kuyruðun baþýndaki otobüsü aktif yap
-            SetBusColor(busQueue.Peek());
+            Bus frontBus = busQueue.Peek();
+            frontBus.activeBus = true;  // Kuyruðun baþýndaki otobüsü aktif yap
+            SetBusColor(frontBus);
+
+            if (busQueue.Count > 1)
+            {
+                Bus nextBus = busQueue.ElementAt(1);
+                nextBus.nextBus = true;
+                SetBusColor(nextBus);
+            }
         }
         else
         {

@@ -14,15 +14,21 @@ public class Passenger : MonoBehaviour
     public int rowIndex;
     public int colIndex;
     [SerializeField] private float moveSpeed = 3f;
+    private Animator animator;
 
     private PassengerManager manager;
 
     public bool isMoving = false;
     private Vector3 targetPosition;
+    private BusManager busManager;
+
+    private Vector3 originalScale = new Vector3(0.01f, 0.01f, 0.01f);
 
     void Start()
     {
         manager = FindObjectOfType<PassengerManager>();
+        busManager = GameObject.FindObjectOfType<BusManager>();
+        animator = GetComponent<Animator>();
         manager.RegisterPassenger(this);
     }
 
@@ -34,7 +40,7 @@ public class Passenger : MonoBehaviour
         {
             manager.ActivatePassenger(this);
         }
-        StartCoroutine(PlayGrowthAnimation());
+        PlaySpawnAnimation();
     }
 
     void OnDisable()
@@ -212,6 +218,7 @@ public class Passenger : MonoBehaviour
     IEnumerator FollowPath(List<Vector3> path)
     {
         isMoving = true;
+        animator.SetBool("isMoving", isMoving);
 
         foreach (Vector3 targetPosition in path)
         {
@@ -227,23 +234,28 @@ public class Passenger : MonoBehaviour
         }
 
 
-        CheckForBus();
+       StartCoroutine(CheckForBus());
 
     }
 
 
-    void CheckForBus()
+    IEnumerator CheckForBus()
     {
-        if (GameObject.FindObjectOfType<BusManager>().currentBus.busColor != PassengerColor)
+        while (busManager.currentBus == null || busManager.currentBus.isFull())
+        {
+            yield return new WaitForSeconds(1f); // Bir saniye bekle ve tekrar kontrol et
+        }
+
+        if (busManager.currentBus.busColor != PassengerColor)
         {
             GoToWaitingCells();
         }
         else
         {
-            MoveToBusIfNooneisWaiting(GameObject.FindObjectOfType<BusManager>().currentBus);
+            MoveToBusIfNooneisWaiting(busManager.currentBus);
         }
-        
     }
+
 
     List<Vector2Int> GetNeighbors(Vector2Int current)
     {
@@ -310,26 +322,25 @@ public class Passenger : MonoBehaviour
 
     public void GetInsideofBus(Bus bus)
     {
-        isMoving = false; 
-
-        if (!bus.Passengers.Contains(this) && !bus.isFull())
-        {
-            bus.Passengers.Add(this);
-        }
-
-        
-        StartCoroutine(PlayShrinkAnimation(bus));
+        isMoving = false;
+        animator.SetBool("isMoving", isMoving);
+        bus.GetPassengerIn(this);
     }
 
     private IEnumerator MoveToBusAndGetIn(Bus bus)
     {
-        targetPosition = bus.transform.position;
+        
         isMoving = true;
+        animator.SetBool("isMoving", isMoving);
 
         while (isMoving)
         {
+            targetPosition = bus.transform.position;
+
             float step = moveSpeed * Time.deltaTime; 
             transform.position = Vector3.MoveTowards(transform.position, targetPosition, step);
+
+            transform.LookAt(new Vector3(targetPosition.x, transform.position.y, targetPosition.z));
 
             if (Vector3.Distance(transform.position, targetPosition) < 0.1f)
             {
@@ -349,6 +360,7 @@ public class Passenger : MonoBehaviour
             {
                 grid.passengerOnGrid = this;
                 passangerObject.transform.position = grid.transform.position;
+                animator.SetBool("isMoving", false);
                 grid.isEmpty = false;
                 return true;
             }
@@ -374,7 +386,6 @@ public class Passenger : MonoBehaviour
 
     private IEnumerator PlayGrowthAnimation()
     {
-        Vector3 originalScale = new Vector3(0.01f,0.01f,0.01f);
         Vector3 targetScale = originalScale * 1f;
         float currentTime = 0f;
 
@@ -382,27 +393,21 @@ public class Passenger : MonoBehaviour
         {
             transform.localScale = Vector3.Lerp(Vector3.zero, originalScale, currentTime / 1);
             currentTime += Time.deltaTime;
+            Debug.Log("Büyüyorujm");
             yield return null;
         }
 
         transform.localScale = targetScale;
     }
 
-    private IEnumerator PlayShrinkAnimation(Bus bus)
+    public void PlaySpawnAnimation()
     {
-        Vector3 originalScale = transform.localScale;
-        Vector3 targetScale = originalScale * 0.1f;
-        float currentTime = 0f;
+        StartCoroutine(PlayGrowthAnimation());
+    }
 
-        while (currentTime < 0.25f)
-        {
-            transform.localScale = Vector3.Lerp(originalScale, targetScale, currentTime / 1);
-            currentTime += Time.deltaTime;
-            yield return null;
-        }
-
-        bus.GetPassengerIn(this);
-        ObjectPooler.Instance.RemoveFromPool("Passenger", gameObject);
+    public void Despawn()
+    {
+        ObjectPooler.Instance.ReturnToPool("Passenger", gameObject);
     }
 
 }

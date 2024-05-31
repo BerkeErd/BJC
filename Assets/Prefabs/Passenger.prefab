@@ -363,6 +363,7 @@ GameObject:
   - component: {fileID: 2283736174592268885}
   - component: {fileID: -3119402401354245972}
   - component: {fileID: 6887069197316655411}
+  - component: {fileID: 3004291796629112980}
   m_Layer: 0
   m_Name: Passenger
   m_TagString: Untagged
@@ -402,6 +403,7 @@ MonoBehaviour:
   rowIndex: 0
   colIndex: 0
   moveSpeed: 6
+  animator: {fileID: 3004291796629112980}
   isMoving: 0
 --- !u!65 &6887069197316655411
 BoxCollider:
@@ -416,6 +418,25 @@ BoxCollider:
   serializedVersion: 2
   m_Size: {x: 65, y: 250, z: 65}
   m_Center: {x: 0, y: 100, z: 10}
+--- !u!95 &3004291796629112980
+Animator:
+  serializedVersion: 3
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1511702456369168623}
+  m_Enabled: 1
+  m_Avatar: {fileID: 9000000, guid: 2cfab378a3d911f4c955ba18600e6437, type: 3}
+  m_Controller: {fileID: 9100000, guid: 291fd96cc91c4f24da87d69923e8c862, type: 2}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
+  m_KeepAnimatorControllerStateOnDisable: 0
 --- !u!1 &1609371076583576779
 GameObject:
   m_ObjectHideFlags: 0

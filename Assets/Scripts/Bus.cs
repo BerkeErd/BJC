@@ -5,6 +5,9 @@ using UnityEngine;
 public class Bus : MonoBehaviour
 {
     public bool activeBus;
+    public bool nextBus;
+
+    public bool isColorSet = false;
     public Color busColor;
 
     public float speed;
@@ -15,7 +18,9 @@ public class Bus : MonoBehaviour
 
     private bool isCheckedForWaitingPassengers = false;
 
-    public List<Passenger> Passengers = new List<Passenger>();
+    private List<Passenger> Passengers = new List<Passenger>();
+
+    public List<GameObject> PassengerChairs;
 
     private void Start()
     {
@@ -29,6 +34,15 @@ public class Bus : MonoBehaviour
             manager.currentBus = this;
             transform.position = Vector3.MoveTowards(transform.position, destination, speed * Time.deltaTime);
             
+            if (Vector3.Distance(transform.position, destination) < 0.1f)
+            {
+                ArriveAtDestination();
+            }
+        }
+        else if(nextBus)
+        {
+            transform.position = Vector3.MoveTowards(transform.position, destination - Vector3.right * 10f, speed * Time.deltaTime);
+
             if (Vector3.Distance(transform.position, destination) < 0.1f)
             {
                 ArriveAtDestination();
@@ -95,17 +109,51 @@ public class Bus : MonoBehaviour
 
     public void GetPassengerIn(Passenger p)
     {
-        if(isFull() && ReadyToMove())
+       
+
+        if (!Passengers.Contains(p) && !isFull())
+        {
+            Debug.Log("Bana yer var gibi");
+            Passengers.Add(p);
+        }
+
+        if (isFull() && ReadyToMove())
         {
             manager.BusDeparted(this);
             ResetBus();
         }
+        else
+        {
+            SitPassengerToChair(p);
+        }
+        
+    }
+
+    private void SitPassengerToChair(Passenger p)
+    {
+        Debug.Log("otur bakim");
+        p.PlaySpawnAnimation();
+        p.gameObject.transform.position = PassengerChairs[Passengers.IndexOf(p)].transform.position;
+        p.transform.rotation = Quaternion.Euler(0, 90, 0);
+        p.transform.parent = transform;
     }
 
     public void ResetBus()
     {
+        ResetChairPassengers();
+        activeBus = false;
+        nextBus = false;
+        isColorSet = false;
         Passengers = new List<Passenger>();
         isCheckedForWaitingPassengers = false;
+    }
+
+    public void ResetChairPassengers()
+    {
+        foreach (var passenger in Passengers)
+        {
+            ObjectPooler.Instance.ReturnToPool("Passenger", passenger.gameObject);
+        }
     }
 
 }

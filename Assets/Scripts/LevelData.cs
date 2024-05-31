@@ -7,9 +7,9 @@ using UnityEngine;
 public class LevelData : ScriptableObject
 {
     
-    [Range(2,30)]
+    [Range(2,12)]
     public int width;
-    [Range(2, 30)]
+    [Range(2, 12)]
     public int height;
     [Min(1)]
     public int timer;

@@ -7,6 +7,7 @@ using UnityEngine;
 public class LevelEditorWindow : EditorWindow
 {
     private LevelData currentLevel;
+    private LevelData previousLevel;
     private Color[] availableColors = new Color[] { Color.red, Color.blue, Color.green, Color.yellow, Color.magenta };
     private string[] colorNames = new string[] { "Red", "Blue", "Green", "Yellow", "Magenta" };
     private int selectedColorIndex = 0;
@@ -28,7 +29,12 @@ public class LevelEditorWindow : EditorWindow
     {
         GUILayout.Label("Level Editor", EditorStyles.boldLabel);
 
-        currentLevel = (LevelData)EditorGUILayout.ObjectField("Level Data", currentLevel, typeof(LevelData), false);
+        LevelData newLevel = (LevelData)EditorGUILayout.ObjectField("Level Data", currentLevel, typeof(LevelData), false);
+
+        if (newLevel != currentLevel)
+        {
+            OnLevelDataChanged(newLevel);
+        }
 
         if (currentLevel != null)
         {
@@ -72,6 +78,24 @@ public class LevelEditorWindow : EditorWindow
                 ClearGrid();
             }
         }
+    }
+
+
+    private void OnLevelDataChanged(LevelData newLevel)
+    {
+        if (currentLevel != null)
+        {
+            if (!CheckColorMultiplesOfThree())
+            {
+                Debug.LogError("Current level is not valid. Changes will not be saved.");
+                ClearGrid();
+            }
+            else
+            {
+                SaveLevel();
+            }
+        }
+        currentLevel = newLevel;
     }
 
     private void DrawTunnelSettings()

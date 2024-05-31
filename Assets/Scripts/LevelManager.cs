@@ -86,7 +86,7 @@ public class LevelManager : MonoBehaviour
         float cameraHeight = Mathf.Max(planeWidth, planeDepth);
         float backOffset = planeDepth / 2 + 10.0f;
 
-        Vector3 cameraPosition = new Vector3(planeWidth / 2, cameraHeight * 2, planeDepth / 2 - backOffset);
+        Vector3 cameraPosition = new Vector3(planeWidth / 2, cameraHeight /*+ Mathf.Max(planeWidth, planeDepth)*/, planeDepth / 2 - backOffset);
         mainCamera.transform.position = cameraPosition;
 
         // Kameranýn yolun baþlangýç noktasýna bakmasýný saðla

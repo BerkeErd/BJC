@@ -167,7 +167,8 @@ public class BusManager : MonoBehaviour
     {
         foreach (Bus bus in busQueue)
         {
-            bus.activeBus = false;  // Tüm otobüsleri önce pasif yap
+            bus.activeBus = false;  
+            bus.nextBus = false;  
         }
 
         if (busQueue.Count > 0)

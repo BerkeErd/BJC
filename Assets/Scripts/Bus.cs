@@ -27,6 +27,7 @@ public class Bus : MonoBehaviour
         manager = FindObjectOfType<BusManager>();
     }
 
+
     private void Update()
     {
         if(activeBus)
@@ -71,6 +72,7 @@ public class Bus : MonoBehaviour
                     grid.passengerOnGrid.GetInsideofBus(this);
                     grid.isEmpty = true;
                     grid.passengerOnGrid = null;
+
                 }
             }
         }
@@ -94,6 +96,7 @@ public class Bus : MonoBehaviour
 
     public bool isFull()
     {
+        Debug.Log($"Passenger count: {Passengers.Count}");
         return Passengers.Count >= 3;
     }
 
@@ -109,29 +112,24 @@ public class Bus : MonoBehaviour
 
     public void GetPassengerIn(Passenger p)
     {
-       
-
         if (!Passengers.Contains(p) && !isFull())
         {
-            Debug.Log("Bana yer var gibi");
-            Passengers.Add(p);
+            IncreasePassengerCount(p);
         }
+        SitPassengerToChair(p);
+        CheckDepartCondition();
+    }
 
+    private void CheckDepartCondition()
+    {
         if (isFull() && ReadyToMove())
         {
             manager.BusDeparted(this);
-            ResetBus();
         }
-        else
-        {
-            SitPassengerToChair(p);
-        }
-        
     }
 
     private void SitPassengerToChair(Passenger p)
     {
-        Debug.Log("otur bakim");
         p.PlaySpawnAnimation();
         p.gameObject.transform.position = PassengerChairs[Passengers.IndexOf(p)].transform.position;
         p.transform.rotation = Quaternion.Euler(0, 90, 0);
@@ -140,8 +138,8 @@ public class Bus : MonoBehaviour
 
     public void ResetBus()
     {
-        ResetChairPassengers();
         activeBus = false;
+        ResetChairPassengers();
         nextBus = false;
         isColorSet = false;
         Passengers = new List<Passenger>();

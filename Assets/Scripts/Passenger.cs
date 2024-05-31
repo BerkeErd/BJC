@@ -393,7 +393,6 @@ public class Passenger : MonoBehaviour
         {
             transform.localScale = Vector3.Lerp(Vector3.zero, originalScale, currentTime / 1);
             currentTime += Time.deltaTime;
-            Debug.Log("Büyüyorujm");
             yield return null;
         }
 

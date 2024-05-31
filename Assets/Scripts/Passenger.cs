@@ -369,6 +369,23 @@ public class Passenger : MonoBehaviour
         return false;
     }
 
+    public void MoveToBusFromWaitingGrid(Bus bus)
+    {
+        if (bus.activeBus && bus.busColor == PassengerColor && !bus.isFull())
+        {
+            bus.IncreasePassengerCount(this);
+            foreach (var grid in GameObject.FindObjectsOfType<WaitingGrid>())
+            {
+                if (grid.passengerOnGrid == this)
+                {
+                    grid.EmptyGrid();
+                    StartCoroutine(MoveToBusAndGetIn(bus));
+                }
+            }
+        }
+       
+    }
+
     bool CheckIfSameColorPassengerWaiting()
     {
         foreach (var grid in GameObject.FindObjectsOfType<WaitingGrid>())

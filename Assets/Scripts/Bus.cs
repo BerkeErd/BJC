@@ -69,10 +69,7 @@ public class Bus : MonoBehaviour
             {
                 if(grid.passengerOnGrid.PassengerColor == busColor && !isFull()) 
                 {
-                    grid.passengerOnGrid.GetInsideofBus(this);
-                    grid.isEmpty = true;
-                    grid.passengerOnGrid = null;
-
+                    grid.passengerOnGrid.MoveToBusFromWaitingGrid(this);
                 }
             }
         }

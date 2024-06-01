@@ -19,6 +19,7 @@ public class Tunnel : MonoBehaviour
     public int colIndex;
     public int tunnelSize;
     private int spawnedCount = 0;
+    private bool isSpawning = false;
     public float spawnInterval = 1.0f;
     private PassengerManager passengerManager;
     public TunnelDirection spawnDirection;
@@ -116,8 +117,9 @@ public class Tunnel : MonoBehaviour
         }
         else
         {
-            if (IsInsideGrid(exitCell) && !IsCellOccupied(exitCell.y, exitCell.x))
+            if (IsInsideGrid(exitCell) && !IsCellOccupied(exitCell.y, exitCell.x) && !isSpawning)
             {
+                isSpawning = true;
                 SpawnPassenger(exitCell.y, exitCell.x, passengerColors[spawnedCount]);
             }
             BlockTheExitCell();
@@ -135,6 +137,7 @@ public class Tunnel : MonoBehaviour
     {
         if (!IsCellOccupied(row, col)) // Meþgul deðilse yolcu yarat
         {
+            levelData.tempOccupiedCells[exitCell.y, exitCell.x] = true; // Geçici olarak iþgal et
             tunnelSize--;
             countText.text = tunnelSize.ToString();
             passengerManager.UnregisterPassenger(placeholderPassengers[spawnedCount].GetComponent<Passenger>());
@@ -142,9 +145,10 @@ public class Tunnel : MonoBehaviour
             GameObject newPassenger = ObjectPooler.Instance.SpawnFromPool("Passenger", spawnPosition, Quaternion.identity);
             Passenger passengerComponent = newPassenger.GetComponent<Passenger>();
             passengerComponent.Initialize(levelData, row, col, color);
-            levelData.tempOccupiedCells[row, col] = true; // Geçici olarak iþgal et
             spawnedCount++;
         }
+
+        isSpawning = false;
     }
 
     private void OnEnable()

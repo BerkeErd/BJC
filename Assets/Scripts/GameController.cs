@@ -7,6 +7,7 @@ public class GameController : MonoBehaviour
 {
     public static event Action OnGameStart; // Oyunun baþlama event'i
     public static event Action OnGameWon; // Oyunun kazanýlma event'i
+    public static event Action OnGameLose; // Oyunun kaybetme event'i
     public static GameController Instance { get; private set; }
 
 
@@ -62,6 +63,7 @@ public class GameController : MonoBehaviour
         LoseScreen.GetComponent<Animator>().Play("FallScreenFallAnim");
         TimerText.text = "Game Over";
         Debug.Log("Game Over");
+        OnGameLose?.Invoke();
     }
 
     public void WinLevel()

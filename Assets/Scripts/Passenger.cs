@@ -22,10 +22,19 @@ public class Passenger : MonoBehaviour
     private Vector3 targetPosition;
     private BusManager busManager;
 
+    private Vector3 StartPosition;
+
     private Vector3 originalScale = new Vector3(0.01f, 0.01f, 0.01f);
+
+    private AudioSource audioSource;
+
+    public bool isFlying = false;
+    
 
     void Start()
     {
+        audioSource = GetComponent<AudioSource>();
+        StartPosition = transform.position;
         manager = FindObjectOfType<PassengerManager>();
         busManager = GameObject.FindObjectOfType<BusManager>();
         animator = GetComponent<Animator>();
@@ -35,6 +44,7 @@ public class Passenger : MonoBehaviour
 
     void OnEnable()
     {
+        GameController.OnGameLose += HandleGameOver;
         manager = FindObjectOfType<PassengerManager>();
         if (manager != null)
         {
@@ -43,12 +53,11 @@ public class Passenger : MonoBehaviour
         PlaySpawnAnimation();
     }
 
+
     void OnDisable()
     {
-        if (manager != null)
-        {
-            manager.DeactivatePassenger(this);
-        }
+        GameController.OnGameLose -= HandleGameOver;
+        DeactivePassenger();
     }
 
     void OnDestroy()
@@ -58,6 +67,8 @@ public class Passenger : MonoBehaviour
             manager.UnregisterPassenger(this);
         }
     }
+
+    
 
     public bool CanMoveToFirstRow()
     {
@@ -135,8 +146,9 @@ public class Passenger : MonoBehaviour
         if (GameController.Instance.isGameStarted && GameController.Instance.IsFirstTouchHandled() && !isMoving)
         {
             List<Vector3> path = FindPathToExit();
-            if (path.Count > 0)
+            if (path.Count > 0 && manager.GetTotalMovingPassengers() < 6)
             {
+                audioSource.PlayOneShot(audioSource.clip);
                 ClearOccupiedCell();
                 OnPassengerMoved?.Invoke(this);
                 manager.DeactivatePassenger(this);
@@ -144,13 +156,42 @@ public class Passenger : MonoBehaviour
             }
             else
             {
-                Debug.Log("Çýkýþa giden yol bulunamadý.");
+                //Yürüyemiyor
             }
         }
     }
+    
+    public void FlyToBus()
+    {
+        audioSource.PlayOneShot(audioSource.clip);
+        StartCoroutine(FlyAnimation(busManager.currentBus));
+    }
 
+    private IEnumerator FlyAnimation(Bus targetBus)
+    {
+        ClearOccupiedCell();
+        targetBus.IncreasePassengerCount(this);
+        isFlying = true;
 
+        Vector3 startPosition = transform.position;
+        Vector3 risePosition = startPosition + Vector3.up * 6; // Yükselme noktasý
+        Vector3 busPosition = targetBus.transform.position;
 
+        // Yükselme animasyonu
+        float timer = 0;
+        while (timer < 2)
+        {
+            transform.position = Vector3.Lerp(startPosition, risePosition, timer / 2);
+            transform.Rotate(new Vector3(0, 360, 0) * Time.deltaTime / 2); // Döndürme
+            timer += Time.deltaTime;
+            yield return null;
+        }
+
+        isFlying = false;
+
+        GetInsideofBus(targetBus);
+        OnPassengerMoved?.Invoke(this);
+    }
 
     public void Initialize(LevelData data, int row, int col, Color color)
     {
@@ -161,12 +202,43 @@ public class Passenger : MonoBehaviour
     }
 
 
-    void ClearOccupiedCell()
+    public void ClearOccupiedCell()
     {
         if (rowIndex >= 0 && rowIndex < levelData.height && colIndex >= 0 && colIndex < levelData.width)
         {
             levelData.tempOccupiedCells[rowIndex, colIndex] = false; 
         }
+    }
+
+    void UnClearOccupiedCell()
+    {
+        if (rowIndex >= 0 && rowIndex < levelData.height && colIndex >= 0 && colIndex < levelData.width)
+        {
+            levelData.tempOccupiedCells[rowIndex, colIndex] = true;
+        }
+    }
+
+    public void Undo()
+    {
+        foreach (var grid in GameObject.FindObjectsOfType<WaitingGrid>())
+        {
+            if (grid.passengerOnGrid == this)
+            {
+                grid.EmptyGrid();
+                break;
+            }
+        }
+        audioSource.PlayOneShot(audioSource.clip);
+        UnClearOccupiedCell();
+        if (manager != null)
+        {
+            manager.ActivatePassenger(this);
+            manager.lastPassengerWentToGrid = null;
+        }
+        StartCoroutine(MoveBackToStart());
+        OnPassengerMoved?.Invoke(this);
+        
+
     }
 
     List<Vector3> FindPathToExit()
@@ -214,11 +286,16 @@ public class Passenger : MonoBehaviour
         return path; // Eðer yol bulunamazsa boþ liste dön
     }
 
+    public void SetMovingBoolean(bool newisMoving)
+    {
+            isMoving = newisMoving;
+            animator.SetBool("isMoving", isMoving);
+    }
 
     IEnumerator FollowPath(List<Vector3> path)
     {
-        isMoving = true;
-        animator.SetBool("isMoving", isMoving);
+        SetMovingBoolean(true);
+        
 
         foreach (Vector3 targetPosition in path)
         {
@@ -241,18 +318,21 @@ public class Passenger : MonoBehaviour
 
     IEnumerator CheckForBus()
     {
-        while (busManager.currentBus == null || busManager.currentBus.isFull())
+        if(GameController.Instance.isGameStarted)
         {
-            yield return new WaitForSeconds(1f); // Bir saniye bekle ve tekrar kontrol et
-        }
+            while (busManager.currentBus == null || busManager.currentBus.isFull())
+            {
+                yield return new WaitForSeconds(1f); // Bir saniye bekle ve tekrar kontrol et
+            }
 
-        if (busManager.currentBus.busColor != PassengerColor)
-        {
-            GoToWaitingCells();
-        }
-        else
-        {
-            MoveToBusIfNooneisWaiting(busManager.currentBus);
+            if (busManager.currentBus.busColor != PassengerColor)
+            {
+                GoToWaitingCells();
+            }
+            else
+            {
+                MoveToBusIfNooneisWaiting(busManager.currentBus);
+            }
         }
     }
 
@@ -322,15 +402,25 @@ public class Passenger : MonoBehaviour
 
     public void GetInsideofBus(Bus bus)
     {
-        isMoving = false;
+        SetMovingBoolean(false);
         animator.SetBool("isMoving", isMoving);
         bus.GetPassengerIn(this);
+        DeactivePassenger();
+    }
+
+
+    void DeactivePassenger()
+    {
+        if (manager != null)
+        {
+            manager.DeactivatePassenger(this);
+        }
     }
 
     private IEnumerator MoveToBusAndGetIn(Bus bus)
     {
-        
-        isMoving = true;
+
+        SetMovingBoolean(true);
         animator.SetBool("isMoving", isMoving);
 
         while (isMoving)
@@ -351,6 +441,29 @@ public class Passenger : MonoBehaviour
         }
     }
 
+    private IEnumerator MoveBackToStart()
+    {
+        SetMovingBoolean(true);
+        animator.SetBool("isMoving", isMoving);
+
+        while (isMoving)
+        {
+            targetPosition = StartPosition;
+
+            float step = moveSpeed * Time.deltaTime;
+            transform.position = Vector3.MoveTowards(transform.position, targetPosition, step);
+
+            transform.LookAt(new Vector3(targetPosition.x, transform.position.y, targetPosition.z));
+
+            if (Vector3.Distance(transform.position, targetPosition) < 0.1f)
+            {
+                SetMovingBoolean(false);
+            }
+
+            yield return null;
+        }
+    }
+
 
     bool CheckAvailableWaitingGrids(GameObject passangerObject)
     {
@@ -362,6 +475,7 @@ public class Passenger : MonoBehaviour
                 passangerObject.transform.position = grid.transform.position;
                 animator.SetBool("isMoving", false);
                 grid.isEmpty = false;
+                manager.lastPassengerWentToGrid = this;
                 return true;
             }
         }
@@ -378,8 +492,13 @@ public class Passenger : MonoBehaviour
             {
                 if (grid.passengerOnGrid == this)
                 {
+                    if(manager.lastPassengerWentToGrid == this)
+                    {
+                        manager.lastPassengerWentToGrid = null;
+                    }
                     grid.EmptyGrid();
                     StartCoroutine(MoveToBusAndGetIn(bus));
+                    break;
                 }
             }
         }
@@ -424,6 +543,13 @@ public class Passenger : MonoBehaviour
     public void Despawn()
     {
         ObjectPooler.Instance.ReturnToPool("Passenger", gameObject);
+    }
+
+    void HandleGameOver()
+    {
+        StopAllCoroutines();
+        SetMovingBoolean(false);
+        animator.SetBool("isMoving", isMoving);
     }
 
 }

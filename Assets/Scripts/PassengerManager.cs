@@ -5,11 +5,28 @@ using UnityEngine;
 public class PassengerManager : MonoBehaviour
 {
     private List<Passenger> allPassengers = new List<Passenger>();
-    private List<Passenger> activePassengers = new List<Passenger>();
+    public List<Passenger> activePassengers = new List<Passenger>();
     private List<Passenger> passengersWithPaths = new List<Passenger>();
+
+    public Passenger lastPassengerWentToGrid = null;
 
     [SerializeField] private Material passengerCanMoveMat;
     [SerializeField] private Material passengerDefaultMat;
+
+
+    public int GetTotalMovingPassengers()
+    {
+        int movingPassengersCount = 0;
+        foreach (var passanger in allPassengers)
+        {
+            if(passanger.isMoving)
+            {
+                movingPassengersCount += 1;
+            }
+        }
+
+        return movingPassengersCount;
+    }
 
 
     // Toplam yolcu sayýsýný döndürür

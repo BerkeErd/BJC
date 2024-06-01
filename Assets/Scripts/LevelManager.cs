@@ -129,6 +129,18 @@ public class LevelManager : MonoBehaviour
             grid.transform.SetParent(sidewalkParent);
             grid.AddComponent<WaitingGrid>();
         }
+
+        // 3 tane bonus grid ekle ve onlarý deaktif yap
+        for (int i = 3; i <= 5; i++) // 
+        {
+            Vector3 gridPosition = new Vector3(centerGridX + i * gridSpacing, 0.1f, zPosition); // Y ekseni biraz yükseltilmiþ
+            GameObject grid = Instantiate(floorPrefab, gridPosition, Quaternion.identity);
+            grid.GetComponent<Renderer>().material.color = Color.magenta;
+            grid.transform.SetParent(sidewalkParent);
+            grid.AddComponent<WaitingGrid>();
+            JokerManager.Instance.bonusGrids.Add(grid);
+            grid.SetActive(false);
+        }
     }
 
     void PlaceRoad()

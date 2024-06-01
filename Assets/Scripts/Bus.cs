@@ -101,7 +101,7 @@ public class Bus : MonoBehaviour
     {
         foreach (var passenger in Passengers)
         {
-            if (passenger.isMoving)
+            if (passenger.isMoving || passenger.isFlying)
                 return false;
         }
         return true;
@@ -127,6 +127,7 @@ public class Bus : MonoBehaviour
 
     private void SitPassengerToChair(Passenger p)
     {
+        p.StopAllCoroutines();
         p.PlaySpawnAnimation();
         p.gameObject.transform.position = PassengerChairs[Passengers.IndexOf(p)].transform.position;
         p.transform.rotation = Quaternion.Euler(0, 90, 0);
@@ -150,5 +151,8 @@ public class Bus : MonoBehaviour
             ObjectPooler.Instance.ReturnToPool("Passenger", passenger.gameObject);
         }
     }
+
+
+
 
 }

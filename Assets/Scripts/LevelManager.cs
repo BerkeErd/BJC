@@ -119,7 +119,7 @@ public class LevelManager : MonoBehaviour
         float gridSpacing = 1 + planeSpacing; // Her grid arasý mesafe
         float zPosition = levelData.height + (sidewalkLength / 2.0f); // Sidewalk'ýn ortasýna yerleþtir
 
-        busmanager.waitingSpot = new Vector3(centerGridX, 0.1f, zPosition + roadLength / 2);
+        busmanager.waitingSpot = new Vector3(centerGridX, 0.25f, zPosition + roadLength / 2);
 
         // 5 grid ekle, merkezi hesapla ve oradan itibaren saða sola ekle
         for (int i = -2; i <= 2; i++) // -2'den 2'ye kadar (5 grid)

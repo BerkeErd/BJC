@@ -42,7 +42,7 @@ public class Bus : MonoBehaviour
         }
         else if(nextBus)
         {
-            transform.position = Vector3.MoveTowards(transform.position, destination - Vector3.right * 10f, speed * Time.deltaTime);
+            transform.position = Vector3.MoveTowards(transform.position, destination - Vector3.right * 7f, speed * Time.deltaTime);
 
             if (Vector3.Distance(transform.position, destination) < 0.1f)
             {

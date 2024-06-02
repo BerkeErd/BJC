@@ -137,13 +137,15 @@ public class Tunnel : MonoBehaviour
     {
         if (!IsCellOccupied(row, col)) // Meþgul deðilse yolcu yarat
         {
-            levelData.tempOccupiedCells[exitCell.y, exitCell.x] = true; // Geçici olarak iþgal et
+            levelData.tempOccupiedCells[row, col] = true; // Geçici olarak iþgal et
             tunnelSize--;
             countText.text = tunnelSize.ToString();
             passengerManager.UnregisterPassenger(placeholderPassengers[spawnedCount].GetComponent<Passenger>());
             Vector3 spawnPosition = levelData.gridCells[row * levelData.width + col].Position;
             GameObject newPassenger = ObjectPooler.Instance.SpawnFromPool("Passenger", spawnPosition, Quaternion.identity);
             Passenger passengerComponent = newPassenger.GetComponent<Passenger>();
+            passengerComponent.hasTunel = true;
+            passengerComponent.summonedTunnel = this;
             passengerComponent.Initialize(levelData, row, col, color);
             spawnedCount++;
         }
@@ -175,6 +177,16 @@ public class Tunnel : MonoBehaviour
     {
         TrySpawnPassenger();
     }
+
+    public void DespawnPassenger(Passenger passenger)
+    {
+        passenger.gameObject.SetActive(false);
+        placeholderPassengers.Insert(0, passenger.gameObject);
+        tunnelSize++;
+        spawnedCount--;
+        countText.text = tunnelSize.ToString(); 
+    }
+
 }
 
 

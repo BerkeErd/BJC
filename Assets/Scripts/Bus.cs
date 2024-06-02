@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -27,6 +28,22 @@ public class Bus : MonoBehaviour
         manager = FindObjectOfType<BusManager>();
     }
 
+    void OnEnable()
+    {
+        GameController.OnGameLose += HandleGameOver;
+        
+    }
+
+
+    void OnDisable()
+    {
+        GameController.OnGameLose -= HandleGameOver;
+    }
+
+    private void HandleGameOver()
+    {
+        StopAllCoroutines();
+    }
 
     private void Update()
     {
@@ -107,14 +124,26 @@ public class Bus : MonoBehaviour
         return true;
     }
 
+    private IEnumerator SitPassengerToChair(Passenger p)
+    {
+        p.StopAllCoroutines();
+        p.PlaySpawnAnimation();
+        p.gameObject.transform.position = PassengerChairs[Passengers.IndexOf(p)].transform.position;
+        p.transform.rotation = Quaternion.Euler(0, 90, 0);
+        p.transform.parent = transform;
+        
+        yield return new WaitForSeconds(1.5f);
+
+        CheckDepartCondition();
+    }
+
     public void GetPassengerIn(Passenger p)
     {
         if (!Passengers.Contains(p) && !isFull())
         {
             IncreasePassengerCount(p);
         }
-        SitPassengerToChair(p);
-        CheckDepartCondition();
+        StartCoroutine(SitPassengerToChair(p));
     }
 
     private void CheckDepartCondition()
@@ -125,14 +154,14 @@ public class Bus : MonoBehaviour
         }
     }
 
-    private void SitPassengerToChair(Passenger p)
-    {
-        p.StopAllCoroutines();
-        p.PlaySpawnAnimation();
-        p.gameObject.transform.position = PassengerChairs[Passengers.IndexOf(p)].transform.position;
-        p.transform.rotation = Quaternion.Euler(0, 90, 0);
-        p.transform.parent = transform;
-    }
+    //private void SitPassengerToChair(Passenger p)
+    //{
+    //    p.StopAllCoroutines();
+    //    p.PlaySpawnAnimation();
+    //    p.gameObject.transform.position = PassengerChairs[Passengers.IndexOf(p)].transform.position;
+    //    p.transform.rotation = Quaternion.Euler(0, 90, 0);
+    //    p.transform.parent = transform;
+    //}
 
     public void ResetBus()
     {

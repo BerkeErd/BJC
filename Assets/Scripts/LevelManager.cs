@@ -78,18 +78,15 @@ public class LevelManager : MonoBehaviour
 
     void AdjustCameraToLevel()
     {
-        // Plane'in boyutlarýný al
         float planeWidth = levelData.width * (1 + planeSpacing) - planeSpacing + planeExtraPadding;
         float planeDepth = levelData.height + sidewalkLength + roadLength;
-
-        // Kamera yüksekliðini ve pozisyonunu ayarla
+        
         float cameraHeight = Mathf.Max(planeWidth, planeDepth);
         float backOffset = planeDepth / 2 + 10.0f;
 
-        Vector3 cameraPosition = new Vector3(planeWidth / 2, cameraHeight /*+ Mathf.Max(planeWidth, planeDepth)*/, planeDepth / 2 - backOffset);
+        Vector3 cameraPosition = new Vector3(planeWidth / 2, cameraHeight , planeDepth / 2 - backOffset);
         mainCamera.transform.position = cameraPosition;
-
-        // Kameranýn yolun baþlangýç noktasýna bakmasýný saðla
+        
         Vector3 lookAtPosition = new Vector3(planeWidth / 2, 0, planeDepth / 2);
         mainCamera.transform.LookAt(lookAtPosition);
     }

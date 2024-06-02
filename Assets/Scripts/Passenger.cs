@@ -13,6 +13,10 @@ public class Passenger : MonoBehaviour
     public LevelData levelData;
     public int rowIndex;
     public int colIndex;
+
+    private int originalRowIndex;
+    private int originalColIndex;
+
     [SerializeField] private float moveSpeed = 3f;
     private Animator animator;
 
@@ -29,6 +33,9 @@ public class Passenger : MonoBehaviour
     private AudioSource audioSource;
 
     public bool isFlying = false;
+
+    public Tunnel summonedTunnel;
+    public bool hasTunel = false;
     
 
     void Start()
@@ -198,7 +205,9 @@ public class Passenger : MonoBehaviour
         levelData = data;
         rowIndex = row;
         colIndex = col;
-        PassengerColor = color; 
+        PassengerColor = color;
+        originalColIndex = col;
+        originalRowIndex = row;
     }
 
 
@@ -206,8 +215,10 @@ public class Passenger : MonoBehaviour
     {
         if (rowIndex >= 0 && rowIndex < levelData.height && colIndex >= 0 && colIndex < levelData.width)
         {
-            levelData.tempOccupiedCells[rowIndex, colIndex] = false; 
+            levelData.tempOccupiedCells[rowIndex, colIndex] = false;
         }
+        rowIndex = -1;
+        colIndex = -1;
     }
 
     void UnClearOccupiedCell()
@@ -229,16 +240,32 @@ public class Passenger : MonoBehaviour
             }
         }
         audioSource.PlayOneShot(audioSource.clip);
+        if (IsCellOccupied(originalRowIndex, originalColIndex))
+        {
+               Passenger blockingPassenger = manager.FindActivePassengerAtPosition(originalRowIndex, originalColIndex);
+               if (blockingPassenger.hasTunel)
+                {
+                    blockingPassenger.summonedTunnel.DespawnPassenger(blockingPassenger);
+                }
+        }
+        ResetPosInfos();
         UnClearOccupiedCell();
         if (manager != null)
         {
             manager.ActivatePassenger(this);
             manager.lastPassengerWentToGrid = null;
         }
+        
         StartCoroutine(MoveBackToStart());
         OnPassengerMoved?.Invoke(this);
         
 
+    }
+
+    void ResetPosInfos()
+    {
+        rowIndex = originalRowIndex;
+        colIndex = originalColIndex;
     }
 
     List<Vector3> FindPathToExit()
@@ -403,7 +430,6 @@ public class Passenger : MonoBehaviour
     public void GetInsideofBus(Bus bus)
     {
         SetMovingBoolean(false);
-        animator.SetBool("isMoving", isMoving);
         bus.GetPassengerIn(this);
         DeactivePassenger();
     }
@@ -421,7 +447,6 @@ public class Passenger : MonoBehaviour
     {
 
         SetMovingBoolean(true);
-        animator.SetBool("isMoving", isMoving);
 
         while (isMoving)
         {
@@ -444,7 +469,6 @@ public class Passenger : MonoBehaviour
     private IEnumerator MoveBackToStart()
     {
         SetMovingBoolean(true);
-        animator.SetBool("isMoving", isMoving);
 
         while (isMoving)
         {
@@ -549,7 +573,6 @@ public class Passenger : MonoBehaviour
     {
         StopAllCoroutines();
         SetMovingBoolean(false);
-        animator.SetBool("isMoving", isMoving);
     }
 
 }

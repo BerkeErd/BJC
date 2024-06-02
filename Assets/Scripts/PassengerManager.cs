@@ -139,4 +139,17 @@ public class PassengerManager : MonoBehaviour
         UpdatePassengersWithPaths();
     }
 
+    public Passenger FindActivePassengerAtPosition(int row, int col)
+    {
+        foreach (var passenger in activePassengers)
+        {
+            if (passenger.rowIndex == row && passenger.colIndex == col)
+            {
+                return passenger;
+            }
+        }
+        return null; 
+    }
+
+
 }

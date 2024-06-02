@@ -174,8 +174,11 @@ MonoBehaviour:
     isBlocked: 0
     isTunnel: 1
     tunnelDirection: 2
-    tunnelSize: 0
-    tunnelPassengerColors: []
+    tunnelSize: 3
+    tunnelPassengerColors:
+    - {r: 1, g: 0, b: 0, a: 1}
+    - {r: 1, g: 0, b: 0, a: 1}
+    - {r: 1, g: 0, b: 0, a: 1}
   - Position: {x: 0, y: 0, z: 0}
     isOccupied: 1
     passengerColor: {r: 0, g: 0, b: 1, a: 1}

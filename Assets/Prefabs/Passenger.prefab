@@ -415,6 +415,9 @@ MonoBehaviour:
   colIndex: 0
   moveSpeed: 6
   isMoving: 0
+  isFlying: 0
+  summonedTunnel: {fileID: 0}
+  hasTunel: 0
 --- !u!65 &6887069197316655411
 BoxCollider:
   m_ObjectHideFlags: 0

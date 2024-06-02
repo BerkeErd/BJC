@@ -9,7 +9,7 @@ public class ObjectPooler : MonoBehaviour
     {
         public string tag;
         public GameObject prefab;
-        public int size;
+        public int size; // Ýlk oluþturma için gerekli boyut, baþlangýçta 0 olabilir.
     }
 
     public List<Pool> pools;
@@ -38,11 +38,12 @@ public class ObjectPooler : MonoBehaviour
             poolParent.transform.SetParent(transform);
             poolParents[pool.tag] = poolParent.transform;
 
+            // Baþlangýç boyutu sýfýr olduðu için herhangi bir nesne oluþturmayacak
             for (int i = 0; i < pool.size; i++)
             {
                 GameObject obj = Instantiate(pool.prefab);
                 obj.SetActive(false);
-                obj.transform.SetParent(poolParent.transform);  // Parent olarak belirli bir Transform ayarlýyoruz
+                obj.transform.SetParent(poolParent.transform);
                 objectPool.Enqueue(obj);
             }
 
@@ -69,23 +70,10 @@ public class ObjectPooler : MonoBehaviour
         objectToSpawn.transform.position = position;
         objectToSpawn.transform.rotation = rotation;
 
-        poolDictionary[tag].Enqueue(objectToSpawn);
+        //poolDictionary[tag].Enqueue(objectToSpawn);
 
         return objectToSpawn;
     }
-
-    //public void RemoveFromPool(string tag, GameObject objectToRemove)
-    //{
-    //    if (poolDictionary.ContainsKey(tag) && poolDictionary[tag].Contains(objectToRemove))
-    //    {
-    //        poolDictionary[tag].Dequeue();
-    //        Destroy(objectToRemove);
-    //    }
-    //    else
-    //    {
-    //        Debug.LogWarning("Object to remove not found in pool or wrong tag.");
-    //    }
-    //}
 
     public void ReturnToPool(string tag, GameObject objectToReturn)
     {
@@ -96,7 +84,7 @@ public class ObjectPooler : MonoBehaviour
         }
 
         objectToReturn.SetActive(false);
-        objectToReturn.transform.SetParent(poolParents[tag]);  // Obje tekrar parent altýna yerleþtir
+        objectToReturn.transform.SetParent(poolParents[tag]);
         poolDictionary[tag].Enqueue(objectToReturn);
     }
 
@@ -107,7 +95,7 @@ public class ObjectPooler : MonoBehaviour
         {
             GameObject obj = Instantiate(pool.prefab);
             obj.SetActive(false);
-            obj.transform.SetParent(poolParents[tag]);  // Yeni objeyi de doðru parent altýna yerleþtir
+            obj.transform.SetParent(poolParents[tag]);
             poolDictionary[tag].Enqueue(obj);
         }
         else

@@ -38,6 +38,13 @@ public class GameController : MonoBehaviour
         }
     }
 
+    public int GetWaitingGridsCount()
+    {
+        int WaitingGridCount = GameObject.FindObjectsOfType<WaitingGrid>().Length;
+        return WaitingGridCount;
+    }
+
+
     public void StartGame()
     {
         if (!isGameStarted)
@@ -62,7 +69,6 @@ public class GameController : MonoBehaviour
         isGameOver = true;
         LoseScreen.GetComponent<Animator>().Play("FallScreenFallAnim");
         TimerText.text = "Game Over";
-        Debug.Log("Game Over");
         OnGameLose?.Invoke();
     }
 

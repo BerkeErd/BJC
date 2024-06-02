@@ -110,7 +110,6 @@ public class Bus : MonoBehaviour
 
     public bool isFull()
     {
-        Debug.Log($"Passenger count: {Passengers.Count}");
         return Passengers.Count >= 3;
     }
 
@@ -151,6 +150,7 @@ public class Bus : MonoBehaviour
         if (isFull() && ReadyToMove())
         {
             manager.BusDeparted(this);
+            StopAllCoroutines();
         }
     }
 
@@ -165,6 +165,7 @@ public class Bus : MonoBehaviour
 
     public void ResetBus()
     {
+        StopAllCoroutines();
         activeBus = false;
         ResetChairPassengers();
         nextBus = false;

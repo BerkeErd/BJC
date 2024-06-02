@@ -153,7 +153,7 @@ public class Passenger : MonoBehaviour
         if (GameController.Instance.isGameStarted && GameController.Instance.IsFirstTouchHandled() && !isMoving)
         {
             List<Vector3> path = FindPathToExit();
-            if (path.Count > 0 && manager.GetTotalMovingPassengers() < 6)
+            if (path.Count > 0 && manager.GetTotalMovingPassengers() < GameController.Instance.GetWaitingGridsCount() + 1)
             {
                 audioSource.PlayOneShot(audioSource.clip);
                 ClearOccupiedCell();

@@ -1041,23 +1041,23 @@ MonoBehaviour:
   - tag: Passenger
     prefab: {fileID: 1511702456369168623, guid: 889b31234f9db8b41ba198f3ddfafe6a,
       type: 3}
-    size: 900
+    size: 0
   - tag: Block
     prefab: {fileID: 3506439182469718011, guid: 2d5f71d9ebe7baa43b3c9a7dab139085,
       type: 3}
-    size: 20
+    size: 0
   - tag: Floor
     prefab: {fileID: 3506439182469718011, guid: 9b604911b40a31548b39d34feb7f02f9,
       type: 3}
-    size: 900
+    size: 0
   - tag: Tunnel
     prefab: {fileID: 7087234561590305683, guid: 21d7cd825c648024ba0b2edc0865d945,
       type: 3}
-    size: 20
+    size: 0
   - tag: Bus
     prefab: {fileID: 6647465049201367024, guid: 0faeeb43b8e262a4197e45089896cffc,
       type: 3}
-    size: 5
+    size: 0
 --- !u!4 &631537182
 Transform:
   m_ObjectHideFlags: 0
